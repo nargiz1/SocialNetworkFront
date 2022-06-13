@@ -1,0 +1,83 @@
+.header{
+    padding: 10px 0px;
+    width: 100%;
+    justify-content: space-between;
+    position: fixed!important;
+    background-color: white;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #ebe4e48c;
+}
+.header .header-bar{
+    font-size: 23px;
+    margin-right: 13px;
+    color: gray;
+    cursor: pointer;
+}
+
+.header-center {
+    width: 50%;
+}
+
+.header-center input{
+    height: 44px;
+    color: #393939;
+    padding: 0 30px 0 40px;
+    outline: 0;
+    background: #f0f2f5;
+    border: 1px solid transparent;
+    width: 100%;
+    border-radius: 32px;
+  
+    font-size: 15px;
+}
+.header-center i{
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    color: #737373;
+}
+.header-right a{
+    width: 35px;
+    height: 35px;
+    position: relative;
+    background-color: #f0f2f5;
+    border-radius: 100%;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 19px;
+    color: #3F424B;
+
+}
+.header-right .circle{
+     position: absolute; 
+    height: 16px;
+    width: 16px;
+    background-color: #DC2626;
+    border-radius: 100%;
+    top: -4px;
+    right: -5px; 
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 11px;
+    border-radius: 100%;
+}
+.header-right a img{
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    margin-left: 10px;
+    position: absolute;
+    right: -1px;
+}
+
+.custom-toggler{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,102,203, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")!important;
+    background-repeat: no-repeat;
+    background-position: center;
+    outline: none!important;
+    border: none!important;
+    box-shadow: none!important;
+}

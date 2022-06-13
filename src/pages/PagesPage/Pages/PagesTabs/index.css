@@ -1,0 +1,40 @@
+
+.MuiTabs-scroller button.MuiButtonBase-root{
+    font-weight: bold;
+
+}
+.MuiTabs-scroller button.Mui-selected{
+    color: #2A41E8;
+}
+.css-1aquho2-MuiTabs-indicator{
+    background-color: #2a40e8d2!important;
+}
+.add-button{
+    font-size: 30px;
+    color: #2A41E8;
+}
+
+.slick-prev:before, .slick-next:before{
+    color: black!important;
+}
+.slick-slide{
+    padding: 10px;
+}
+.pages-card{
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+}
+.pages-card-title{
+    color: #595959;
+    font-size: 16px;
+    font-weight: bold;
+}
+.pages-card-text{
+    font-size: 14px;
+    color: #666666;
+}
+.pages-card-body{
+    padding: 13px 0px 0px 17px;
+}

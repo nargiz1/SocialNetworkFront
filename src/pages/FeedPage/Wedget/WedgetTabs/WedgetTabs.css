@@ -1,0 +1,26 @@
+.basicTabs .profile-photo{
+width: 40px;
+height: 40px;
+border-radius: 100%;
+}
+.basicTabs h4{
+    font-size: 15px;
+    margin-left: 10px;
+}
+.MuiTabs-scroller button.MuiButtonBase-root{
+    font-weight: bold;
+
+}
+.MuiTabs-scroller button.Mui-selected{
+    color: #2A41E8;
+}
+.css-1aquho2-MuiTabs-indicator{
+    background-color: #2A41E8!important;
+}
+/* .MuiTabs-scroller button.Mui-selected span.MuiTabs-indicator{
+    background-color: red;
+} */
+.basicTabs .MuiBox-root .css-19kzrtu{
+    padding: 0px;
+    padding-top: 22px;
+}

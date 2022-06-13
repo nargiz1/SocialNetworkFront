@@ -1,0 +1,30 @@
+.photo{
+    border-radius: 8px;
+    overflow: hidden;
+}
+.file-input-div {
+    position: relative;
+    width: 100%;
+    padding: 30px 20px;
+    background-color: #f3f4f6;
+    align-items: center;
+    border-radius: 8px;
+    border: 2px dashed #cdcecf;
+  }
+  input[type="file"] {
+    opacity: 0;
+  }
+.upload-icon {
+    position: absolute;
+    font-size: 30px;
+    top: 30px;
+    right: 44%;
+  }
+  .form-submit button {
+    border: 0px;
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: white;
+    background-color: #2a41e8;
+  }
+  

@@ -1,0 +1,86 @@
+.post {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+}
+.post .post-profile{
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+}
+.post-body-bottom{
+  border-bottom: 1px solid rgba(128, 128, 128, 0.336);
+}
+.post-body-bottom .MuiAvatar-root{
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+.comment-content .comment{
+ background-color: #F3F4F6;
+ padding: 7px 13px;
+ border-radius: 10px;
+ border-top-left-radius: 0px;
+}
+.post .username{
+  text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.post .post-date{
+  color: grey;
+  font-weight: 500;
+}
+.post .post-interaction div{
+  color: black;
+  width: 35px;
+    height: 35px;
+    font-size: 17px;
+    line-height: 30px;
+  text-align: center;
+  border-radius: 100%;
+  background-color: #F3F4F6;
+}
+.post-body  span{
+  color: grey;
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.comment p{
+  font-size: 15px;
+}
+.comment-options .comment-replay,.comment-options .comment-date{
+  font-size: 14px;
+}
+.post .post-bottom .more-comment{
+  text-decoration: none;
+  color: gray;
+}
+.post input{
+  height: 44px;
+  color: #393939;
+  padding: 0 30px 0 40px;
+  outline: 0;
+  background: #f0f2f5;
+  border: 1px solid transparent;
+  width: 100%;
+  border-radius: 32px;
+}
+.post .post-input-icons{
+  top: 5px;
+  right: 15px;
+  font-size: 19px;
+}
+.avatar-item{
+  width:28px;
+  height: 28px;
+  border: 2px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: -8px;
+}
+
+

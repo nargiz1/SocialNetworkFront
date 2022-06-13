@@ -1,0 +1,116 @@
+.prod-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%);
+}
+.prod-card .prod-card-top a {
+  top: 8px;
+  right: 7px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  font-size: 18px;
+  color: #f15e5e;
+  border-radius: 100%;
+  background-color: #fee2e2;
+}
+.prod-card .prod-card-bottom {
+  padding: 14px;
+}
+.info {
+  color: #666666;
+}
+.prod-card .prod-card-bottom .prod-price-primary {
+  position: absolute;
+  bottom: 56px;
+  right: 10px;
+  background-color: #dbeafe;
+  color: #4b8cf6;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 26px;
+}
+
+.prod-type {
+  text-transform: uppercase;
+  font-size: 13px;
+  color: #f59e0b;
+}
+.prod {
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+}
+.category-card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.category-card img {
+  object-fit: cover;
+}
+.category-card-title {
+  position: absolute !important;
+  bottom: 3px;
+  left: 10px;
+}
+.prod-card-left {
+  width: 80px;
+  height: 96px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.prod-card-right .prod {
+  font-size: 20px;
+}
+.prod-card-right .like-count,
+.prod-card-right .view-count {
+  font-size: 14px;
+  color: #adb3bd;
+}
+.prod-card-right .prod-price-secondary {
+  position: absolute;
+  top: 13px;
+  right: 25px;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 26px;
+  background-color: #f3f4f6;
+  color: #666;
+  font-weight: bold;
+}
+.file-input-div {
+  position: relative;
+  width: 100%;
+  padding: 30px 20px;
+  background-color: #f3f4f6;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px dashed #cdcecf;
+}
+input[type="file"] {
+  opacity: 0;
+}
+input,
+select,
+textarea {
+  padding: 7px;
+  border-radius: 5px;
+  color: #666;
+  border: 1px solid #adb3bd;
+  outline: none;
+}
+.upload-icon {
+  position: absolute;
+  font-size: 30px;
+  top: 30px;
+  right: 44%;
+}
+.form-submit button {
+  border: 0px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: white;
+  background-color: #2a41e8;
+}

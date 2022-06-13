@@ -1,0 +1,27 @@
+.sidebarRow{
+    display: flex;
+    align-items: center;
+    cursor: pointer; 
+    margin-bottom: 26px;
+}
+.sidebarRow .icon svg{
+    margin-left: 10px;
+}
+.active{
+    background-color: rgb(233, 232, 232);
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px 2px;
+}
+.sidebarRow .active h4{
+    color: #2A41E8;
+}
+.sidebarRow h4{
+    margin-left: 16px;
+    margin-bottom: 0px;
+    font-size: 17px;
+    color: #585757;
+  
+}
+
+
