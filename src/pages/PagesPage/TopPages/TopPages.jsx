@@ -12,7 +12,7 @@ const TopPages = () => {
           </a>
         </div>
         <div className="page-card-body">
-          <div className="d-flex justify-content-between mt-3 card-item">
+          <div className="d-flex justify-content-between align-items-center mt-3 card-item">
             <div>
               <img
                 src={require("../../../helpers/images/avatar.jpg")}
@@ -25,7 +25,7 @@ const TopPages = () => {
             </div>
             <div><button className="follow-button">Follow</button></div>
           </div>
-          <div className="d-flex  justify-content-between mt-3 card-item">
+          <div className="d-flex  justify-content-between align-items-center mt-3 card-item">
             <div>
               <img
                 src={require("../../../helpers/images/avatar.jpg")}
@@ -38,7 +38,7 @@ const TopPages = () => {
             </div>
             <div><button className="follow-button">Follow</button></div>
           </div>
-          <div className="d-flex  justify-content-between mt-3 card-item">
+          <div className="d-flex  justify-content-between align-items-center mt-3 card-item">
             <div>
               <img
                 src={require("../../../helpers/images/avatar.jpg")}
@@ -51,7 +51,7 @@ const TopPages = () => {
             </div>
             <div><button className="follow-button">Follow</button></div>
           </div>
-          <div className="d-flex  justify-content-between mt-3 card-item">
+          <div className="d-flex  justify-content-between align-items-center mt-3 card-item">
             <div>
               <img
                 src={require("../../../helpers/images/avatar.jpg")}
@@ -64,7 +64,7 @@ const TopPages = () => {
             </div>
             <div><button className="follow-button">Follow</button></div>
           </div>
-           <div className="d-flex  justify-content-between mt-3 card-item">
+           <div className="d-flex  justify-content-between align-items-center mt-3 card-item">
             <div>
               <img
                 src={require("../../../helpers/images/avatar.jpg")}

@@ -17,14 +17,13 @@ function Sidebar({ isOpen }) {
       style={
         isOpen
           ? { width: "inherit" }
-          : { maxWidth: "30%", overflow: "hidden",backgroundColor: "white"}
+          : { maxWidth: "30%", backgroundColor: "white"}
       }
     >
       <div className="sidebar-top border-bottom pt-3">
         <SidebarRow
           Icon={AiFillHome}
           title="Feed"
-          activeClassName="active"
           color="#2563EB"
           isOpen={isOpen}
         />
@@ -87,6 +86,7 @@ function Sidebar({ isOpen }) {
             {show ? "See Less" : "See More"}
           </button>
         ) : null}
+       
       </div>
       <div className="sidebar-middle border-bottom pt-3">
         {isOpen ? <h3 className="mb-3 ps-2">Contacts</h3> : null}

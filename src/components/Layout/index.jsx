@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 
-const Layout = ({ showIcon = true, collapseSidebar=false, children }) => {
+const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
