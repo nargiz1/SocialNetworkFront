@@ -1,0 +1,33 @@
+.user-profile{
+    position: relative;
+    border-radius: 1rem;
+    background-color: white;
+    border: 1px solid #ebe9e6;
+    -webkit-box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+}
+.profile-banner{
+    width: 100%;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    height: 300px;
+}
+.profile-banner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-content{
+    position: relative;
+}
+.profile-avatar{
+    
+    border-radius: 100%;
+    overflow: hidden;
+}
+.profile-avatar img{
+    width: 150px;
+    height: 150px;
+}

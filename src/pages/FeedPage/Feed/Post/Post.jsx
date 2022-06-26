@@ -6,8 +6,13 @@ import { BsShare, BsEmojiLaughing } from "react-icons/bs";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
+import { useSelector } from "react-redux";
+
 
 function Post() {
+  const data=useSelector((state) => state.post.posts);
+  console.log("Post js data",data);
+  
   return (
     <div className="post mt-4 mb-4">
       <div className="post-top d-flex align-items-center justify-content-between p-3">

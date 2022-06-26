@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import "../Sidebar/Sidebar.css";
 import SidebarRow from "./SidebarRow/SidebarRow";
 import { BsFillBagFill, BsFillCameraVideoFill } from "react-icons/bs";
@@ -8,16 +10,26 @@ import { HiPhotograph } from "react-icons/hi";
 import { AiFillHome, AiOutlineSetting } from "react-icons/ai";
 import { IoDocumentOutline } from "react-icons/io5";
 import { RiFlag2Fill } from "react-icons/ri";
+import { setLogin } from "../../redux/Auth/AuthSlice";
 
 function Sidebar({ isOpen }) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    sessionStorage.removeItem("token");
+    dispatch(setLogin(null));
+    navigate("/login");
+  };
+
   return (
     <div
       className={`sidebar border-end scroll-bar`}
       style={
         isOpen
           ? { width: "inherit" }
-          : { maxWidth: "30%", backgroundColor: "white"}
+          : { maxWidth: "30%", backgroundColor: "white" }
       }
     >
       <div className="sidebar-top border-bottom pt-3">
@@ -86,7 +98,6 @@ function Sidebar({ isOpen }) {
             {show ? "See Less" : "See More"}
           </button>
         ) : null}
-       
       </div>
       <div className="sidebar-middle border-bottom pt-3">
         {isOpen ? <h3 className="mb-3 ps-2">Contacts</h3> : null}
@@ -103,53 +114,38 @@ function Sidebar({ isOpen }) {
                 alt="profile-photo"
               />
             </div>
-            {isOpen ? 
-            <h4>Fidan Ganbarli</h4> : null}
+            {isOpen ? <h4>Fidan Ganbarli</h4> : null}
           </a>
         </div>
       </div>
       <div className="sidebar-bottom border-bottom pt-3">
         {isOpen ? <h3 className="mb-3 ps-2">Pages</h3> : null}
 
-        <a href="#">
-          <div className="d-flex justify-content-between align-items-center pages-item">
-            <div className="d-flex align-items-center">
-              <AiOutlineSetting />
-              {isOpen ? <h4>Setting</h4> : null}
-            </div>
+        <div className="d-flex justify-content-between align-items-center pages-item">
+          <Link to="/setting">
+          <div
+            className="d-flex align-items-center"
+          >
+            <AiOutlineSetting />
             {isOpen ? (
-              <i>
-                <MdOutlineKeyboardArrowDown />
-              </i>
-            ) : null}
+                <h4>Setting</h4>
+                ) : null}
           </div>
-        </a>
-        <a href="#">
-          <div className="d-flex justify-content-between align-items-center pages-item">
-            <div className="d-flex align-items-center">
-              <IoDocumentOutline />
-              {isOpen ? <h4>Create content</h4> : null}
-            </div>
+                </Link>
+        </div>
+        <div className="d-flex justify-content-between align-items-center pages-item">
+          <Link to="/logout">
+          <div
+            onClick={() => logoutHandler()}
+            className="d-flex align-items-center"
+          >
+            <BiLogIn />
             {isOpen ? (
-              <i>
-                <MdOutlineKeyboardArrowDown />
-              </i>
-            ) : null}
+                <h4>Logout</h4>
+                ) : null}
           </div>
-        </a>
-        <a href="#">
-          <div className="d-flex justify-content-between align-items-center pages-item">
-            <div className="d-flex align-items-center">
-              <BiLogIn />
-              {isOpen ? <h4>Authentication</h4> : null}
-            </div>
-            {isOpen ? (
-              <i>
-                <MdOutlineKeyboardArrowDown />
-              </i>
-            ) : null}
-          </div>
-        </a>
+                </Link>
+        </div>
       </div>
     </div>
   );

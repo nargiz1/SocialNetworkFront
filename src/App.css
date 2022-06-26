@@ -5,3 +5,53 @@
 .slick-next {
     right: -3px!important;
 }
+.register-sign-in{
+    color: #3F3D56;
+    position: relative;
+    background-color: white;
+    padding: 35px 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
+}
+.register-sign-in input{
+    height: 44px;
+    color: #393939;
+    padding: 0 28px 0 28px;
+    outline: 0;
+    background: #f0f2f5;
+    border: 1px solid transparent;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.register-sign-in button,.forgot-back{
+    border: none;
+    color: white;
+    background-color: #6C63FF;
+    padding: 8px 26px;
+    border-radius: 20px;
+    font-size: 15px;
+}
+.register-sign-in button:hover{
+    background-color: #3F3D56;
+}
+.chat-button{
+    width: 50px;
+    height: 50px;
+    line-height: 23px;
+    font-size: 29px;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: #3D63EB;
+    color: white;
+    position: fixed;
+}
+.offcanvas{
+    width: 310px!important;
+}
+
