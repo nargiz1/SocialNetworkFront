@@ -3,7 +3,9 @@ import Layout from "../../components/Layout";
 import Pages from "./Pages/Pages";
 import TopPages from "./TopPages/TopPages";
 
-const index = () => {
+import { useSelector } from "react-redux";
+
+const Index = () => {
   return (
     <Layout>
     <div className="container pt-4">
@@ -20,4 +22,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

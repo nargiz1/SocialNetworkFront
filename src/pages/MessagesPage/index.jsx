@@ -1,11 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { FiEdit,FiSend } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 import Layout from "../../components/Layout";
 import "./index.css";
 
-const index = () => {
+const Index = () => {
+  const data = useSelector((state) => state.auth.currentUser);
+  console.log("current user",data);
   return (
     <Layout showIcon={false} collapseSidebar={true}>
       <div className="chat-content vh-100">
@@ -168,4 +171,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -19,6 +19,7 @@ const Index = () => {
     setValue(newValue);
   };
   const data = useSelector((state) => state.auth.currentUser);
+  console.log("currentUser",data);
   const userPostsData = useSelector((state) => state.post.userPosts);
   const followersData = useSelector((state) => state.follow.followers);
   console.log("followers dispatch data", followersData);

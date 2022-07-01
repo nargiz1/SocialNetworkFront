@@ -25,8 +25,6 @@ const Index = () => {
     (async function() {
       const user=await authServices.getUserService();
       const followers=await followServices.getFollowersService(user);
-
-      //Burada niye getUserPostService yuxaridaki data ni gonderende undefined qaytarir?
       const userPosts = await postServices.getUserPostsService(user);
       dispatch(setCurrentUser(user));
       dispatch(setUserPosts(userPosts.$values));

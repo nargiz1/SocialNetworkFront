@@ -6,9 +6,11 @@ import { setPosts } from "../../redux/Post/PostSlice";
 import Layout from "../../components/Layout";
 import Feed from "./Feed/Feed";
 import Wedget from "./Wedget/Wedget";
+import { useSelect } from "@mui/base";
 
 const Index = () => {
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     (async function () {

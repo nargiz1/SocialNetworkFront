@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import * as authServices from "../src/services/AuthService";
+import  { setCurrentUser } from '../src/redux/Auth/AuthSlice';
 
 import FeedPage from "./pages/FeedPage/index";
 import "./App.css";
@@ -23,11 +26,20 @@ const UserPage = React.lazy(() => import("./pages/UserPage/index"));
 
 
 function App() {
+  const dispatch= useDispatch();
+
   useSelector((state) => state.auth.token);
   useSelector((state) => state.auth.resetToken);
   const token = sessionStorage.getItem("token");
   const resetToken = sessionStorage.getItem("resetToken");
+  
+  useEffect(() => {
+    (async function() {
+      const user=await authServices.getUserService();
 
+      dispatch(setCurrentUser(user));
+    })();
+  }, [dispatch])
   return (
     <>
         <ToastContainer autoClose={2000} position="bottom-right" />

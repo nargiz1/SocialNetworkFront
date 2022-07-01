@@ -35,7 +35,7 @@ const Post = ({ post }) => {
 
             <div className="ms-3">
               <a href="#" className="username text-capitalize">
-                {post?.user?.fullName || "ayshan gambarova"}
+                {post?.user?.fullName || "user"}
               </a>
               <div className="d-flex align-items-center">
                 <span className="post-date text-capitalize">
