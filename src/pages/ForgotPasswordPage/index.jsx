@@ -1,30 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
 import { setReset } from "../../redux/Auth/AuthSlice";
 import * as authServices from "../../services/AuthService";
 
 const Index = () => {
   const dispatch = useDispatch();
-
-  // const [forgotData, setForgotData] = useState({
-  //   mail: "",
-  // });
-
-  const [forgotData, setForgotData] = useState("");
-
   const navigate = useNavigate();
+  const [forgotData, setForgotData] = useState("");
 
   const backToLogin = {
     textDecoration: "none",
     color: "#393939",
     fontStyle:"italic"
   };
-
-
-  // const handleChange = (name, value) => {
-  //   setForgotData({ ...forgotData, [name]: value });
-  // };
 
   const handleChange = (value) => {
     setForgotData(value);

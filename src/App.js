@@ -1,14 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
-import FeedPage from "./pages/FeedPage/index";
-import "./App.css";
-
-// Includes Toastify Package
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Code Splitting - Lazy loading(dynamic import)
+import FeedPage from "./pages/FeedPage/index";
+import "./App.css";
+
 const GroupsPage = React.lazy(() => import("./pages/GroupsPage/index"));
 const PagesPage = React.lazy(() => import("./pages/PagesPage/index"));
 const PhotosPage = React.lazy(() => import("./pages/PhotosPage/index"));

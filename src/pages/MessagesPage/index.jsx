@@ -1,8 +1,9 @@
 import React from "react";
-import "./index.css";
 import { FiEdit,FiSend } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
+
 import Layout from "../../components/Layout";
+import "./index.css";
 
 const index = () => {
   return (

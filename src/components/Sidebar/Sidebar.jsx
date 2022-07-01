@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "../Sidebar/Sidebar.css";
-import SidebarRow from "./SidebarRow/SidebarRow";
 import { BsFillBagFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdGroups, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { BiMessageDetail, BiLogIn } from "react-icons/bi";
 import { HiPhotograph } from "react-icons/hi";
 import { AiFillHome, AiOutlineSetting } from "react-icons/ai";
-import { IoDocumentOutline } from "react-icons/io5";
 import { RiFlag2Fill } from "react-icons/ri";
+
 import { setLogin } from "../../redux/Auth/AuthSlice";
+import "../Sidebar/Sidebar.css";
+import SidebarRow from "./SidebarRow/SidebarRow";
 
 function Sidebar({ isOpen }) {
   const dispatch = useDispatch();
@@ -136,7 +136,7 @@ function Sidebar({ isOpen }) {
         <div className="d-flex justify-content-between align-items-center pages-item">
           <Link to="/logout">
           <div
-            onClick={() => logoutHandler()}
+            onClick={(e) => logoutHandler()}
             className="d-flex align-items-center"
           >
             <BiLogIn />

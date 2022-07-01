@@ -1,13 +1,14 @@
 import React from "react";
-import Logo from "../../helpers/images/logo.png";
+import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { MdShoppingCart } from "react-icons/md";
 import { RiNotification2Fill } from "react-icons/ri";
 import { BiMessageDetail } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import {HiOutlineMenuAlt1} from "react-icons/hi";
+
+import Logo from "../../helpers/images/logo.png";
 import "../Header/Header.css";
-import { Link } from "react-router-dom";
 
 function Header({ isOpen, setIsOpen, showIcon = true }) {
 

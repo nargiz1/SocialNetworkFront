@@ -11,7 +11,7 @@
     background-color: white;
     padding: 35px 50px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgb(0 0 0 / 8%);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .register-sign-in input{
     height: 44px;

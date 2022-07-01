@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+
 import "../SidebarRow/SidebarRow.css";
 
 function SidebarRow({ src, Icon, title, link, color, isOpen }) {

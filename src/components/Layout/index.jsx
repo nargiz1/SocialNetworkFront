@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineMessage } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import Tabs from "../../components/Tabs/Tabs";
@@ -54,7 +55,7 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
               </div>
                   {search?(
                      <div>
-                     <input type="text" placeholder="Search..." className="w-100 border-0 p-3 pb-0"/>
+                     <input type="text" placeholder="Search..." className="w-100 border-0 p-3 pb-0" style={{"outline":"none"}}/>
                    </div>
                   ):null}
               <div className="offcanvas-body">

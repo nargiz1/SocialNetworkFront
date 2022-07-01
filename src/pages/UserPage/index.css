@@ -1,33 +1,122 @@
-.user-profile{
-    position: relative;
-    border-radius: 1rem;
-    background-color: white;
-    border: 1px solid #ebe9e6;
-    -webkit-box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+.user-profile {
+  position: relative;
+  background: white;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding-bottom: 25px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px -1px 0px;
 }
-.profile-banner{
-    width: 100%;
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    border-radius: 12px 12px 0 0;
-    height: 300px;
+.profile-banner {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  height: 300px;
 }
-.profile-banner img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.profile-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.profile-content{
-    position: relative;
+.profile-content {
+  padding: 26px;
 }
-.profile-avatar{
-    
-    border-radius: 100%;
-    overflow: hidden;
+.avatar-parent {
+  position: relative;
 }
-.profile-avatar img{
-    width: 150px;
-    height: 150px;
+.profile-avatar {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+.profile-avatar img {
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 2px 20px 0 rgb(0 0 0 / 30%);
+  border: 4px solid #fff;
+}
+.profile-info .username {
+  font-size: 30px;
+}
+.tabs-holder {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+.about-list {
+  padding: 20px 13px 20px 13px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(71, 70, 70, 0.15) 1.95px 1.95px 2.6px;
+}
+.about-list h3 {
+  color: #393939;
+  text-align: left;
+  padding-left: 9px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+ul.about {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.about .about-data {
+  color: #393939c2;
+  font-weight: bold;
+}
+ul.about li {
+  color: #808080;
+  text-align: left;
+  padding-left: 0px;
+  margin: 7px;
+  font-size: 16px;
+}
+ul.about li i {
+  font-size: 18px;
+}
+.user-friends {
+  background-color: white;
+  padding:25px 20px 15px 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 10px;
+}
+.user-friends .friend-card {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #8080801c;
+  margin-bottom: 10px;
+}
+.user-friends .friend-card .friend-card-img {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.user-friends .friend-card .friend-card-info {
+  padding: 11px 0px;
+  text-align: left;
+  color: #393939;
+}
+.user-friends .friend-card .friend-card-info .followers-name {
+  font-weight: bold;
+}
+.user-friends .friend-card .friend-card-info .followers {
+  font-size: 14px;
+}
+.user-friends .friend-card .btn-following {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 0px;
+  background-color: #dbeafe;
+  color: #5184f0;
+  font-weight: bold;
+  font-size: 15px;
 }

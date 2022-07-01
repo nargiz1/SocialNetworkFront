@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as authServices from "../../services/AuthService";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+
+import * as authServices from "../../services/AuthService";
 import { setLogin } from "../../redux/Auth/AuthSlice";
 import LoginSVG from "../../helpers/images/login.svg";
-import { toast } from "react-toastify";
 
 const Index = () => {
   const dispatch = useDispatch();

@@ -1,13 +1,27 @@
 import React from "react";
-import CreatePost from "./CreatePost/CreatePost";
-import Post from "./Post/Post";
+import { useSelector } from "react-redux";
+
+import CreatePost from "../../../components/CreatePost/CreatePost";
+import Post from "../../../components/Post/Post";
 import "../Feed/Feed.css";
 
 function Feed() {
+
+  const data = useSelector((state) => state.post.posts);
+  console.log("all posts",data);
+
   return (
     <div className="feed">
       <CreatePost />
-      <Post/>
+
+      {
+        data && data.length > 0 ? (
+          data.map((item, index) => (
+            <Post post={item} key={index} />
+          ))
+        ) : null
+      }
+
     </div>
   );
 }

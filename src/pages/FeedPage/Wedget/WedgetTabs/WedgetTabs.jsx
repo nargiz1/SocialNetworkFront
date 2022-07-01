@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import "./WedgetTabs.css";
 import Tabs from "../../../../components/Tabs/Tabs";
 import TabPanel from "../../../../components/Tabs/TabPanel";
@@ -12,7 +13,7 @@ export default function WedgetTabs() {
 
   return (
     <>
-    <h5>Contacts</h5>
+      <h5>Contacts</h5>
       <Tabs
         activeTab={value}
         handleTabChange={handleChange}

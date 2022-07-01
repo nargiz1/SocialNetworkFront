@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as authServices from "../../services/AuthService";
 import { toast } from "react-toastify";
+
+import * as authServices from "../../services/AuthService";
 import RegisterSVG from "../../helpers/images/register.svg";
 
 const Index = () => {
