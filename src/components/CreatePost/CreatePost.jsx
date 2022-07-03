@@ -49,7 +49,7 @@ const CreatePost = () => {
     formData.append("PublicationTime", createPost.PublicationTime);
     console.log(formData);
 
-    // await postServices.createPostService(formData);
+    await postServices.createPostService(formData);
   };
 
   return (

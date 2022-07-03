@@ -7,15 +7,22 @@ import Layout from "../../components/Layout";
 import Feed from "./Feed/Feed";
 import Wedget from "./Wedget/Wedget";
 import { useSelect } from "@mui/base";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const Index = () => {
   const dispatch = useDispatch();
+  
 
 
   useEffect(() => {
     (async function () {
       const data = await postServices.getAllPostsService();
-      dispatch(setPosts(data.$values));
+      console.log("data posts feedpage index",data);
+  
+      dispatch(setPosts(data));
+      // const currentUser = useSelector((state) => state.auth.currentUser);
+      // console.log("current user",currentUser);
+      
     })();
   }, [dispatch]);
 

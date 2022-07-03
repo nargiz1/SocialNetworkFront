@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { MdShoppingCart } from "react-icons/md";
 import { RiNotification2Fill } from "react-icons/ri";
 import { BiMessageDetail } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
-import {HiOutlineMenuAlt1} from "react-icons/hi";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 
 import Logo from "../../helpers/images/logo.png";
 import "../Header/Header.css";
+import * as authServices from "../../services/AuthService";
 
 function Header({ isOpen, setIsOpen, showIcon = true }) {
+
+  const [searchUser, setSearchUser] = useState("");
+  const [userData, setUserData] = useState({});
 
   const handleOpenSidebar = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = authServices.SearchUserService(searchUser);
+    setUserData(data);
+    console.log("searching user data",data);
+  
   };
 
   return (
@@ -23,7 +34,11 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
         <div className="container-fluid">
           <a className="navbar-brand">
             <div className="header-left">
-              {showIcon && <i className="header-bar"><HiOutlineMenuAlt1 onClick={handleOpenSidebar}/></i>}
+              {showIcon && (
+                <i className="header-bar">
+                  <HiOutlineMenuAlt1 onClick={handleOpenSidebar} />
+                </i>
+              )}
               <img src={Logo} alt="Logo" />
             </div>
           </a>
@@ -47,7 +62,15 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
                 <i className="position-absolute">
                   <BsSearch />
                 </i>
-                <input type="text" placeholder="Search for Friends..." />
+
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Search for Friends..."
+                    onChange={(e) => setSearchUser(e.target.value)}
+                  />
+                </form>
+                  {/* <div>{userData}</div> */}
               </div>
             </div>
             <div className="header-right d-flex">

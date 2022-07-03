@@ -5,6 +5,7 @@ import { BsShare, BsEmojiLaughing } from "react-icons/bs";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
+import * as postServices from "../../services/PostService";
 import "./Post.css";
 
 // Additional Libraries
@@ -13,9 +14,12 @@ import Moment from 'react-moment';
 const Post = ({ post }) => {
   const[showComment,setShowComment]=useState(true);
 
-  const disableComments =() =>{
-    setShowComment=(!showComment);
-  }
+  const deletePost =(id)=>{
+    const data=postServices.deletePostService(id);
+
+  };
+ 
+
   return (
     <>
       <div className="post mt-4 mb-4">
@@ -33,9 +37,9 @@ const Post = ({ post }) => {
               </a>
             </div>
 
-            <div className="ms-3">
+            <div className="ms-3 text-start">
               <a href="#" className="username text-capitalize">
-                {post?.user?.fullName || "user"}
+                {post?.user?.userName || "user"}
               </a>
               <div className="d-flex align-items-center">
                 <span className="post-date text-capitalize">
@@ -76,7 +80,10 @@ const Post = ({ post }) => {
             <li>
               <hr className="dropdown-divider" />
             </li>
-            <li>
+            <li onClick={()=>{
+              console.log(post.id)
+deletePost(post.id)
+              }}>
              
                 Delete
              
@@ -86,19 +93,19 @@ const Post = ({ post }) => {
         </div>
 
         <div className="post-body">
-          {post?.images && post.images?.$values?.length>0 ? (
-            post.images.$values.map((img,index)=>(
+          {post?.images && post.images?.length>0 ? (
+            post.images.map((img,index)=>(
               <img
                 key={index}
-                src={require(`../../helpers/images/${img.imageUrl}`)}
+                 src={"http://localhost:39524/"+img.imageUrl}
                 alt="post"
                 className="w-100"
               />
 
             ))
           ) : post?.text !== null ? (
-            <p className="ps-3 pe-3">{post?.text}</p>
-          ) : post?.videos?.$values.length > 0 ? (
+            <p className="ps-3 pe-3 text-start">{post?.text}</p>
+          ) : post?.videos?.length > 0 ? (
             <video controls>
               <source
                 src={require(`../../helpers/videos/${post?.videos}`)}
@@ -150,7 +157,7 @@ const Post = ({ post }) => {
                 <span> Share</span>
               </a>
             </div>
-            {post.likes?.$values.length > 0 ? (
+            {post.likes?.length > 0 ? (
               <>
                 <div className="d-flex align-items-center">
                   <div className="avatar-group d-flex ps-2">
@@ -171,7 +178,7 @@ const Post = ({ post }) => {
                   </div>
                   <div className="ms-2">
                     Liked <strong>Johnson</strong> and{" "}
-                    <strong>{post.likes?.$values.length} other</strong>
+                    <strong>{post.likes?.length} other</strong>
                   </div>
                 </div>
               </>
@@ -181,7 +188,7 @@ const Post = ({ post }) => {
         </div>
 
         <div className="post-bottom p-3">
-          {post.comments?.$values.length > 0 ? (
+          {post.comments?.length > 0 ? (
             <>
               <div className="comment-area pe-5">
                 <div className="d-flex mb-3">
@@ -195,7 +202,7 @@ const Post = ({ post }) => {
 
                   <div className="comment-content ms-3">
                     <div className="comment align-items-center">
-                      {post.comments?.$values.map((x) => (
+                      {post.comments?.map((x) => (
                         <p key={x.$id}>{x.text}</p>
                       ))}
                     </div>
@@ -224,9 +231,9 @@ const Post = ({ post }) => {
                 </div>
               </div>
               <div className="mb-3">
-                {post.comments?.$values.length - 1 > 0 ? (
+                {post.comments?.length - 1 > 0 ? (
                   <a href="#" className="more-comment">
-                    View {post.comments?.$values.length - 1} more comments
+                    View {post.comments?.length - 1} more comments
                   </a>
                 ) : null}
               </div>

@@ -11,6 +11,7 @@ import { TbWorld } from "react-icons/tb";
 import { MdOutlineWork } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { FaBirthdayCake, FaUniversity } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [value, setValue] = React.useState(0);
@@ -18,9 +19,10 @@ const Index = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const data = useSelector((state) => state.auth.currentUser);
-  console.log("currentUser",data);
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  console.log("currentUser", currentUser);
   const userPostsData = useSelector((state) => state.post.userPosts);
+
   const followersData = useSelector((state) => state.follow.followers);
   console.log("followers dispatch data", followersData);
   console.log("user dispatch posts", userPostsData);
@@ -38,14 +40,14 @@ const Index = () => {
           <div className="row d-flex justify-content-center">
             <div className="col-md-6">
               <CreatePost />
-              {/* {
+              {
                 userPostsData && userPostsData.length > 0 ? (
                   userPostsData.map((item,index)=>(
                     <Post post={item} key={index}/>
 
                   ))
                 ):"Userin hec bir postu yoxdu"
-              } */}
+              }
             </div>
             <div className="col-md-4">
               <div className="about-list">
@@ -55,28 +57,28 @@ const Index = () => {
                     <i>
                       <TbWorld style={{ color: "#3B82F6" }} />
                     </i>{" "}
-                    Country | <span className="about-data">{data.country}</span>
+                    Country | <span className="about-data">{currentUser.country}</span>
                   </li>
                   <li>
                     <i>
                       <FaBirthdayCake style={{ color: "#EC4899" }} />
                     </i>{" "}
                     birth date |{" "}
-                    <span className="about-data">{data.birthDate}</span>
+                    <span className="about-currentUser">{currentUser.birthDate}</span>
                   </li>
                   <li>
                     <i>
                       <FaUniversity style={{ color: "#10B981" }} />
                     </i>{" "}
                     education |{" "}
-                    <span className="about-data">{data.education}</span>
+                    <span className="about-currentUser">{currentUser.education}</span>
                   </li>
                   <li>
                     <i>
                       <MdOutlineWork style={{ color: "#F59E0B" }} />
                     </i>{" "}
                     occupation |{" "}
-                    <span className="about-data">{data.occupation}</span>
+                    <span className="about-currentUser">{currentUser.occupation}</span>
                   </li>
                   <li>
                     <i>
@@ -84,11 +86,13 @@ const Index = () => {
                     </i>{" "}
                     Relationship Status |{" "}
                     <span className="about-data">
-                      {data.relationshipStatus}
+                      {currentUser.relationshipStatus}
                     </span>
                   </li>
                 </ul>
-                <button className="btn btn-primary w-100 mt-3">Edit</button>
+                <Link to={"/setting"}>
+                  <button className="btn btn-primary w-100 mt-3">Edit</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -145,6 +149,7 @@ const Index = () => {
                   ) : (
                     "You don't have any photo"
                   )}
+               
                 </div>
               </div>
             </div>

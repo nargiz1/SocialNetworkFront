@@ -56,4 +56,21 @@ export async function createPostService(formData) {
     console.log("err: ", error);
   }
 };
+export async function deletePostService(payload) {
+  try {
+    return await (
+      await Axios.post(`/api/Post/delete`,  payload , {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+      })
+      ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+};
+
+
 

@@ -8,7 +8,7 @@ import "../Feed/Feed.css";
 function Feed() {
 
   const data = useSelector((state) => state.post.posts);
-  console.log("all posts",data);
+  console.log("all posts feed fedd,jsx",data);
 
   return (
     <div className="feed">

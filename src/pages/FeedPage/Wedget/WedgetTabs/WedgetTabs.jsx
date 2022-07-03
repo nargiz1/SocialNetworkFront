@@ -13,7 +13,6 @@ export default function WedgetTabs() {
 
   return (
     <>
-      <h5>Contacts</h5>
       <Tabs
         activeTab={value}
         handleTabChange={handleChange}

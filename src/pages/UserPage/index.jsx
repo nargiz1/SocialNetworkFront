@@ -17,7 +17,6 @@ const Index = () => {
   const dispatch= useDispatch();
   
   const data = useSelector((state) => state.auth.currentUser);
-  console.log("user dispatch data",data);
 
   
 
@@ -27,8 +26,9 @@ const Index = () => {
       const followers=await followServices.getFollowersService(user);
       const userPosts = await postServices.getUserPostsService(user);
       dispatch(setCurrentUser(user));
-      dispatch(setUserPosts(userPosts.$values));
-      dispatch(setFollowers(followers.$values));
+      
+      dispatch(setUserPosts(userPosts));
+      dispatch(setFollowers(followers));
     })();
   }, [dispatch])
   
