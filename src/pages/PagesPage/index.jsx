@@ -9,13 +9,13 @@ const Index = () => {
   return (
     <Layout>
     <div className="container pt-4">
-      <div className="row">
+      <div className="row justify-content-center align-items-center">
         <div className="col-md-8">
           <Pages />
         </div>
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <TopPages />
-        </div>
+        </div> */}
       </div>
     </div>
     </Layout>

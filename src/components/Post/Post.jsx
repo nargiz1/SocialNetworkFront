@@ -1,45 +1,104 @@
-import React,{useState} from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { BsShare, BsEmojiLaughing } from "react-icons/bs";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
+import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
 import * as postServices from "../../services/PostService";
+import * as commentServices from "../../services/CommentService";
+import * as likeServices from "../../services/LikeService";
 import "./Post.css";
 
 // Additional Libraries
-import Moment from 'react-moment';
+import Moment from "react-moment";
+import { Carousel } from "bootstrap";
+import { setIsClickedLike, setPosts } from "../../redux/Post/PostSlice";
 
-const Post = ({ post }) => {
-  const[showComment,setShowComment]=useState(true);
+const Post = ({ post, likeTest, setLikeTest }) => {
 
-  const deletePost =(id)=>{
-    const data=postServices.deletePostService(id);
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const isClickedLike = useSelector((state) => state.post.isClickedLike);
+  const [showComment, setShowComment] = useState(true);
+  const [like, setLike] = useState(false);
 
+  const [createComment, setCreateComment] = useState({
+    text: "",
+    postId: post.id,
+    commentId: 0,
+  });
+
+  const handleChange = (name, value) => {
+    setCreateComment({ ...createComment, [name]: value });
   };
- 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (createComment.text !== "" && createComment.postId !== "") {
+      try {
+        const resp = await commentServices.CommentPostService(createComment);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    }
+  };
+
+  const getAllPosts = async() => {
+    const data = await postServices.getAllPostsService();
+    dispatch(setPosts(data));
+  };
+
+  const deletePost = async (id) => {
+    await postServices.deletePostService(id);
+    getAllPosts();
+  };
+
+  const toggleLikePost = () => {
+    setLike(!like);
+    // const data = likeServices.likePostService(id);
+    // setLike(true);
+  };
+
+  const handleLikePost = async (e, id) => {
+        e.preventDefault();
+        if (!isClickedLike) {
+          const data = likeServices.likePostService(id);
+          setLikeTest(true);
+          setLike(true);  
+        } else {
+          setLikeTest(false);
+        }
+        getAllPosts();
+  };
+
+  useEffect(() => {
+
+  }, [])
+  
 
   return (
     <>
       <div className="post mt-4 mb-4">
-
         <div className="post-top d-flex align-items-center justify-content-between p-3">
           <div className="d-flex align-items-center">
-
-            <div>
-              <a href="#">
+            <Link to={"/user"}>
+              <div>
                 <img
-                  src={require("../../helpers/images/avatar.jpg")}
+                  src={"http://localhost:39524/" + currentUser?.imageUrl}
                   alt="profile-photo"
                   className="post-profile"
                 />
-              </a>
-            </div>
+              </div>
+            </Link>
 
             <div className="ms-3 text-start">
-              <a href="#" className="username text-capitalize">
-                {post?.user?.userName || "user"}
+              <a href="#" className="username text-lowercase">
+                @{post?.user?.userName || "user"}
               </a>
               <div className="d-flex align-items-center">
                 <span className="post-date text-capitalize">
@@ -47,10 +106,9 @@ const Post = ({ post }) => {
                 </span>
               </div>
             </div>
-
           </div>
 
-          <a
+          {/* <a
             href="#"
             className="text-decoration-none fs-4 text-secondary"
             data-bs-toggle="dropdown"
@@ -60,58 +118,63 @@ const Post = ({ post }) => {
           </a>
 
           <ul className="dropdown-menu post-events">
-            <li>
-             
-                Edit post
-            
-            </li>
+            <li>Edit post</li>
 
-            {
-              showComment?(
-               <li onClick={(e)=> setShowComment(!showComment)}>
-                 Disable comments
-               </li>
-              ):(
-                <li onClick={(e)=> setShowComment(!showComment)}>
+            {showComment ? (
+              <li onClick={(e) => setShowComment(!showComment)}>
+                Disable comments
+              </li>
+            ) : (
+              <li onClick={(e) => setShowComment(!showComment)}>
                 Unable comments
-               </li>
-              )
-            }
+              </li>
+            )}
             <li>
               <hr className="dropdown-divider" />
             </li>
-            <li onClick={()=>{
-              console.log(post.id)
-deletePost(post.id)
-              }}>
-             
-                Delete
-             
+            <li
+              onClick={() => {
+                deletePost(post.id);
+              }}
+            >
+              Delete
             </li>
-          </ul>
-
+          </ul> */}
+          <button
+            onClick={() => {
+              deletePost(post.id);
+            }}
+          >
+            delete
+          </button>
         </div>
 
         <div className="post-body">
-          {post?.images && post.images?.length>0 ? (
-            post.images.map((img,index)=>(
+          {post?.images && post.images?.length > 0 ? (
+            post.images.map((img, index) => (
+              // <Carousel mdViewCount={1} key={index}>
               <img
-                key={index}
-                 src={"http://localhost:39524/"+img.imageUrl}
+                src={"http://localhost:39524/" + img?.imageUrl}
                 alt="post"
                 className="w-100"
+                key={index}
               />
-
+              // </Carousel>
             ))
           ) : post?.text !== null ? (
             <p className="ps-3 pe-3 text-start">{post?.text}</p>
-          ) : post?.videos?.length > 0 ? (
-            <video controls>
-              <source
-                src={require(`../../helpers/videos/${post?.videos}`)}
-                type="video/mp4"
-              />
-            </video>
+          ) : post?.videos && post?.videos?.length > 0 ? (
+            post.videos.map((video, index) => (
+              // <Carousel mdViewCount={1} key={index}>
+              <video controls key={index} className="w-100">
+                <source
+                  src={"http://localhost:39524/" + video.videoUrl}
+                  type="video/mp4"
+                  alt="video"
+                />
+              </video>
+              // </Carousel>
+            ))
           ) : null}
 
           <div className="post-body-bottom p-3">
@@ -120,30 +183,80 @@ deletePost(post.id)
                 <a
                   href="#"
                   className="d-flex align-items-center me-4 text-decoration-none"
+                  onClick={(e) => handleLikePost(e, post.id)}
                 >
-                  <div className="post-interaction">
+                  <div
+                    className="post-interaction"
+                  >
+                    {
+                      setLike?(
                     <div>
-                      <AiOutlineLike style={{ fontSize: "21px" }} />
+                      <AiOutlineLike style={{ fontSize: "21px",color:"red" }} />
                     </div>
-                  </div>
-                  <span> Like</span>
-                </a>
-                {
-                  showComment?(
-                <a
-                  href="#"
-                  className="d-flex align-items-center text-decoration-none"
-                >
-                  <div className="post-interaction">
-                    <div>
-                      <FaRegComment />
-                    </div>
-                  </div>
-                  <span> Comment</span>
-                </a>
 
-                  ):null
-                }
+                      ) :(
+                        <div>
+                        <AiOutlineLike style={{ fontSize: "21px" }} />
+                      </div>
+                      )
+
+                    }
+                  </div>
+                  {/* <span> Like</span> */}
+                </a>
+                {showComment ? (
+                  <a
+                    href="#"
+                    className="d-flex align-items-center text-decoration-none"
+                  >
+                    <div
+                      className="post-interaction"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                    >
+                      <div>
+                        <FaRegComment />
+                      </div>
+                    </div>
+                    <div
+                      className="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">
+                              Modal title
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div className="modal-body">...</div>
+                          <div className="modal-footer">
+                            <button
+                              type="button"
+                              className="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Save changes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <span> Comment</span> */}
+                  </a>
+                ) : null}
               </div>
               <a
                 href="#"
@@ -154,100 +267,110 @@ deletePost(post.id)
                     <BsShare />
                   </div>
                 </div>
-                <span> Share</span>
+                {/* <span> Share</span> */}
               </a>
             </div>
-            {post.likes?.length > 0 ? (
-              <>
-                <div className="d-flex align-items-center">
-                  <div className="avatar-group d-flex ps-2">
-                    <div className="avatar-item">
-                      <img
-                        src={require("../../helpers/images/avatar1.jpg")}
-                        alt=""
-                        className="w-100"
-                      />
-                    </div>
-                    <div className="avatar-item">
-                      <img
-                        src={require("../../helpers/images/avatar2.jpg")}
-                        alt=""
-                        className="w-100"
-                      />
-                    </div>
-                  </div>
-                  <div className="ms-2">
-                    Liked <strong>Johnson</strong> and{" "}
-                    <strong>{post.likes?.length} other</strong>
-                  </div>
-                </div>
-              </>
-            ) : null}
-          </div>
 
+            {
+              console.log('post.likes: ', post?.likes)
+            }
+
+            {post.likes?.length > 0
+              ? (
+                <div className="d-flex align-items-center like-content">
+                <div className="avatar-group d-flex ps-2">
+                  <div className="avatar-item">
+                    <img
+                       src={"http://localhost:39524/" + post.likes[post.likes?.length-1]?.user?.imageUrl}
+                       alt={post.id}
+                       className="w-100"
+                    />
+
+                  </div>
+                  {
+                      <div className="ms-2">
+                        Liked <strong>{post.likes[0]?.user?.fullName}</strong> and {" "}
+                      
+                        <strong>{post.likes?.length-1} other</strong>
+                      </div>
+                    }
+                </div>
+              </div>
+              )
+              : null}
+
+          </div>
         </div>
 
         <div className="post-bottom p-3">
-          {post.comments?.length > 0 ? (
-            <>
-              <div className="comment-area pe-5">
-                <div className="d-flex mb-3">
-                  <a href="#">
-                    <img
-                      src={require("../../helpers/images/avatar3.jpg")}
-                      alt="profile-photo"
-                      className="post-profile"
-                    />
-                  </a>
-
-                  <div className="comment-content ms-3">
-                    <div className="comment align-items-center">
-                      {post.comments?.map((x) => (
-                        <p key={x.$id}>{x.text}</p>
-                      ))}
-                    </div>
-                    <div className="d-flex comment-options align-items-center">
-                      <div className="d-flex me-2">
-                        <a
-                          href="#"
-                          className="text-decoration-none text-danger"
-                        >
-                          <AiOutlineHeart />
-                        </a>
+          {post.comments?.length > 0
+            ? post.comments.map((comment, index) => (
+                <div key={index} className="comment-area pe-5">
+                  <div className="d-flex mb-3">
+                    <Link to={`/user/${comment.user.id}`}>
+                      <div>
+                        <img
+                          src={
+                            "http://localhost:39524/" + comment.user?.imageUrl
+                          }
+                          alt="profile-photo"
+                          className="post-profile"
+                        />
                       </div>
-                      <div className="d-flex me-2">
-                        <a
-                          href="#"
-                          className="text-decoration-none text-secondary comment-replay"
-                        >
-                          Replay
-                        </a>
+                    </Link>
+                    <div className="comment-content ms-3">
+                      <div className="comment align-items-center">
+                        <p>{comment.text}</p>
                       </div>
-                      <span className="comment-date text-secondary comment-date">
-                        3d
-                      </span>
+                      <div className="d-flex comment-options align-items-center">
+                        <div className="d-flex me-2">
+                          <a
+                            href="#"
+                            className="text-decoration-none text-danger"
+                          >
+                            <AiOutlineHeart />
+                          </a>
+                        </div>
+                        <div className="d-flex me-2">
+                          <a
+                            href="#"
+                            className="text-decoration-none text-secondary comment-replay"
+                          >
+                            Replay
+                          </a>
+                        </div>
+                        <span className="comment-date text-secondary comment-date">
+                          3d
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="mb-3">
-                {post.comments?.length - 1 > 0 ? (
-                  <a href="#" className="more-comment">
-                    View {post.comments?.length - 1} more comments
-                  </a>
-                ) : null}
-              </div>
-            </>
-          ) : null}
+              ))
+            : null}
 
-{showComment?(
-          <div className="post-input position-relative">
-            <input
-              type="text"
-              className="w-100"
-              placeholder="Add a comment..."
-            />
-            {/* <div className="position-absolute post-input-icons">
+          {
+            <div className="mb-3">
+              {post.comments?.length - 1 > 0 ? (
+                <a href="#" className="more-comment">
+                  View {post.comments?.length - 1} more comments
+                </a>
+              ) : null}
+            </div>
+          }
+
+          {showComment ? (
+            <div className="post-input position-relative">
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  className="w-100"
+                  name="text"
+                  placeholder="Add a comment..."
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
+                />
+              </form>
+              {/* <div className="position-absolute post-input-icons">
               <i className="me-2 text-secondary">
                 <BsEmojiLaughing />
               </i>
@@ -258,21 +381,17 @@ deletePost(post.id)
                 <IoMdLink />
               </i>
             </div> */}
-          </div>
-
-):<p className="m-0">Comments are off.</p>
-}
+            </div>
+          ) : (
+            <p className="m-0 text-start">Comments are off.</p>
+          )}
 
           <div className="d-flex align-items-center mt-2">
             <span className="post-date">
-                <Moment format="DD/MM/YYYY">
-                    {post.created}
-                </Moment>
+              <Moment format="DD/MM/YYYY">{post.created}</Moment>
             </span>
           </div>
-
         </div>
-
       </div>
     </>
   );

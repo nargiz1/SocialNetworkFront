@@ -7,8 +7,11 @@ import "./CreatePost.css";
 
 // Additional Libraries
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [createPost, setCreatePost] = useState({
     Text: "",
     IsPrivate: false,
@@ -17,61 +20,59 @@ const CreatePost = () => {
     VideoFiles: [],
     PublicationTime: "",
   });
-
   const handleChange = (name, value) => {
     setCreatePost({ ...createPost, [name]: value });
     console.log(createPost);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     const date = new Date();
-
     createPost.PublicationTime = moment(date).format();
-    console.log("date mament", createPost.PublicationTime);
-
     formData.append("Text", createPost.Text);
     formData.append("IsPrivate", createPost.IsPrivate);
     formData.append("Location", createPost.Location);
-    // createPost.ImageFiles.map((ImageFile) => {
-    //   formData.append("ImageFiles", ImageFile);
-    // });
     Array.from(createPost.ImageFiles).forEach((ImageFile)=>
       formData.append("ImageFiles",ImageFile)
     );
-    // createPost.VideoFiles.map((VideoFile) => {
-    //   formData.append("VideoFiles", VideoFile);
-    // });
+    //videoFiles boshdu?
     Array.from(createPost.VideoFiles).forEach((VideoFile)=>
-      formData.append("ImageFiles",VideoFile)
+      formData.append("VideoFiles",VideoFile)
     );
     formData.append("PublicationTime", createPost.PublicationTime);
+
     console.log(formData);
 
-    await postServices.createPostService(formData);
+       await postServices.createPostService(formData);
   };
 
   return (
     <>
       <div className="createPost p-3">
         <div className="createPost-top">
-          <a href="#">
-            <div className="user-info">
-              <FaUserAlt />
+        
+          <Link to={"/user"}>
+              <div>
+                <img
+                 src={"http://localhost:39524/"+currentUser?.imageUrl}
+                  alt="profile-photo"
+                  className="post-profile"
+
+                />
             </div>
-          </a>
+              </Link>
+          
           <input
             className="createPost-input w-100"
             placeholder="Crate your post..."
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#exampleModal1"
           />
 
           <form>
             <div
-              className="modal fade"
-              id="exampleModal"
+              className="modal fade create"
+              id="exampleModal1"
               tabIndex="-1"
               aria-labelledby="exampleModalLabel"
               aria-hidden="true"
@@ -119,7 +120,7 @@ const CreatePost = () => {
                             </label>
                             <input
                               type="file"
-                              accept="image/png, image/jpg, image/gif, image/jpeg,images/*"
+                              accept="images/*"
                               id="photo"
                               className="custom-file-upload d-none"
                               name="ImageFiles"
@@ -138,7 +139,7 @@ const CreatePost = () => {
                             <input
                               type="file"
                               id="video"
-                              accept="video/mp4,video/x-m4v,video/*"
+                             
                               className="custom-file-upload d-none"
                               name="VideoFiles"
                               multiple

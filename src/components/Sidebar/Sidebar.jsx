@@ -46,44 +46,44 @@ function Sidebar({ isOpen }) {
           color="#F59E0B"
           isOpen={isOpen}
         />
-        <SidebarRow
+          <SidebarRow
+            Icon={BiMessageDetail}
+            title="Messages"
+            link="messages"
+            color="#6366F1"
+            isOpen={isOpen}
+          />
+        {/* <SidebarRow
           Icon={MdGroups}
           title="Groups"
           link="groups"
           color="#EF4444"
           isOpen={isOpen}
-        />
-        <SidebarRow
-          Icon={BsFillCameraVideoFill}
-          title="Videos"
-          link="videos"
-          color="#3B82F6"
-          isOpen={isOpen}
-        />
+        /> */}
 
         {show ? (
           <>
-            <SidebarRow
+          {/* <SidebarRow
+            Icon={BsFillCameraVideoFill}
+            title="Videos"
+            link="videos"
+            color="#3B82F6"
+            isOpen={isOpen}
+          /> */}
+            {/* <SidebarRow
               Icon={HiPhotograph}
               title="Photos"
               link="photos"
               color="#EC4899"
               isOpen={isOpen}
-            />
-            <SidebarRow
+            /> */}
+            {/* <SidebarRow
               Icon={BsFillBagFill}
               title="Products"
               link="products"
               color="#10B981"
               isOpen={isOpen}
-            />
-            <SidebarRow
-              Icon={BiMessageDetail}
-              title="Messages"
-              link="messages"
-              color="#6366F1"
-              isOpen={isOpen}
-            />
+            /> */}
           </>
         ) : null}
 

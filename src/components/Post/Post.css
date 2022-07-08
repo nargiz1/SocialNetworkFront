@@ -26,6 +26,7 @@
 .comment-content .comment {
   background-color: #f3f4f6;
   padding: 7px 13px;
+  margin-bottom: 10px;
   border-radius: 10px;
   border-top-left-radius: 0px;
   text-align: left;
@@ -58,6 +59,7 @@
 }
 .comment p {
   font-size: 15px;
+  margin-bottom: 0px;
 }
 .comment-options .comment-replay,
 .comment-options .comment-date {
@@ -89,4 +91,7 @@
   border-radius: 50%;
   overflow: hidden;
   margin-left: -8px;
+}
+.like-content{
+  font-size: 14px;
 }

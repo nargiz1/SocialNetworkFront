@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import Tabs from "../../../components/Tabs/Tabs";
 import TabPanel from "../../../components/Tabs/TabPanel";
 import * as authServices from "../../../services/AuthService";
+import * as userServices from "../../../services/UserService";
 
 const SettingTabs = () => {
-  const currentUser = useSelector((state) => state.auth.currentUser);
-  console.log(currentUser);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -15,12 +15,20 @@ const SettingTabs = () => {
   };
   const [updateUserData, setUpdateUserData] = useState({
     FullName: "",
-    Country: "",
-    Education: "",
-    Occupation: "",
     RelationshipStatus: "",
+    Occupation: "",
+    Education: "",
     Status: "",
-    SocialMediaLinks: ""
+    Country: "",
+    PhoneNumber:"",
+    SocialMediaLinks:[]
+  });
+
+  const [updatePasswordData, setUpdatePasswordData] = useState({
+    email: "",
+    currentPassword: "",
+    newPassword: "",
+    passwordConfirm: ""
   });
 
   useEffect(() => {
@@ -31,19 +39,20 @@ const SettingTabs = () => {
         Education: currentUser.education ?? "",
         Occupation: currentUser.occupation ?? "",
         RelationshipStatus: currentUser.relationshipStatus ?? "",
-        Status: currentUser.status?? "",
-        SocialMediaLinks: currentUser.socialMediaLinks ?? ""
+        Status: currentUser.status ?? "",
+        PhoneNumber:currentUser.phoneNumber ?? "",
+        SocialMediaLinks:currentUser.socialMediaLinks ?? []
       })
     }
   }, [currentUser]);
-    
-  const [updatePasswordData, setUpdatePasswordData] = useState({
-    email: "",
-    currentPassword: "",
-    newPassword: "",
-    passwordConfirm: ""
-  });
-  
+
+  useEffect(() => {
+    if (currentUser) {
+      setUpdatePasswordData({
+        email: currentUser.email ?? "",
+      })
+    }
+  }, [currentUser]);
 
   const handleUserChange = (name, value) => {
     setUpdateUserData({ ...updateUserData, [name]: value });
@@ -55,7 +64,7 @@ const SettingTabs = () => {
   const handleUserSubmit = async (e) => {
     e.preventDefault();
     console.log("updateUserData", updateUserData);
-    const resp = await authServices.UpdateUserService(updateUserData);
+     const resp = await userServices.UpdateUserService(updateUserData);
   };
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
@@ -150,7 +159,31 @@ const SettingTabs = () => {
                       />
                     </div>
                     <div>
-                      {/* {updateUserData.SocialMediaLinks.map(link => {
+                      <input
+                        type="text"
+                        placeholder="Social media links"
+                        name="SocialMediaLinks"
+                        value={updateUserData.SocialMediaLinks}
+                        className="form-control w-100 shadow-none mb-3"
+                        onChange={(e) =>
+                          handleUserChange(e.target.name, e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Phone number"
+                        name="PhoneNumber"
+                        value={updateUserData.PhoneNumber}
+                        className="form-control w-100 shadow-none mb-3"
+                        onChange={(e) =>
+                          handleUserChange(e.target.name, e.target.value)
+                        }
+                      />
+                    </div>
+                    {/* <div>
+                       {updateUserData.SocialMediaLinks.map(link => {
                         return (
                           <input
                             type="text"
@@ -163,8 +196,8 @@ const SettingTabs = () => {
                             }
                           />
                         )
-                      })} */}
-                    </div>
+                      })} 
+                    </div> */}
                     <div>
                       <button className="w-100 fw-bold mt-3">Update</button>
                     </div>
@@ -186,6 +219,7 @@ const SettingTabs = () => {
                         type="email"
                         placeholder="Email"
                         name="email"
+                        value={updatePasswordData.email}
                         required
                         className="form-control w-100 shadow-none mb-3"
                         onChange={(e) =>

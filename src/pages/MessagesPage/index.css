@@ -16,8 +16,11 @@
   cursor: pointer;
   color: #333;
 }
+.message-inbox{
+  position: fixed;
+}
 .message-content {
-  padding: 10px 0px 10px 35px;
+  padding: 10px;
 }
 .message-content:hover {
   background-color: #fafafa;
@@ -31,7 +34,7 @@
 .message-content span {
   font-size: 13px;
   position: absolute;
-  right: -78px;
+  right: 0px;
   top: 0px;
   color: #666;
 }
@@ -43,12 +46,15 @@
   background-color: #fafafa;
 }
 .message-heading {
+  position: fixed;
+  width: 947px;
   margin: 0;
-  padding: 30px 25px;
+  padding: 29px 25px;
   max-height: 87px;
   font-size: 14px;
   background-color: white;
 }
+
 .message-heading .delete-messages {
   color: #ee3642;
   text-decoration: none;

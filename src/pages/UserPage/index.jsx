@@ -4,34 +4,38 @@ import { useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import UserTabs from "../UserPage/UserTabs/index";
 import * as postServices from "../../services/PostService";
-import * as authServices from "../../services/AuthService";
+import * as userServices from "../../services/UserService";
 import * as followServices from "../../services/FollowService";
-import  { setCurrentUser } from '../../redux/Auth/AuthSlice';
-import  { setUserPosts } from '../../redux/Post/PostSlice';
-import  { setFollowers } from '../../redux/Follow/FollowSlice';
+import { setUserPosts } from "../../redux/Post/PostSlice";
+import { setFollowers,setFollowing } from "../../redux/Follow/FollowSlice";
 import "../UserPage/index.css";
-
-
+import { useParams } from "react-router-dom";
 
 const Index = () => {
-  const dispatch= useDispatch();
-  
-  const data = useSelector((state) => state.auth.currentUser);
-
-  
+  const dispatch = useDispatch();
+  let userId = useParams();
 
   useEffect(() => {
-    (async function() {
-      const user=await authServices.getUserService();
-      const followers=await followServices.getFollowersService(user);
+    console.log("Params", userId);
+  }, [userId]);
+
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
+  console.log("users", users);
+
+  useEffect(() => {
+    (async function () {
+      const user = await userServices.getUserService();
+      const followers = await followServices.getFollowersService(user);
+      const following = await followServices.getSubscribesService(user);
       const userPosts = await postServices.getUserPostsService(user);
-      dispatch(setCurrentUser(user));
-      
+
       dispatch(setUserPosts(userPosts));
       dispatch(setFollowers(followers));
+      dispatch(setFollowing(following));
     })();
-  }, [dispatch])
-  
+  }, [dispatch]);
+
   return (
     <Layout>
       <div className="container">
@@ -47,18 +51,21 @@ const Index = () => {
                   />
                 </div>
                 <div className="profile-content align-items-center justify-content-center">
-                 <div className="avatar-parent">
-                 <div className="profile-avatar">
-                    <img
-                      src={require("../../helpers/images/avatar.jpg")}
-                      alt=""
-                    />
+                  <div className="avatar-parent">
+                    <div className="profile-avatar">
+                      <img
+                        src={"http://localhost:39524/" + currentUser?.imageUrl}
+                        alt=""
+                      />
+                    </div>
                   </div>
-                 </div>
                   <div className="profile-info align-items-center justify-content-center">
-                    <h1 className="username text-capitalize">{data.fullName}</h1>
-                    <span className="text-capitalize">Status | {data.status}</span>
-        
+                    <h1 className="username text-capitalize">
+                      {currentUser.fullName}
+                    </h1>
+                    <span className="text-capitalize">
+                      Status | {currentUser.status}
+                    </span>
                   </div>
                 </div>
               </div>

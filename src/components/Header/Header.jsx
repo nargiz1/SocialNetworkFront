@@ -1,30 +1,35 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import { useSelector } from "react-redux";
 import { BsSearch } from "react-icons/bs";
 import { MdShoppingCart } from "react-icons/md";
 import { RiNotification2Fill } from "react-icons/ri";
 import { BiMessageDetail } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import  { setSearchingUserId } from '../../redux/Auth/AuthSlice';
 
 import Logo from "../../helpers/images/logo.png";
 import "../Header/Header.css";
-import * as authServices from "../../services/AuthService";
+import * as userServices from "../../services/UserService";
 
 function Header({ isOpen, setIsOpen, showIcon = true }) {
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const [searchUser, setSearchUser] = useState("");
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
+  const [showData , setShowData] =useState(false);
 
   const handleOpenSidebar = (e) => {
     e.preventDefault();
     setIsOpen(!isOpen);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = authServices.SearchUserService(searchUser);
-    setUserData(data);
-    console.log("searching user data",data);
+    const resp = await userServices.SearchUserService(searchUser);
+    setUserData(resp);
+    setShowData(true);
+    console.log("searching user resp",resp);
   
   };
 
@@ -70,14 +75,30 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
                     onChange={(e) => setSearchUser(e.target.value)}
                   />
                 </form>
-                  {/* <div>{userData}</div> */}
+                {
+                  showData ?(
+                <div className="search-user-data mb-4">
+                  {
+                     userData && userData.length>0 ?(
+                        userData.map((user,index)=>(
+                          <Link to={`/user/${user.id}`} key={index}>
+                          <div key={index} className="search-user">
+                          {user.fullName}
+                          </div>
+                        </Link>
+                        ))
+                      ) :(<div>User not found</div>)
+                  }
+                </div>
+                  ) : null
+                }
               </div>
             </div>
             <div className="header-right d-flex">
-              <a href="#">
+              {/* <a href="#">
                 <div className="circle">3</div>
                 <MdShoppingCart />
-              </a>
+              </a> */}
               <a href="#">
                 <div className="circle">1</div>
                 <RiNotification2Fill />
@@ -87,9 +108,13 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
                 <BiMessageDetail />
               </a>
               <Link to={"/user"}>
-                <div className="user-info">
-                  <FaUserAlt />
-                </div>
+              <div>
+                <img
+                 src={"http://localhost:39524/"+currentUser?.imageUrl}
+                  alt="profile-photo"
+                  className="post-profile"
+                />
+            </div>
               </Link>
             </div>
           </div>

@@ -1,19 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FiEdit,FiSend } from "react-icons/fi";
+import { FiEdit, FiSend } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 import Layout from "../../components/Layout";
 import "./index.css";
 
 const Index = () => {
-  const data = useSelector((state) => state.auth.currentUser);
-  console.log("current user",data);
+  const data = useSelector((state) => state.user.currentUser);
   return (
     <Layout showIcon={false} collapseSidebar={true}>
       <div className="chat-content vh-100">
         <div className="row">
-          <div className="pe-0 col-md-4">
+          <div className="pe-0 col-md-3">
             <div className="message-inbox border-end vh-100">
               <div className="chat d-flex justify-content-between border-bottom">
                 <h3>Chats</h3>
@@ -98,7 +97,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <div className="ps-0 col-md-8">
+          <div className="ps-0 col-md-9">
             <div className="thread">
               <div className="message-heading d-flex justify-content-between border-bottom">
                 <h6>Ayshan Gambarova</h6>
@@ -107,46 +106,677 @@ const Index = () => {
                   <span className="ms-1">Delete conversation</span>
                 </a>
               </div>
-              <div className="message-date w-100 text-center mt-4">
-                <span>06 December, 2022</span>
-              </div>
-              <div className="message-area mt-3">
-                <div className="pe-4 ps-4">
-                  <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                    <div className="sender">
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
+              <div>
+                <div className="message-date w-100 text-center mt-4">
+                  <span>06 December, 2022</span>
+                </div>
+                <div className="message-area mt-3">
+                  <div className="pe-4 ps-4">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
                     </div>
-                    <div className="message-blue">Salam necesen?</div>
-                  </div>
-                  <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative">
-                    <div className="reciver">
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar4.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
+                    </div>{" "}
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                      <div className="sender">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-blue">Salam necesen?</div>
                     </div>
-                    <div className="message-gray">Yaxshi sen?</div>
+                    <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative">
+                      <div className="reciver">
+                        <a
+                          href="#"
+                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                        >
+                          <div>
+                            <img
+                              className="profile-photo"
+                              src={require("../../helpers/images/avatar4.jpg")}
+                              alt="profile-photo"
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className="message-gray">Yaxshi sen?</div>
+                    </div>
+                    <div></div>
                   </div>
-                  <div></div>
                 </div>
               </div>
               <div className="send-area border-top">
@@ -159,7 +789,9 @@ const Index = () => {
                     />
                   </div>
                   <div className="col-md-1">
-                    <button className="send-button"><FiSend/></button>
+                    <button className="send-button">
+                      <FiSend />
+                    </button>
                   </div>
                 </div>
               </div>

@@ -20,7 +20,11 @@
 .slick-slide{
     padding: 10px;
 }
+.slick-slide img{
+    height: 225px!important;
+}
 .pages-card{
+ 
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
@@ -36,5 +40,8 @@
     color: #666666;
 }
 .pages-card-body{
-    padding: 13px 0px 0px 17px;
+    padding: 13px 17px 13px 17px;
+}
+.follow-button{
+    padding: 4px 10px; background-color: #BBBFC2; color: white; border-radius: 7px; border: none;
 }

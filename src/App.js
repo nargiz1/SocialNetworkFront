@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import * as authServices from "../src/services/AuthService";
-import  { setCurrentUser } from '../src/redux/Auth/AuthSlice';
+import * as userServices from "../src/services/UserService";
+import  { setCurrentUser,setUsers } from '../src/redux/User/UserSlice';
 
 import FeedPage from "./pages/FeedPage/index";
 import "./App.css";
@@ -35,8 +35,10 @@ function App() {
   
   useEffect(() => {
     (async function() {
-      const user=await authServices.getUserService();
+      const user=await userServices.getUserService();
+      const users = await userServices.getUsersService();
 
+      dispatch(setUsers(users));
       dispatch(setCurrentUser(user));
     })();
   }, [dispatch])

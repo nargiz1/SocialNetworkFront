@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as postServices from "../../services/PostService";
+import * as userServices from "../../services/UserService";
 import { setPosts } from "../../redux/Post/PostSlice";
 
 import Layout from "../../components/Layout";
@@ -11,26 +12,25 @@ import { ConstructionOutlined } from "@mui/icons-material";
 
 const Index = () => {
   const dispatch = useDispatch();
-  
-
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const posts = useSelector((state) => state.post.posts);
+  const [likeTest, setLikeTest] = useState(false);
+  const [postTest, setPostTest] = useState([]);
 
   useEffect(() => {
     (async function () {
       const data = await postServices.getAllPostsService();
-      console.log("data posts feedpage index",data);
-  
       dispatch(setPosts(data));
-      // const currentUser = useSelector((state) => state.auth.currentUser);
-      // console.log("current user",currentUser);
-      
     })();
-  }, [dispatch]);
+
+    console.log('heloooo');
+  }, [likeTest, dispatch]);
 
   return (
     <Layout>
       <div className="row d-flex justify-content-between pt-4">
         <div className="col-md-9">
-          <Feed />
+          <Feed likeTest={likeTest} setLikeTest={setLikeTest} />
         </div>
         <div className="col-md-3">
           <Wedget />

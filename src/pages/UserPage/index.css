@@ -72,6 +72,7 @@ ul.about {
 .about .about-data {
   color: #393939c2;
   font-weight: bold;
+  margin-left: 4px;
 }
 ul.about li {
   color: #808080;
@@ -82,6 +83,7 @@ ul.about li {
 }
 ul.about li i {
   font-size: 18px;
+  margin-right: 4px;
 }
 .user-friends {
   background-color: white;
