@@ -112,8 +112,8 @@ const CreatePost = () => {
                       <div className="text-center mb-3">Add to your post</div>
                       <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex">
-                          <div className="me-2">
-                            <label htmlFor="photo">
+                           <div className="me-2">
+                           <label htmlFor="photo">
                               <div className="photo-icon">
                                 <HiOutlinePhotograph />
                               </div>

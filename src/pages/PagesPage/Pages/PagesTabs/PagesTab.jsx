@@ -18,7 +18,6 @@ export default function PagesTabs() {
   };
   const handleSubmit = async (id,e) => {
     const data=await followServices.followService(id);
-
   };
 
   return (

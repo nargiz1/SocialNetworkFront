@@ -25,13 +25,17 @@ function Sidebar({ isOpen }) {
 
   return (
     <div
-      className={`sidebar border-end scroll-bar`}
+      className={`sidebar scroll-bar`}
       style={
         isOpen
           ? { width: "inherit" }
           : { maxWidth: "30%", backgroundColor: "white" }
       }
     >
+      <div
+      className={`border-end ps-2 pe-2`}
+      
+      >
       <div className="sidebar-top border-bottom pt-3">
         <SidebarRow
           Icon={AiFillHome}
@@ -87,7 +91,7 @@ function Sidebar({ isOpen }) {
           </>
         ) : null}
 
-        {isOpen ? (
+        {/* {isOpen ? (
           <button
             className="more-less d-flex mb-2"
             onClick={() => setShow(!show)}
@@ -97,7 +101,7 @@ function Sidebar({ isOpen }) {
             </div>
             {show ? "See Less" : "See More"}
           </button>
-        ) : null}
+        ) : null} */}
       </div>
       <div className="sidebar-middle border-bottom pt-3">
         {isOpen ? <h3 className="mb-3 ps-2">Contacts</h3> : null}
@@ -147,6 +151,7 @@ function Sidebar({ isOpen }) {
                 </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 }

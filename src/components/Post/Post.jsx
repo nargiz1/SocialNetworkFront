@@ -58,28 +58,22 @@ const Post = ({ post, likeTest, setLikeTest }) => {
     getAllPosts();
   };
 
-  const toggleLikePost = () => {
-    setLike(!like);
-    // const data = likeServices.likePostService(id);
-    // setLike(true);
-  };
-
   const handleLikePost = async (e, id) => {
         e.preventDefault();
-        if (!isClickedLike) {
-          const data = likeServices.likePostService(id);
+
+        const likeData = await likeServices.likePostService(id);
+
+        if (likeData) {
           setLikeTest(true);
-          setLike(true);  
         } else {
+          await likeServices.removePostLikeService(id);
           setLikeTest(false);
         }
+
         getAllPosts();
   };
 
-  useEffect(() => {
-
-  }, [])
-  
+  const isExistLikedUser = post.likes?.some((elem) => elem.userId === currentUser?.id);
 
   return (
     <>
@@ -189,12 +183,12 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                     className="post-interaction"
                   >
                     {
-                      setLike?(
-                    <div>
-                      <AiOutlineLike style={{ fontSize: "21px",color:"red" }} />
-                    </div>
+                      isExistLikedUser ? (
+                        <div>
+                          <AiOutlineLike style={{ fontSize: "21px",color:"red" }} />
+                        </div>
 
-                      ) :(
+                      ) : (
                         <div>
                         <AiOutlineLike style={{ fontSize: "21px" }} />
                       </div>
@@ -204,6 +198,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                   </div>
                   {/* <span> Like</span> */}
                 </a>
+
                 {showComment ? (
                   <a
                     href="#"
@@ -287,11 +282,21 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                     />
 
                   </div>
-                  {
+                    {
                       <div className="ms-2">
-                        Liked <strong>{post.likes[0]?.user?.fullName}</strong> and {" "}
-                      
-                        <strong>{post.likes?.length-1} other</strong>
+                        Liked <strong>{post.likes[0]?.user?.fullName}</strong>
+
+                        {
+                          post.likes?.length > 1 ? (
+                            <>
+                              <span>and {" "}</span>
+                              <strong>
+                                {post.likes?.length-1} other
+                              </strong>
+                            </>
+                          ) : null
+                        }
+
                       </div>
                     }
                 </div>

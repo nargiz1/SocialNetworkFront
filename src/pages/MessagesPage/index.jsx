@@ -9,96 +9,220 @@ import "./index.css";
 const Index = () => {
   const data = useSelector((state) => state.user.currentUser);
   return (
-    <Layout showIcon={false} collapseSidebar={true}>
-      <div className="chat-content vh-100">
-        <div className="row">
-          <div className="pe-0 col-md-3">
-            <div className="message-inbox border-end vh-100">
+    <Layout showIcon={false}>
+      <div className="chat-content">
+        <div className="row g-0">
+          <div className="col-md-3">
+            <div className="message-inbox border-end">
               <div className="chat d-flex justify-content-between border-bottom">
                 <h3>Chats</h3>
                 <a href="#">
                   <FiEdit />
                 </a>
               </div>
+              <div className="chat-wrapper">
               <div className="message-content">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <a
-                      href="#"
-                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                    >
-                      <div>
-                        <img
-                          className="profile-photo"
-                          src={require("../../helpers/images/avatar2.jpg")}
-                          alt="profile-photo"
-                        />
-                      </div>
-                    </a>
-                  </div>
-                  <div className="message-by ms-3">
-                    <div className="message-by-headline position-relative">
-                      <h5>Stella Johnson</h5>
-                      <span>4 hours ago</span>
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
                     </div>
-                    <p>laoreet dolore magna aliquam erat...</p>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="message-content active-message">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <a
-                      href="#"
-                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                    >
-                      <div>
-                        <img
-                          className="profile-photo"
-                          src={require("../../helpers/images/avatar3.jpg")}
-                          alt="profile-photo"
-                        />
-                      </div>
-                    </a>
-                  </div>
-                  <div className="message-by ms-3">
-                    <div className="message-by-headline position-relative">
-                      <h5>Stella Johnson</h5>
-                      <span>4 hours ago</span>
+                <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
                     </div>
-                    <p>laoreet dolore magna aliquam erat...</p>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
+                  </div>
+                </div>       <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
+                  </div>
+                </div>       <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
+                  </div>
+                </div>       <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="message-content">
-                <div className="d-flex align-items-center">
-                  <div>
-                    <a
-                      href="#"
-                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                    >
-                      <div>
-                        <img
-                          className="profile-photo"
-                          src={require("../../helpers/images/avatar4.jpg")}
-                          alt="profile-photo"
-                        />
-                      </div>
-                    </a>
-                  </div>
-                  <div className="message-by ms-3">
-                    <div className="message-by-headline position-relative">
-                      <h5>Stella Johnson</h5>
-                      <span>4 hours ago</span>
+                <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar2.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
                     </div>
-                    <p>laoreet dolore magna aliquam erat...</p>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="message-content active-message">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar3.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="message-content">
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <a
+                        href="#"
+                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                      >
+                        <div>
+                          <img
+                            className="profile-photo"
+                            src={require("../../helpers/images/avatar4.jpg")}
+                            alt="profile-photo"
+                          />
+                        </div>
+                      </a>
+                    </div>
+                    <div className="message-by ms-3">
+                      <div className="message-by-headline position-relative">
+                        <h5>Stella Johnson</h5>
+                        <span>4 hours ago</span>
+                      </div>
+                      <p>laoreet dolore magna aliquam erat...</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="ps-0 col-md-9">
-            <div className="thread">
+          <div className="col-md-9">
+            <div className="thread border-start">
               <div className="message-heading d-flex justify-content-between border-bottom">
                 <h6>Ayshan Gambarova</h6>
                 <a className="delete-messages d-flex align-items-center">
@@ -106,8 +230,8 @@ const Index = () => {
                   <span className="ms-1">Delete conversation</span>
                 </a>
               </div>
-              <div>
-                <div className="message-date w-100 text-center mt-4">
+              <div className="py-3 messages-wrapper">
+                <div className="message-date w-100 text-center">
                   <span>06 December, 2022</span>
                 </div>
                 <div className="message-area mt-3">

@@ -11,43 +11,7 @@
   display: flex;
 }
 
-.createPost-top .user-info,
-.photo-icon,
-.smile-icon,
-.location-icon,
-.video-icon,
-.add-friend {
-  width: 35px;
-  height: 35px;
-  position: relative;
-  background-color: #f0f2f5;
-  border-radius: 100%;
 
-  text-align: center;
-  font-size: 19px;
-  color: #3f424b;
-}
-.photo-icon {
-  color: #2563eb;
-  background-color: #dbeafe;
-  font-size: 22px;
-}
-.location-icon {
-  color: rgb(194, 194, 6);
-  background-color: #edf585;
-  font-size: 22px;
-}
-.smile-icon,
-.video-icon {
-  background-color: #fee2e2;
-  color: #dc2626;
-  font-size: 20px;
-}
-.add-friend {
-  background-color: #d1fae5;
-  color: #119c70;
-  font-size: 20px;
-}
 .createPost-top input {
   outline-width: 0;
   border: none;

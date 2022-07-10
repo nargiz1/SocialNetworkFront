@@ -7,9 +7,10 @@ import * as postServices from "../../services/PostService";
 import * as userServices from "../../services/UserService";
 import * as followServices from "../../services/FollowService";
 import { setUserPosts } from "../../redux/Post/PostSlice";
-import { setFollowers,setFollowing } from "../../redux/Follow/FollowSlice";
+import { setFollowers, setFollowing } from "../../redux/Follow/FollowSlice";
 import "../UserPage/index.css";
 import { useParams } from "react-router-dom";
+import { HiOutlinePhotograph } from "react-icons/hi";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,21 @@ const Index = () => {
                       <img
                         src={"http://localhost:39524/" + currentUser?.imageUrl}
                         alt=""
+                      />
+                    </div>
+                    <div className="position-absolute">
+                      <label htmlFor="photo">
+                        <div className="photo-icon">
+                          <HiOutlinePhotograph />
+                        </div>
+                      </label>
+                      <input
+                        type="file"
+                        accept="images/*"
+                        id="photo"
+                        className="custom-file-upload d-none"
+                        name="ImageFiles"
+                        multiple
                       />
                     </div>
                   </div>

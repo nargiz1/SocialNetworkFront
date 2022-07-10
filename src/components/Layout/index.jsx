@@ -24,13 +24,13 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-lg-2">
           <Sidebar isOpen={isOpen && !collapseSidebar} />
         </div>
-        <div className="col-md-10 p-0">
+        <div className="col-lg-10 p-0">
           {children}
           <div>
-            <button
+            {/* <button
               className="chat-button"
               type="button"
               data-bs-toggle="offcanvas"
@@ -38,7 +38,7 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
               aria-controls="offcanvasRight"
             >
               <AiOutlineMessage />
-            </button>
+            </button> */}
             <div
               className="offcanvas offcanvas-end"
               tabIndex="-1"

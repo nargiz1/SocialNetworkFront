@@ -26,11 +26,13 @@ const Index = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const deleteFollower = (id) => {
-    const data = followServices.deleteFollowerService(id);
+  const deleteFollower = async (e, id) => {
+    e.preventDefault();
+    await followServices.deleteFollowerService(id);
   };
-  const unFollow = (id) => {
-    const data = followServices.unFollowService(id);
+
+  const unFollow = async (e, id) => {
+    await followServices.unFollowService(id);
   };
 
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -151,9 +153,10 @@ const Index = () => {
                               </div>
                               <div>
                                 <button
+                                  type="submit"
                                   className="w-100 btn-following"
-                                  onClick={() => {
-                                    deleteFollower(follower.id);
+                                  onClick={(e) => {
+                                    deleteFollower(e, follower.id);
                                   }}
                                 >
                                   Delete
@@ -206,8 +209,8 @@ const Index = () => {
                               <div>
                                 <button
                                   className="w-100 btn-following"
-                                  onClick={() => {
-                                    unFollow(following.id);
+                                  onClick={(e) => {
+                                    unFollow(e, following.id);
                                   }}
                                 >
                                   Unfollow
