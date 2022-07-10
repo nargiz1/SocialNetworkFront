@@ -11,6 +11,7 @@ import { setFollowers, setFollowing } from "../../redux/Follow/FollowSlice";
 import "../UserPage/index.css";
 import { useParams } from "react-router-dom";
 import { HiOutlinePhotograph } from "react-icons/hi";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -59,10 +60,10 @@ const Index = () => {
                         alt=""
                       />
                     </div>
-                    <div className="position-absolute">
+                    <div className="profile-upload">
                       <label htmlFor="photo">
                         <div className="photo-icon">
-                          <HiOutlinePhotograph />
+                          <AiOutlinePlus />
                         </div>
                       </label>
                       <input

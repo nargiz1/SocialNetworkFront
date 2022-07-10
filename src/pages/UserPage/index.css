@@ -122,3 +122,8 @@ ul.about li i {
   font-weight: bold;
   font-size: 15px;
 }
+.profile-upload{
+  position: absolute;
+  bottom: 0px;
+    left: 53%;
+}

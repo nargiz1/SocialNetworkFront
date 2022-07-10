@@ -11,6 +11,7 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
   const [isOpen, setIsOpen] = useState(true);
   const [value, setValue] = useState(0);
   const [search, setSearch] = useState(false);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -30,7 +31,9 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
         <div className="col-lg-10 p-0">
           {children}
           <div>
-            {/* <button
+            {
+              showIcon?(
+            <button
               className="chat-button"
               type="button"
               data-bs-toggle="offcanvas"
@@ -38,7 +41,12 @@ const Layout = ({ showIcon = true, collapseSidebar = false, children }) => {
               aria-controls="offcanvasRight"
             >
               <AiOutlineMessage />
-            </button> */}
+            </button>
+
+              ):(null)
+            }
+
+
             <div
               className="offcanvas offcanvas-end"
               tabIndex="-1"

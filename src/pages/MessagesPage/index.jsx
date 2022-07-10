@@ -236,7 +236,7 @@ const Index = () => {
                 </div>
                 <div className="message-area mt-3">
                   <div className="pe-4 ps-4">
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -253,7 +253,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -270,7 +270,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -287,7 +287,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -304,7 +304,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -321,7 +321,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -338,7 +338,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -355,7 +355,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -372,7 +372,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -389,7 +389,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -406,7 +406,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -423,7 +423,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -440,7 +440,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -457,7 +457,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -474,7 +474,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -491,7 +491,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -508,7 +508,7 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
+                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
                       <div className="sender">
                         <a
                           href="#"
@@ -525,364 +525,8 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>
-                    <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative">
+       
+                    <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative mb-2">
                       <div className="reciver">
                         <a
                           href="#"
