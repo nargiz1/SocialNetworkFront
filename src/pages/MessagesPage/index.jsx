@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FiEdit, FiSend } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 import Layout from "../../components/Layout";
 import "./index.css";
+import * as userServices from "../../services/UserService";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const data = useSelector((state) => state.user.currentUser);
+  const [searchUser, setSearchUser] = useState("");
+  const [userData, setUserData] = useState([]);
+  const [showData , setShowData] =useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const resp = await userServices.SearchUserService(searchUser);
+    setUserData(resp);
+    setShowData(true);
+    console.log("searching user resp",resp);
+  
+  };
+  console.log(data);
   return (
     <Layout showIcon={false}>
       <div className="chat-content">
@@ -21,7 +37,7 @@ const Index = () => {
                 </a>
               </div>
               <div className="chat-wrapper">
-              <div className="message-content">
+                <div className="message-content">
                   <div className="d-flex align-items-center">
                     <div>
                       <a
@@ -70,7 +86,8 @@ const Index = () => {
                       <p>laoreet dolore magna aliquam erat...</p>
                     </div>
                   </div>
-                </div>       <div className="message-content">
+                </div>{" "}
+                <div className="message-content">
                   <div className="d-flex align-items-center">
                     <div>
                       <a
@@ -94,7 +111,8 @@ const Index = () => {
                       <p>laoreet dolore magna aliquam erat...</p>
                     </div>
                   </div>
-                </div>       <div className="message-content">
+                </div>{" "}
+                <div className="message-content">
                   <div className="d-flex align-items-center">
                     <div>
                       <a
@@ -118,7 +136,8 @@ const Index = () => {
                       <p>laoreet dolore magna aliquam erat...</p>
                     </div>
                   </div>
-                </div>       <div className="message-content">
+                </div>{" "}
+                <div className="message-content">
                   <div className="d-flex align-items-center">
                     <div>
                       <a
@@ -224,11 +243,83 @@ const Index = () => {
           <div className="col-md-9">
             <div className="thread border-start">
               <div className="message-heading d-flex justify-content-between border-bottom">
-                <h6>Ayshan Gambarova</h6>
-                <a className="delete-messages d-flex align-items-center">
-                  <RiDeleteBinLine />
-                  <span className="ms-1">Delete conversation</span>
-                </a>
+                <h6 className="mb-0">Ayshan Gambarova</h6>
+                <div className="d-flex">
+                  <div
+                    className="edit-messages messages-prop d-flex align-items-center"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight"
+                  >
+                    <AiTwotoneEdit />
+                    <span className="ms-1"></span>
+                  </div>
+                  <div
+                    className="offcanvas offcanvas-end"
+                    tabIndex="-1"
+                    id="offcanvasRight"
+                    aria-labelledby="offcanvasRightLabel"
+                  >
+                    <div className="offcanvas-header">
+                      <h5
+                        className="offcanvas-title"
+                        id="offcanvasRightLabel"
+                      ></h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div className="offcanvas-body">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <div className="message-canvas-photo">
+                          <img
+                            src={require("../../helpers/images/avatar.jpg")}
+                            className="w-100"
+                          />
+                        </div>
+                      </div>
+                      <div className="text-center mt-2">
+                        <div className="message-canvas-name">
+                          Ayshan Gambarova
+                        </div>
+                        <div>Group 21 participants</div>
+                        <form onSubmit={handleSubmit} className="mt-5">
+                          <input
+                            type="text"
+                            placeholder="Add member..."
+                            className="w-100 message-canvas-search"
+                            onChange={(e) => setSearchUser(e.target.value)}
+                          />
+                        </form>
+                        {showData ? (
+                          <div className="message-canvas-search-user-data mb-4">
+                            {userData && userData.length > 0 ? (
+                              userData.map((user, index) => (
+                               <div className="d-flex justify-content-between align-items-center border-bottom">
+                                 <Link to={`/user/${user.id}`} key={index}>
+                                   <div key={index} className="message-canvas-search-user">
+                                     {user.fullName}
+                                   </div>
+                                 </Link>
+                                   <div className="add-member-btn">+</div>
+                               </div>
+                              ))
+                            ) : (
+                              <div>User not found</div>
+                            )}
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="delete-messages messages-prop d-flex align-items-center">
+                    <RiDeleteBinLine />
+                    <span className="ms-1"></span>
+                  </div>
+                </div>
               </div>
               <div className="py-3 messages-wrapper">
                 <div className="message-date w-100 text-center">
@@ -525,7 +616,6 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>{" "}
-       
                     <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative mb-2">
                       <div className="reciver">
                         <a
