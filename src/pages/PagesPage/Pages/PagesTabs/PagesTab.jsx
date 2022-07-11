@@ -10,14 +10,19 @@ import * as followServices from "../../../../services/FollowService";
 export default function PagesTabs() {
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
+  const following = useSelector((state) => state.follow.following);
+  const followers = useSelector((state) => state.follow.followers);
   console.log("users pages tabs", users);
+  console.log("following", following);
+  console.log("followers", followers);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const handleSubmit = async (id,e) => {
-    const data=await followServices.followService(id);
+  const handleSubmit = async (id, e) => {
+    e.preventDefault();
+    const data = await followServices.followService(id);
   };
 
   return (
@@ -144,36 +149,61 @@ export default function PagesTabs() {
       </div>
       <Carousel mdViewCount={3}>
         {users && users.length > 0
-          ? users.map((user, index) => (
-           <Link to={`user/${user.id}`} key={index} className="text-decoration-none">
-              <div  className="pages-card">
-                <div className="pages-card-top">
-               {
-                 user?.imageUrl==="Resources\\Images\\" ? (
-                  <img src={require("../../../../helpers/images/avatar.jpg")}
-                  className="w-100" />
-                  ):(
-                  <img
-                    src={"http://localhost:39524/" + user?.imageUrl}
-                    className="w-100"
-                  />
-                  )
-               }
-                </div>
-                <div className="pages-card-body">
-                  <h5 className="pages-card-title">{user.fullName}</h5>
-                  <h5 className="pages-card-title text-lowercase">@{user.userName}</h5>
-                  <div className="d-flex justify-content-end">
-                  <button className="follow-button" onClick={()=>{handleSubmit(user.id)}}>follow</button>
-
+          ? users.map((user, index) =>
+              user.id !== currentUser.id ? (
+                <Link
+                  to={`user/${user.id}`}
+                  key={index}
+                  className="text-decoration-none"
+                >
+                  <div className="pages-card">
+                    <div className="pages-card-top">
+                      {user?.imageUrl === "Resources\\Images\\" ? (
+                        <img
+                          src={require("../../../../helpers/images/avatar.jpg")}
+                          className="w-100"
+                        />
+                      ) : (
+                        <img
+                          src={"http://localhost:39524/" + user?.imageUrl}
+                          className="w-100"
+                        />
+                      )}
+                    </div>
+                    <div className="pages-card-body">
+                      <h5 className="pages-card-title">{user.fullName}</h5>
+                      <h5 className="pages-card-title text-lowercase">
+                        @{user.userName}
+                      </h5>
+                      <div className="d-flex justify-content-end">
+                        {following?.map((following) =>
+                          following.id == user.id ? (
+                            <button
+                              className="following-button"
+                              onClick={() => {
+                                handleSubmit(user.id);
+                              }}
+                            >
+                              Following
+                            </button>
+                          ) : (
+                            <button
+                              className="follow-button"
+                              onClick={() => {
+                                handleSubmit(user.id);
+                              }}
+                            >
+                              Follow
+                            </button>
+                          )
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              </Link>
-            ))
+                </Link>
+              ) : null
+            )
           : null}
-
-        
       </Carousel>
     </>
   );

@@ -59,7 +59,8 @@
 .smile-icon,
 .location-icon,
 .video-icon,
-.add-friend {
+.add-friend,
+.user-profile-upload {
   width: 35px;
   height: 35px;
   position: relative;

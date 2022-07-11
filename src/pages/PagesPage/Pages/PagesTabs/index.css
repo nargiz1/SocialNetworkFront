@@ -1,47 +1,60 @@
-
-.MuiTabs-scroller button.MuiButtonBase-root{
-    font-weight: bold;
-
+.MuiTabs-scroller button.MuiButtonBase-root {
+  font-weight: bold;
 }
-.MuiTabs-scroller button.Mui-selected{
-    color: #2A41E8;
+.MuiTabs-scroller button.Mui-selected {
+  color: #2a41e8;
 }
-.css-1aquho2-MuiTabs-indicator{
-    background-color: #2a40e8d2!important;
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #2a40e8d2 !important;
 }
-.add-button{
-    font-size: 30px;
-    color: #2A41E8;
+.add-button {
+  font-size: 30px;
+  color: #2a41e8;
 }
 
-.slick-prev:before, .slick-next:before{
-    color: black!important;
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
 }
-.slick-slide{
-    padding: 10px;
+.slick-slide {
+  padding: 10px;
 }
-.slick-slide img{
-    height: 225px!important;
+.slick-slide img {
+  height: 225px !important;
 }
-.pages-card{
- 
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 5px 8px -9px rgb(0 0 0 / 75%);
+.pages-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 5px 8px -9px rgb(0 0 0 / 75%);
 }
-.pages-card-title{
-    color: #595959;
-    font-size: 16px;
-    font-weight: bold;
+.pages-card-title {
+  color: #595959;
+  font-size: 16px;
+  font-weight: bold;
 }
-.pages-card-text{
-    font-size: 14px;
-    color: #666666;
+.pages-card-text {
+  font-size: 14px;
+  color: #666666;
 }
-.pages-card-body{
-    padding: 13px 17px 13px 17px;
+.pages-card-body {
+  padding: 13px 17px 13px 17px;
 }
-.follow-button{
-    padding: 4px 10px; background-color: #BBBFC2; color: white; border-radius: 7px; border: none;
+.follow-button {
+  padding: 4px 10px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 7px;
+  border: none;
+}
+.following-button {
+    background-color: #bbbfc2;
+  padding: 4px 10px;
+  color: white;
+  border-radius: 7px;
+  border: none;
+}
+.follow-button i,
+.following-button i {
+  font-size: 17px;
 }

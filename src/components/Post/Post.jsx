@@ -7,20 +7,17 @@ import { BsShare, BsEmojiLaughing } from "react-icons/bs";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
 import * as postServices from "../../services/PostService";
 import * as commentServices from "../../services/CommentService";
 import * as likeServices from "../../services/LikeService";
 import "./Post.css";
-
-// Additional Libraries
 import Moment from "react-moment";
 import { Carousel } from "bootstrap";
 import { setIsClickedLike, setPosts } from "../../redux/Post/PostSlice";
 
 const Post = ({ post, likeTest, setLikeTest }) => {
-
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
   const isClickedLike = useSelector((state) => state.post.isClickedLike);
@@ -48,7 +45,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
     }
   };
 
-  const getAllPosts = async() => {
+  const getAllPosts = async () => {
     const data = await postServices.getAllPostsService();
     dispatch(setPosts(data));
   };
@@ -59,21 +56,23 @@ const Post = ({ post, likeTest, setLikeTest }) => {
   };
 
   const handleLikePost = async (e, id) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        const likeData = await likeServices.likePostService(id);
+    const likeData = await likeServices.likePostService(id);
 
-        if (likeData) {
-          setLikeTest(true);
-        } else {
-          await likeServices.removePostLikeService(id);
-          setLikeTest(false);
-        }
+    if (likeData) {
+      setLikeTest(true);
+    } else {
+      await likeServices.removePostLikeService(id);
+      setLikeTest(false);
+    }
 
-        getAllPosts();
+    getAllPosts();
   };
 
-  const isExistLikedUser = post.likes?.some((elem) => elem.userId === currentUser?.id);
+  const isExistLikedUser = post.likes?.some(
+    (elem) => elem.userId === currentUser?.id
+  );
 
   return (
     <>
@@ -103,7 +102,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
           </div>
 
           {/* <a
-            href="#"
+           href="#"
             className="text-decoration-none fs-4 text-secondary"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -133,7 +132,9 @@ const Post = ({ post, likeTest, setLikeTest }) => {
             >
               Delete
             </li>
-          </ul> */}
+          </ul> */} 
+          {
+            post.userId==currentUser.id?(
           <button
             onClick={() => {
               deletePost(post.id);
@@ -141,6 +142,9 @@ const Post = ({ post, likeTest, setLikeTest }) => {
           >
             delete
           </button>
+
+            ):null
+          }
         </div>
 
         <div className="post-body">
@@ -179,22 +183,18 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                   className="d-flex align-items-center me-4 text-decoration-none"
                   onClick={(e) => handleLikePost(e, post.id)}
                 >
-                  <div
-                    className="post-interaction"
-                  >
-                    {
-                      isExistLikedUser ? (
-                        <div>
-                          <AiOutlineLike style={{ fontSize: "21px",color:"red" }} />
-                        </div>
-
-                      ) : (
-                        <div>
+                  <div className="post-interaction">
+                    {isExistLikedUser ? (
+                      <div>
+                        <AiOutlineLike
+                          style={{ fontSize: "21px", color: "red" }}
+                        />
+                      </div>
+                    ) : (
+                      <div>
                         <AiOutlineLike style={{ fontSize: "21px" }} />
                       </div>
-                      )
-
-                    }
+                    )}
                   </div>
                   {/* <span> Like</span> */}
                 </a>
@@ -216,7 +216,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                     <div
                       className="modal fade"
                       id="exampleModal"
-                      tabindex="-1"
+                      tabIndex="-1"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"
                     >
@@ -242,7 +242,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                             >
                               Close
                             </button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" className="btn btn-primary">
                               Save changes
                             </button>
                           </div>
@@ -266,44 +266,35 @@ const Post = ({ post, likeTest, setLikeTest }) => {
               </a>
             </div>
 
-            {
-              console.log('post.likes: ', post?.likes)
-            }
+            {console.log("post.likes: ", post?.likes)}
 
-            {post.likes?.length > 0
-              ? (
-                <div className="d-flex align-items-center like-content">
+            {post.likes?.length > 0 ? (
+              <div className="d-flex align-items-center like-content">
                 <div className="avatar-group d-flex ps-2">
                   <div className="avatar-item">
                     <img
-                       src={"http://localhost:39524/" + post.likes[post.likes?.length-1]?.user?.imageUrl}
-                       alt={post.id}
-                       className="w-100"
+                      src={
+                        "http://localhost:39524/" +
+                        post.likes[post.likes?.length - 1]?.user?.imageUrl
+                      }
+                      alt={post.id}
+                      className="w-100"
                     />
-
                   </div>
-                    {
-                      <div className="ms-2">
-                        Liked <strong>{post.likes[0]?.user?.fullName}</strong>
-
-                        {
-                          post.likes?.length > 1 ? (
-                            <>
-                              <span>and {" "}</span>
-                              <strong>
-                                {post.likes?.length-1} other
-                              </strong>
-                            </>
-                          ) : null
-                        }
-
-                      </div>
-                    }
+                  {
+                    <div className="ms-2">
+                      Liked <strong>{post.likes[0]?.user?.fullName}</strong>
+                      {post.likes?.length > 1 ? (
+                        <>
+                          <span> and </span>
+                          <strong>{post.likes?.length - 1} other</strong>
+                        </>
+                      ) : null}
+                    </div>
+                  }
                 </div>
               </div>
-              )
-              : null}
-
+            ) : null}
           </div>
         </div>
 

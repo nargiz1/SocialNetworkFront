@@ -51,12 +51,7 @@
   border-radius: 100%;
   background-color: #f3f4f6;
 }
-.post-body span {
-  color: grey;
-  font-weight: 700;
-  margin-left: 10px;
-  font-size: 15px;
-}
+
 .comment p {
   font-size: 15px;
   margin-bottom: 0px;

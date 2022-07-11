@@ -8,20 +8,21 @@ import "./index.css";
 import * as userServices from "../../services/UserService";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { MdOutlineIosShare } from "react-icons/md";
 
 const Index = () => {
   const data = useSelector((state) => state.user.currentUser);
   const [searchUser, setSearchUser] = useState("");
   const [userData, setUserData] = useState([]);
-  const [showData , setShowData] =useState(false);
+  const [showData, setShowData] = useState(false);
+  const [checked, setChecked] = React.useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const resp = await userServices.SearchUserService(searchUser);
     setUserData(resp);
     setShowData(true);
-    console.log("searching user resp",resp);
-  
+    console.log("searching user resp", resp);
   };
   console.log(data);
   return (
@@ -48,181 +49,6 @@ const Index = () => {
                           <img
                             className="profile-photo"
                             src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>{" "}
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>{" "}
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>{" "}
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar2.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="message-content active-message">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar3.jpg")}
-                            alt="profile-photo"
-                          />
-                        </div>
-                      </a>
-                    </div>
-                    <div className="message-by ms-3">
-                      <div className="message-by-headline position-relative">
-                        <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
-                      </div>
-                      <p>laoreet dolore magna aliquam erat...</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="message-content">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <a
-                        href="#"
-                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                      >
-                        <div>
-                          <img
-                            className="profile-photo"
-                            src={require("../../helpers/images/avatar4.jpg")}
                             alt="profile-photo"
                           />
                         </div>
@@ -286,32 +112,135 @@ const Index = () => {
                           Ayshan Gambarova
                         </div>
                         <div>Group 21 participants</div>
-                        <form onSubmit={handleSubmit} className="mt-5">
-                          <input
-                            type="text"
-                            placeholder="Add member..."
-                            className="w-100 message-canvas-search"
-                            onChange={(e) => setSearchUser(e.target.value)}
-                          />
-                        </form>
-                        {showData ? (
-                          <div className="message-canvas-search-user-data mb-4">
-                            {userData && userData.length > 0 ? (
-                              userData.map((user, index) => (
-                               <div className="d-flex justify-content-between align-items-center border-bottom">
-                                 <Link to={`/user/${user.id}`} key={index}>
-                                   <div key={index} className="message-canvas-search-user">
-                                     {user.fullName}
-                                   </div>
-                                 </Link>
-                                   <div className="add-member-btn">+</div>
-                               </div>
-                              ))
-                            ) : (
-                              <div>User not found</div>
-                            )}
+                        <div className="tabs">
+                          <div className="tab-2">
+                            <label htmlFor="tab2-1">Add</label>
+                            <input
+                              id="tab2-1"
+                              name="tabs-two"
+                              type="radio"
+                              defaultChecked={checked}
+                              onChange={() => setChecked(!checked)}
+                            />
+                            <div>
+                              <form onSubmit={handleSubmit}>
+                                <input
+                                  type="text"
+                                  placeholder="Add member..."
+                                  className="w-100 message-canvas-search"
+                                  onChange={(e) =>
+                                    setSearchUser(e.target.value)
+                                  }
+                                />
+                              </form>
+                              {showData ? (
+                                <div className="message-canvas-search-user-data mb-4">
+                                  {userData && userData.length > 0 ? (
+                                    userData.map((user, index) => (
+                                      // <div key={index} className="d-flex justify-content-between align-items-center">
+                                      //   <Link
+                                      //     to={`/user/${user.id}`}
+                                      //   >
+                                      //     <div
+                                      //       className="message-canvas-search-user"
+                                      //     >
+                                      //       {user.fullName}
+                                      //     </div>
+                                      //   </Link>
+                                      //   <div className="add-member-btn member-btn">+</div>
+                                      // </div>
+                                      <div className="member-wrapper">
+                                      <div key={index} className="d-flex align-items-center justify-content-between">
+                                          <Link to={`/user/${user.id}`} className="text-decoration-none text-black">
+                                          <div className="d-flex align-items-center">
+                                            <div>
+                                              <a
+                                                href="#"
+                                                className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                              >
+                                                <div>
+                                               <img
+                                                    className="profile-photo"
+                                                    src={require("../../helpers/images/avatar2.jpg")}
+                                                    alt="profile-photo"
+                                                  /> 
+                                                     {/* <img
+                                                    className="profile-photo"
+                                                    src={"http://localhost:39524/" + user?.imageUrl}
+                                                    alt="profile-photo"
+                                                  /> */}
+                                                </div>
+                                              </a>
+                                            </div>
+                                            <div className="ms-2">{user.fullName}</div>
+                                          </div>
+                                          </Link>
+                                       
+                                          <div className="add-member-btn member-btn">+</div>
+                                        </div>
+                                    
+                                      </div>
+                                    ))
+                                  ) : (
+                                    <div>User not found</div>
+                                  )}
+                                </div>
+                              ) : null}
+                            </div>
                           </div>
-                        ) : null}
+                          <div className="tab-2">
+                            <label htmlFor="tab2-2">Search</label>
+                            <input id="tab2-2" name="tabs-two" type="radio" />
+                            <div className="member-wrapper">
+                            <div className="d-flex align-items-center justify-content-between">
+                                <Link to={"/user"} className="text-decoration-none text-black">
+                                <div className="d-flex align-items-center">
+                                  <div>
+                                    <a
+                                      href="#"
+                                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                    >
+                                      <div>
+                                        <img
+                                          className="profile-photo"
+                                          src={require("../../helpers/images/avatar2.jpg")}
+                                          alt="profile-photo"
+                                        />
+                                      </div>
+                                    </a>
+                                  </div>
+                                  <div className="ms-2">Bashir Azizov</div>
+                                </div>
+                                </Link>
+                             
+                                <div className="remove-member-btn member-btn">-</div>
+                              </div>
+                              <div className="d-flex align-items-center justify-content-between">
+                                <Link to={"/user"} className="text-decoration-none text-black">
+                                <div className="d-flex align-items-center">
+                                  <div>
+                                    <a
+                                      href="#"
+                                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                    >
+                                      <div>
+                                        <img
+                                          className="profile-photo"
+                                          src={require("../../helpers/images/avatar2.jpg")}
+                                          alt="profile-photo"
+                                        />
+                                      </div>
+                                    </a>
+                                  </div>
+                                  <div className="ms-2">Bashir Azizov</div>
+                                </div>
+                                </Link>
+                             
+                                <div className="remove-member-btn member-btn">-</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -344,278 +273,6 @@ const Index = () => {
                       </div>
                       <div className="message-blue">Salam necesen?</div>
                     </div>
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
-                    <div className="w-100 d-flex justify-content-end align-items-center position-relative mb-2">
-                      <div className="sender">
-                        <a
-                          href="#"
-                          className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                        >
-                          <div>
-                            <img
-                              className="profile-photo"
-                              src={require("../../helpers/images/avatar.jpg")}
-                              alt="profile-photo"
-                            />
-                          </div>
-                        </a>
-                      </div>
-                      <div className="message-blue">Salam necesen?</div>
-                    </div>{" "}
                     <div className="w-100 d-flex justify-content-start align-items-center mt-3 position-relative mb-2">
                       <div className="reciver">
                         <a
@@ -639,7 +296,12 @@ const Index = () => {
               </div>
               <div className="send-area border-top">
                 <div className="row d-flex justify-content-between align-items-center">
-                  <div className="col-md-11">
+                <div className="col-md-1">
+                    <button className="share-button">
+                      <MdOutlineIosShare />
+                    </button>
+                  </div>
+                  <div className="col-md-10">
                     <input
                       type="text"
                       className=" w-100"

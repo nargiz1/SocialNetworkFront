@@ -7,6 +7,7 @@ import { BiMessageDetail, BiLogIn } from "react-icons/bi";
 import { HiPhotograph } from "react-icons/hi";
 import { AiFillHome, AiOutlineSetting } from "react-icons/ai";
 import { RiFlag2Fill } from "react-icons/ri";
+import * as authServices from "../../services/AuthService";
 
 import { setLogin } from "../../redux/Auth/AuthSlice";
 import "../Sidebar/Sidebar.css";
@@ -18,9 +19,10 @@ function Sidebar({ isOpen }) {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
+    authServices.LogoutService();
     sessionStorage.removeItem("token");
     dispatch(setLogin(null));
-    navigate("/login");
+    
   };
 
   return (
@@ -138,7 +140,7 @@ function Sidebar({ isOpen }) {
                 </Link>
         </div>
         <div className="d-flex justify-content-between align-items-center pages-item">
-          <Link to="/logout">
+           <Link to="/login"> 
           <div
             onClick={(e) => logoutHandler()}
             className="d-flex align-items-center"
@@ -148,7 +150,7 @@ function Sidebar({ isOpen }) {
                 <h4>Logout</h4>
                 ) : null}
           </div>
-                </Link>
+                </Link> 
         </div>
       </div>
     </div>

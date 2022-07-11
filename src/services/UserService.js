@@ -15,7 +15,6 @@ export async function getUserService() {
     console.log("err: ", error);
   }
 }
-
 export async function SearchUserService(searchUser) {
   try {
     return await (
@@ -34,7 +33,6 @@ export async function SearchUserService(searchUser) {
     console.log("err: ", error);
   }
 }
-
 export async function UpdateUserService(payload) {
   try {
     return await (
@@ -62,6 +60,36 @@ export async function getUsersService() {
         params: {
           Skip: 0,
           Take: 10,
+        },
+      })
+    ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+}
+export async function profilePicService(payload) {
+  try {
+    return await (
+      await Axios.post(`/api/User/profilePic`, payload, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+    ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+}
+export async function coverPicService(payload) {
+  try {
+    return await (
+      await Axios.post(`/api/User/coverPic`, payload, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
       })
     ).data;

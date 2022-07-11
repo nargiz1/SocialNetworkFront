@@ -19,13 +19,13 @@ const Index = () => {
   const [value, setValue] = React.useState(0);
   let userId = useParams();
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   useEffect(() => {
     console.log("Params", userId);
   }, [userId]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   const deleteFollower = async (e, id) => {
     e.preventDefault();
     await followServices.deleteFollowerService(id);
@@ -39,11 +39,6 @@ const Index = () => {
   const userPostsData = useSelector((state) => state.post.userPosts);
   const followersData = useSelector((state) => state.follow.followers);
   const followingData = useSelector((state) => state.follow.following);
-
-  console.log("followers", followersData);
-  console.log("followingData", followingData);
-  console.log("currentUser", currentUser);
-  console.log("userPostsData", userPostsData);
   return (
     <>
       <div className="tabs-holder">
@@ -166,7 +161,7 @@ const Index = () => {
                           </Link>
                         </div>
                       ))
-                    : "Nobody is following you"}
+                    : "Nobody follows you."}
                 </div>
               </div>
             </div>
@@ -234,8 +229,8 @@ const Index = () => {
                   {userPostsData && userPostsData.length > 0
                     ? userPostsData.map((post) =>
                         post.images && post.images.length > 0
-                          ? post.images.map((img) => (
-                              <div className="col-md-4">
+                          ? post.images.map((img,index) => (
+                              <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">
                                   <div className="friend-card-img">
                                     <img
@@ -248,9 +243,9 @@ const Index = () => {
                                 </div>
                               </div>
                             ))
-                          : null
+                          : "You don't have any photo"
                       )
-                    : "You don't have any photo"}
+                    : null}
                 </div>
               </div>
             </div>
@@ -265,12 +260,11 @@ const Index = () => {
                     ? userPostsData.map((post) =>
                         post.videos && post.videos.length > 0
                           ? post.videos.map((video, index) => (
-                              <div className="col-md-4">
+                              <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">
                                   <div className="friend-card-img">
                                     <video
                                       controls
-                                      key={index}
                                       className="w-100"
                                     >
                                       <source
@@ -285,9 +279,9 @@ const Index = () => {
                                 </div>
                               </div>
                             ))
-                          : null
+                          : "You don't have any video"
                       )
-                    : "You don't have any video"}
+                    : null}
                 </div>
               </div>
             </div>

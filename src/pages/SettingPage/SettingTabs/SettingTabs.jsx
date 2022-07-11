@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import {  useNavigate } from "react-router-dom";
 import Tabs from "../../../components/Tabs/Tabs";
 import TabPanel from "../../../components/Tabs/TabPanel";
 import * as authServices from "../../../services/AuthService";
@@ -9,6 +9,7 @@ import * as userServices from "../../../services/UserService";
 const SettingTabs = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -65,6 +66,7 @@ const SettingTabs = () => {
     e.preventDefault();
     console.log("updateUserData", updateUserData);
      const resp = await userServices.UpdateUserService(updateUserData);
+     navigate("/user");
   };
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();

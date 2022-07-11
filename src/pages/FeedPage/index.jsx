@@ -15,7 +15,6 @@ const Index = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const posts = useSelector((state) => state.post.posts);
   const [likeTest, setLikeTest] = useState(false);
-  const [postTest, setPostTest] = useState([]);
 
   useEffect(() => {
     (async function () {
@@ -23,7 +22,6 @@ const Index = () => {
       dispatch(setPosts(data));
     })();
 
-    console.log('heloooo');
   }, [likeTest, dispatch]);
 
   return (

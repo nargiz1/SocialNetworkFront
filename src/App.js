@@ -5,8 +5,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as userServices from "../src/services/UserService";
+import * as followServices from "../src/services/FollowService";
 import  { setCurrentUser,setUsers } from '../src/redux/User/UserSlice';
-
+import  { setFollowers,setFollowing } from '../src/redux/Follow/FollowSlice';
 import FeedPage from "./pages/FeedPage/index";
 import "./App.css";
 
@@ -37,7 +38,11 @@ function App() {
     (async function() {
       const user=await userServices.getUserService();
       const users = await userServices.getUsersService();
+      const followers = await followServices.getFollowersService(user);
+      const following = await followServices.getSubscribesService(user);
 
+      dispatch(setFollowers(followers));
+      dispatch(setFollowing(following));
       dispatch(setUsers(users));
       dispatch(setCurrentUser(user));
     })();
@@ -46,7 +51,6 @@ function App() {
     <>
         <ToastContainer autoClose={2000} position="bottom-right" />
     <Routes>
-
       {token !== null && (
         <>
           <Route path="/" element={<FeedPage />} />
@@ -61,7 +65,6 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       )}
-
       {token === null && (
         <>
           <Route path="/login" element={<LoginPage />} />

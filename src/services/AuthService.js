@@ -15,7 +15,21 @@ export async function LoginService(payload) {
     console.log("err: ", error);
   }
 }
-
+export async function LogoutService() {
+  try {
+    return await (
+      await Axios.post(`/api/User/logout`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+      })
+    ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+}
 export async function RegisterService(payload) {
   try {
     return await (
@@ -31,7 +45,6 @@ export async function RegisterService(payload) {
     console.log("err: ", error);
   }
 }
-
 export async function ForgotPasswordService(payload) {
   try {
     return await (
@@ -47,7 +60,6 @@ export async function ForgotPasswordService(payload) {
     console.log("err: ", error);
   }
 }
-
 export async function ResetPasswordService(payload) {
   try {
     return await (

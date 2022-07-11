@@ -22,7 +22,6 @@ const CreatePost = () => {
   });
   const handleChange = (name, value) => {
     setCreatePost({ ...createPost, [name]: value });
-    console.log(createPost);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +34,6 @@ const CreatePost = () => {
     Array.from(createPost.ImageFiles).forEach((ImageFile)=>
       formData.append("ImageFiles",ImageFile)
     );
-    //videoFiles boshdu?
     Array.from(createPost.VideoFiles).forEach((VideoFile)=>
       formData.append("VideoFiles",VideoFile)
     );
