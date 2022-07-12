@@ -3,144 +3,38 @@ import "./index.css";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 import Carousel from "../../../../components/Carousel/Carousel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFollowing } from "../../../../redux/Follow/FollowSlice";
 import { Link } from "react-router-dom";
 import * as followServices from "../../../../services/FollowService";
+import * as userServices from "../../../../services/UserService";
 
 export default function PagesTabs() {
+  const dispatch= useDispatch();
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const following = useSelector((state) => state.follow.following);
   const followers = useSelector((state) => state.follow.followers);
-  console.log("users pages tabs", users);
-  console.log("following", following);
-  console.log("followers", followers);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const handleSubmit = async (id, e) => {
-    e.preventDefault();
+  const handleSubmit = async (id) => {
     const data = await followServices.followService(id);
+    const user=await userServices.getUserService();
+    const following = await followServices.getSubscribesService(user);
+    dispatch(setFollowing(following));
+  };
+  const handleUnfollow = async (id) => {
+    const data = await followServices.unFollowService(id);
+    const user=await userServices.getUserService();
+    const following = await followServices.getSubscribesService(user);
+    dispatch(setFollowing(following));    
   };
 
   return (
     <>
-      {/*<div className="d-flex justify-content-between align-items-center">
-        <a href="#" className="add-button">
-          <BsFillPlusCircleFill />
-        </a>
-      </div>
-     <Tabs
-        activeTab={value}
-        handleTabChange={handleChange}
-        tabs={["Suggestions", "Newest", "My pages"]}
-      >
-        <TabPanel value={value} index={0}>
-          <Carousel mdViewCount={3}>
-            <div className="pages-card">
-              <img
-                src={require("../../../../helpers/images/avatar4.jpg")}
-                className="card-img-top"
-                alt="slidePhoto"
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following
-                </p>
-              </div>
-            </div>
-            <div className="pages-card">
-              <img
-                src={require("../../../../helpers/images/avatar4.jpg")}
-                className="card-img-top"
-                alt="slidePhoto"
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following
-                </p>
-              </div>
-            </div>
-            <div className="pages-card">
-              <img
-                src={require("../../../../helpers/images/avatar3.jpg")}
-                className="card-img-top"
-                alt="slidePhoto"
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following
-                </p>
-              </div>
-            </div>
-          </Carousel>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Carousel mdViewCount={3}>
-            <div className="pages-card" style="width: 18rem;">
-              <img
-                src={require("../../../../helpers/images/avatar1.jpg")}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following
-                </p>
-              </div>
-            </div>
-            <div className="pages-card" style="width: 18rem;">
-              <img
-                src={require("../../../../helpers/images/avatar3.jpg")}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following
-                </p>
-              </div>
-            </div>
-          </Carousel>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Carousel mdViewCount={3}>
-            <div className="pages-card" style="width: 18rem;">
-              <img
-                src={require("../../../../helpers/images/avatar1.jpg")}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis2</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following2
-                </p>
-              </div>
-            </div>
-            <div className="pages-card" style="width: 18rem;">
-              <img
-                src={require("../../../../helpers/images/avatar3.jpg")}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="pages-card-body">
-                <h5 className="pages-card-title">James Levis2</h5>
-                <p className="pages-card-text">
-                  <span>212K</span> Following2
-                </p>
-              </div>
-            </div>
-          </Carousel>
-        </TabPanel>
-      </Tabs> */}
       <div className="d-flex justify-content-between">
         <h4 className="mb-4">Pages</h4>
         <a href="#" className="text-decoration-none">
@@ -151,56 +45,56 @@ export default function PagesTabs() {
         {users && users.length > 0
           ? users.map((user, index) =>
               user.id !== currentUser.id ? (
-                <Link
-                  to={`user/${user.id}`}
-                  key={index}
-                  className="text-decoration-none"
-                >
-                  <div className="pages-card">
-                    <div className="pages-card-top">
-                      {user?.imageUrl === "Resources\\Images\\" ? (
-                        <img
-                          src={require("../../../../helpers/images/avatar.jpg")}
-                          className="w-100"
-                        />
-                      ) : (
-                        <img
-                          src={"http://localhost:39524/" + user?.imageUrl}
-                          className="w-100"
-                        />
-                      )}
-                    </div>
-                    <div className="pages-card-body">
-                      <h5 className="pages-card-title">{user.fullName}</h5>
+                <div key={index} className="pages-card">
+                  <div className="pages-card-top">
+                    {user?.imageUrl === "Resources\\Images\\" ? (
+                      <img
+                        src={require("../../../../helpers/images/avatar.jpg")}
+                        className="w-100"
+                      />
+                    ) : (
+                      <img
+                        src={"http://localhost:39524/" + user?.imageUrl}
+                        className="w-100"
+                      />
+                    )}
+                  </div>
+                  <div className="pages-card-body">
+                    <h5 className="pages-card-title">{user.fullName}</h5>
+                    <Link
+                      to={`user/${user.id}`}
+                      key={index}
+                      className="text-decoration-none"
+                    >
                       <h5 className="pages-card-title text-lowercase">
                         @{user.userName}
                       </h5>
-                      <div className="d-flex justify-content-end">
-                        {following?.map((following) =>
-                          following.id == user.id ? (
-                            <button
-                              className="following-button"
-                              onClick={() => {
-                                handleSubmit(user.id);
-                              }}
-                            >
-                              Following
-                            </button>
-                          ) : (
-                            <button
-                              className="follow-button"
-                              onClick={() => {
-                                handleSubmit(user.id);
-                              }}
-                            >
-                              Follow
-                            </button>
-                          )
-                        )}
-                      </div>
+                    </Link>
+                    <div className="d-flex justify-content-end">
+                      {Boolean(following.find((f) => f.id === user.id)) ? (
+                        <button
+                          className="following-button"
+                          onClick={(e) => {
+                            handleUnfollow(user.id);
+                            e.stopPropagation();
+                          }}
+                        >
+                          Following
+                        </button>
+                      ) : (
+                        <button
+                          className="follow-button"
+                          onClick={(e) => {
+                            handleSubmit(user.id);
+                            e.stopPropagation();
+                          }}
+                        >
+                          Follow
+                        </button>
+                      )}
                     </div>
                   </div>
-                </Link>
+                </div>
               ) : null
             )
           : null}

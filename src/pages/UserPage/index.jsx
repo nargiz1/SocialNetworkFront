@@ -7,12 +7,13 @@ import * as postServices from "../../services/PostService";
 import * as userServices from "../../services/UserService";
 
 import { setUserPosts } from "../../redux/Post/PostSlice";
+import { setCurrentUser } from "../../redux/User/UserSlice";
 
 import "../UserPage/index.css";
 import { useParams } from "react-router-dom";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import { Co2Sharp } from "@mui/icons-material";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -20,30 +21,27 @@ const Index = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const users = useSelector((state) => state.user.users);
   console.log("users", users);
-  const [createProfilePic, setCreateProfilePic] = useState({
-    ImageFile: "",
-  });
-  const [createCoverPic, setCreateCoverPic] = useState({
-    CoverPicFile: "",
-  });
 
-  const handleProfileChange = (name, value) => {
-    setCreateProfilePic({ ...createProfilePic, [name]: value });
-
+  const handleProfileChange = async (name, value) => {
+    console.log("name",name);
     const formData = new FormData();
-    formData.append("ImageFile", createProfilePic.ImageFile);
-    console.log("profile form data",formData);
-    // await userServices.profilePicService(formData);
+    Array.from(value).forEach((ImageFile) =>
+      formData.append("ImageFile", ImageFile)
+    );
+     await userServices.profilePicService(formData);
+    const currentUser = await userServices.getUserService();
+    dispatch(setCurrentUser(currentUser));
+    
   };
-  const handleCoverChange = (name, value) => {
-    setCreateCoverPic({ ...createCoverPic, [name]: value });
-
+  const handleCoverChange = async (name, value) => {
     const formData = new FormData();
-    formData.append("CoverPicFile", createCoverPic.CoverPicFile);
-    console.log("cover form data",formData);
-    // await userServices.profilePicService(formData);
+    Array.from(value).forEach((CoverPicFile) =>
+      formData.append("CoverPicFile", CoverPicFile)
+    );
+     await userServices.coverPicService(formData);
+    const currentUser = await userServices.getUserService();
+    dispatch(setCurrentUser(currentUser));
   };
-
 
   useEffect(() => {
     console.log("Params", userId);
@@ -54,7 +52,6 @@ const Index = () => {
       const user = await userServices.getUserService();
       const userPosts = await postServices.getUserPostsService(user);
       dispatch(setUserPosts(userPosts));
-
     })();
   }, [dispatch]);
 
@@ -67,27 +64,27 @@ const Index = () => {
               <div className="user-profile">
                 <div className="profile-banner">
                   <img
-                    src={require("../../helpers/images/profile-cover.jpg")}
+                     src={"http://localhost:39524/" + currentUser?.coverPicUrl}
                     alt=""
                     className="w-100 h-100"
                   />
-                  <div className="cover-upload">
-                        <label htmlFor="photo">
-                          <div className="user-profile-upload">
-                            <AiOutlinePlus />
-                          </div>
-                        </label>
-                        <input
-                          type="file"
-                          accept="images/*"
-                          id="photo"
-                          className="custom-file-upload d-none"
-                          name="CoverPicFile"
-                          onChange={(e) =>
-                            handleProfileChange(e.target.name, e.target.files)
-                          }
-                        />
-                    </div>
+                   <div className="cover-upload">
+                    <label htmlFor="photo">
+                      <div className="user-profile-upload">
+                        <AiOutlinePlus />
+                      </div>
+                    </label>
+                    <input
+                      type="file"
+                      accept="images/*"
+                      id="photo"
+                      className="custom-file-upload d-none"
+                      name="CoverPicFile"
+                      onChange={(e) =>
+                        handleCoverChange("CoverPicFile", e.target.files)
+                      }
+                    />
+                  </div> 
                 </div>
                 <div className="profile-content align-items-center justify-content-center">
                   <div className="avatar-parent">
@@ -98,21 +95,21 @@ const Index = () => {
                       />
                     </div>
                     <div className="profile-upload">
-                        <label htmlFor="photo">
-                          <div className="user-profile-upload">
-                            <AiOutlinePlus />
-                          </div>
-                        </label>
-                        <input
-                          type="file"
-                          accept="images/*"
-                          id="photo"
-                          className="custom-file-upload d-none"
-                          name="ImageFile"
-                          onChange={(e) =>
-                            handleProfileChange(e.target.name, e.target.files)
-                          }
-                        />
+                      <label htmlFor="photo">
+                        <div className="user-profile-upload">
+                          <AiOutlinePlus />
+                        </div>
+                      </label>
+                      <input
+                        type="file"
+                        accept="images/*"
+                        id="photo"
+                        className="custom-file-upload d-none"
+                        name="ImageFile"
+                        onChange={(e) =>
+                          handleProfileChange("ImageFile", e.target.files)
+                        }
+                      />
                     </div>
                   </div>
                   <div className="profile-info align-items-center justify-content-center">

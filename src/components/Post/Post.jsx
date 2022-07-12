@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { BsShare, BsEmojiLaughing } from "react-icons/bs";
 import { GoKebabHorizontal } from "react-icons/go";
@@ -53,6 +53,9 @@ const Post = ({ post, likeTest, setLikeTest }) => {
   const deletePost = async (id) => {
     await postServices.deletePostService(id);
     getAllPosts();
+  };
+  const deleteComment = async (id) => {
+    await commentServices.deleteCommentService(id);
   };
 
   const handleLikePost = async (e, id) => {
@@ -132,38 +135,35 @@ const Post = ({ post, likeTest, setLikeTest }) => {
             >
               Delete
             </li>
-          </ul> */} 
-          {
-            post.userId==currentUser.id?(
-          <button
-            onClick={() => {
-              deletePost(post.id);
-            }}
-          >
-            delete
-          </button>
-
-            ):null
-          }
+          </ul> */}
+          {post.userId == currentUser?.id ? (
+            <button
+              onClick={() => {
+                deletePost(post.id);
+              }}
+            >
+              delete
+            </button>
+          ) : null}
         </div>
 
         <div className="post-body">
+           {/* <Carousel mdViewCount={1}> */}
           {post?.images && post.images?.length > 0 ? (
             post.images.map((img, index) => (
-              // <Carousel mdViewCount={1} key={index}>
               <img
                 src={"http://localhost:39524/" + img?.imageUrl}
                 alt="post"
                 className="w-100"
                 key={index}
               />
-              // </Carousel>
+        
             ))
           ) : post?.text !== null ? (
             <p className="ps-3 pe-3 text-start">{post?.text}</p>
           ) : post?.videos && post?.videos?.length > 0 ? (
             post.videos.map((video, index) => (
-              // <Carousel mdViewCount={1} key={index}>
+       
               <video controls key={index} className="w-100">
                 <source
                   src={"http://localhost:39524/" + video.videoUrl}
@@ -171,7 +171,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                   alt="video"
                 />
               </video>
-              // </Carousel>
+       
             ))
           ) : null}
 
@@ -196,7 +196,6 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                       </div>
                     )}
                   </div>
-                  {/* <span> Like</span> */}
                 </a>
 
                 {showComment ? (
@@ -249,7 +248,6 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                         </div>
                       </div>
                     </div>
-                    {/* <span> Comment</span> */}
                   </a>
                 ) : null}
               </div>
@@ -262,7 +260,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                     <BsShare />
                   </div>
                 </div>
-                {/* <span> Share</span> */}
+     
               </a>
             </div>
 
@@ -296,14 +294,18 @@ const Post = ({ post, likeTest, setLikeTest }) => {
               </div>
             ) : null}
           </div>
+         {/* </Carousel> */}
         </div>
 
         <div className="post-bottom p-3">
           {post.comments?.length > 0
             ? post.comments.map((comment, index) => (
-                <div key={index} className="comment-area pe-5">
+                <div
+                  key={index}
+                  className="comment-area d-flex justify-content-between"
+                >
                   <div className="d-flex mb-3">
-                    <Link to={`/user/${comment.user.id}`}>
+                    <Link to={`/user/${comment?.user?.id}`}>
                       <div>
                         <img
                           src={
@@ -327,20 +329,24 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                             <AiOutlineHeart />
                           </a>
                         </div>
-                        <div className="d-flex me-2">
-                          <a
-                            href="#"
-                            className="text-decoration-none text-secondary comment-replay"
-                          >
-                            Replay
-                          </a>
-                        </div>
+                        <div className="d-flex me-2"></div>
                         <span className="comment-date text-secondary comment-date">
                           3d
                         </span>
                       </div>
                     </div>
                   </div>
+                  {post.userId == currentUser?.id ||
+                  comment.userId == currentUser?.id ? (
+                    <div
+                      className="comment-delete"
+                      onClick={() => {
+                        deleteComment(comment.id);
+                      }}
+                    >
+                      <AiOutlineDelete />
+                    </div>
+                  ) : null}
                 </div>
               ))
             : null}

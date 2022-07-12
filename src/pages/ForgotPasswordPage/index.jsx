@@ -31,7 +31,6 @@ const Index = () => {
           sessionStorage.setItem("resetToken", resp);
           sessionStorage.setItem("currentMail", forgotData);
           dispatch(setReset(resp));
-          navigate("/reset");
         }
 
       } catch (error) {

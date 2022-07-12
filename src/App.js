@@ -51,6 +51,8 @@ function App() {
     <>
         <ToastContainer autoClose={2000} position="bottom-right" />
     <Routes>
+    <Route path="/reset" element={<ResetPage />} />
+
       {token !== null && (
         <>
           <Route path="/" element={<FeedPage />} />
@@ -62,6 +64,7 @@ function App() {
           <Route path="/videos" element={<VideosPage />} />
           <Route path="/setting" element={<SettingPage />} />
           <Route path="/user" element={<UserPage />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       )}
@@ -71,11 +74,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget" element={<ForgetPasswordPage />} />
 
-          {
-            resetToken !== null && (
-              <Route path="/reset" element={<ResetPage />} />
-            )
-          }
+
+        
 
           <Route path="*" element={<Navigate to="/login" replace />} />
         </>

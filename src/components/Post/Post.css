@@ -90,3 +90,9 @@
 .like-content{
   font-size: 14px;
 }
+.comment-delete{
+  display: none;
+}
+.comment-area:hover .comment-delete{
+  display: block;
+}

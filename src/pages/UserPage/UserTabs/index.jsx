@@ -39,6 +39,8 @@ const Index = () => {
   const userPostsData = useSelector((state) => state.post.userPosts);
   const followersData = useSelector((state) => state.follow.followers);
   const followingData = useSelector((state) => state.follow.following);
+  console.log("followersData",followersData);
+  console.log("followingData",followingData);
   return (
     <>
       <div className="tabs-holder">
@@ -227,9 +229,10 @@ const Index = () => {
               <div className="user-friends">
                 <div className="row">
                   {userPostsData && userPostsData.length > 0
-                    ? userPostsData.map((post) =>
-                        post.images && post.images.length > 0
-                          ? post.images.map((img,index) => (
+                    ? (
+                      userPostsData.map((post) =>
+                        post.images || post.images.length > 0
+                          ?( post.images.map((img,index) => (
                               <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">
                                   <div className="friend-card-img">
@@ -242,9 +245,10 @@ const Index = () => {
                                   </div>
                                 </div>
                               </div>
-                            ))
+                            )))
                           : "You don't have any photo"
                       )
+                    )
                     : null}
                 </div>
               </div>
@@ -258,7 +262,7 @@ const Index = () => {
                 <div className="row">
                   {userPostsData && userPostsData.length > 0
                     ? userPostsData.map((post) =>
-                        post.videos && post.videos.length > 0
+                        post.videos || post.videos.length > 0
                           ? post.videos.map((video, index) => (
                               <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">

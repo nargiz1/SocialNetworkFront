@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 
 const CreatePost = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const [collapseModal,setCollapseModal]=useState(false);
   const [createPost, setCreatePost] = useState({
     Text: "",
     IsPrivate: false,
@@ -24,6 +25,7 @@ const CreatePost = () => {
     setCreatePost({ ...createPost, [name]: value });
   };
   const handleSubmit = async (e) => {
+    setCollapseModal(true);
     e.preventDefault();
     const formData = new FormData();
     const date = new Date();
@@ -66,8 +68,9 @@ const CreatePost = () => {
             data-bs-toggle="modal"
             data-bs-target="#exampleModal1"
           />
-
-          <form>
+{
+  collapseModal?(null):(
+<form>
             <div
               className="modal fade create"
               id="exampleModal1"
@@ -230,6 +233,9 @@ const CreatePost = () => {
               </div>
             </div>
           </form>
+  )
+}
+          
         </div>
 
         {/* <div className="createPost-bottom mt-3 d-flex">

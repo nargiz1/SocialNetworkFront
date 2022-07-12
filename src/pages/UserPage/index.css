@@ -132,10 +132,9 @@ ul.about li i {
   left: 53%;
 }
 .cover-upload{
-  display: none;
   top: 10px;
   right: 20px;
-}
-.profile-banner:hover .cover-upload{
   display: block;
 }
+/* .profile-banner:hover .cover-upload{
+} */

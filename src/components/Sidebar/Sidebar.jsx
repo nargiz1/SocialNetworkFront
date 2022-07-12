@@ -20,6 +20,7 @@ function Sidebar({ isOpen }) {
 
   const logoutHandler = () => {
     authServices.LogoutService();
+    navigate("/")
     sessionStorage.removeItem("token");
     dispatch(setLogin(null));
     

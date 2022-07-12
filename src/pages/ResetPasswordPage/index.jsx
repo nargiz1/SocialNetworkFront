@@ -1,12 +1,25 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate,Link, useParams, useLocation } from "react-router-dom";
 import swal from "sweetalert";
+import { toast } from "react-toastify";
 
 import * as authServices from "../../services/AuthService";
 import ResetSVG from "../../helpers/images/reset.svg";
 
 const Index = () => {
   const navigate = useNavigate();
+  const search = useLocation().search;
+   const token = (new URLSearchParams(search).get('token')).replace(/ /g, '+');
+  // const token=new URLSearchParams(search).get('token');
+
+  const email=new URLSearchParams(search).get('email');
+
+  useEffect(() => {
+    console.log("token", token);
+    console.log("email", email);
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("email", email);
+  }, [token,email]);
 
   const [resetData, setResetData] = useState({
     email: "",
@@ -21,41 +34,20 @@ const Index = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = sessionStorage.getItem("resetToken");
-    const mail = sessionStorage.getItem("currentMail");
-    resetData["email"] = mail;
-    resetData["token"] = token;
+    const token = sessionStorage.getItem("token");
+    const email = sessionStorage.getItem("email");
+    resetData.email = email;
+    resetData.token = token;
 
     if (resetData.newPassword !== "" && resetData.passwordConfirm !== "") {
       try {
-        swal({
-          title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this imaginary file!",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        }).then((willConfirm) => {
-          if (willConfirm) {
-            authServices
-              .ResetPasswordService(resetData)
-              .then(function (response) {
-                if (response) {
-                  swal("Poof! Your imaginary file has been deleted!", {
-                    title: "Good job!",
-                    icon: "success",
-                  }).then(function () {
-                    sessionStorage.clear();
-                    navigate("/login");
-                  });
-                } else {
-                  swal("Poof! Your imaginary file has been deleted!", {
-                    title: "Bad job!",
-                    icon: "error",
-                  });
-                }
-              });
-          }
-        });
+        const resp = await authServices.ForgotPasswordService(resetData);
+        if (resp) {
+          toast.success("You changed you password successfully!");
+          navigate("/");
+        } else {
+          toast.error("Something went wrong!");
+        }
       } catch (error) {
         console.log("error: ", error);
       }

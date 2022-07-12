@@ -14,3 +14,18 @@ export async function CommentPostService(payload) {
     console.log("err: ", error);
   }
 }
+export async function deleteCommentService(payload) {
+  try {
+    return await (
+      await Axios.post(`/api/Comment/delete`, payload, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+    ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+}
