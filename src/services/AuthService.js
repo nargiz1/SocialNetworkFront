@@ -38,6 +38,7 @@ export async function RegisterService(payload) {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
           accept: "application/json",
+          
         },
       })
     ).data;

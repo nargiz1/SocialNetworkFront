@@ -14,8 +14,10 @@ import * as commentServices from "../../services/CommentService";
 import * as likeServices from "../../services/LikeService";
 import "./Post.css";
 import Moment from "react-moment";
-import { Carousel } from "bootstrap";
+import Carousel from "react-bootstrap/Carousel";
 import { setIsClickedLike, setPosts } from "../../redux/Post/PostSlice";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const Post = ({ post, likeTest, setLikeTest }) => {
   const dispatch = useDispatch();
@@ -23,6 +25,9 @@ const Post = ({ post, likeTest, setLikeTest }) => {
   const isClickedLike = useSelector((state) => state.post.isClickedLike);
   const [showComment, setShowComment] = useState(true);
   const [like, setLike] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [createComment, setCreateComment] = useState({
     text: "",
@@ -82,20 +87,31 @@ const Post = ({ post, likeTest, setLikeTest }) => {
       <div className="post mt-4 mb-4">
         <div className="post-top d-flex align-items-center justify-content-between p-3">
           <div className="d-flex align-items-center">
-            <Link to={"/user"}>
+            <Link to={`/user/${post?.user?.id}`}>
               <div>
-                <img
-                  src={"http://localhost:39524/" + currentUser?.imageUrl}
-                  alt="profile-photo"
-                  className="post-profile"
-                />
+                {post?.user?.imageUrl === null ? (
+                  <img
+                    src={require("../../helpers/images/avatar.jpg")}
+                    alt="profile-photo"
+                    className="post-profile"
+                  />
+                ) : (
+                  <img
+                    src={"http://localhost:39524/" + post?.user?.imageUrl}
+                    alt="profile-photo"
+                    className="post-profile"
+                  />
+                )}
               </div>
             </Link>
 
             <div className="ms-3 text-start">
-              <a href="#" className="username text-lowercase">
+              <div className="username text-lowercase">
+                <Link to={`/user/${post?.user?.id}`} className="username">
                 @{post?.user?.userName || "user"}
-              </a>
+                </Link>
+               
+              </div>
               <div className="d-flex align-items-center">
                 <span className="post-date text-capitalize">
                   {post.location}
@@ -148,32 +164,38 @@ const Post = ({ post, likeTest, setLikeTest }) => {
         </div>
 
         <div className="post-body">
-           {/* <Carousel mdViewCount={1}> */}
-          {post?.images && post.images?.length > 0 ? (
-            post.images.map((img, index) => (
-              <img
-                src={"http://localhost:39524/" + img?.imageUrl}
-                alt="post"
-                className="w-100"
-                key={index}
-              />
-        
-            ))
-          ) : post?.text !== null ? (
-            <p className="ps-3 pe-3 text-start">{post?.text}</p>
-          ) : post?.videos && post?.videos?.length > 0 ? (
-            post.videos.map((video, index) => (
-       
-              <video controls key={index} className="w-100">
-                <source
-                  src={"http://localhost:39524/" + video.videoUrl}
-                  type="video/mp4"
-                  alt="video"
-                />
-              </video>
-       
-            ))
-          ) : null}
+          <Carousel interval={null}>
+            {post?.images && post.images?.length > 0
+              ? post?.images.map((img, index) => (
+                  <Carousel.Item  key={index} className="p-0">
+                    <img style={{height:"257px"}}
+                      src={"http://localhost:39524/" + img?.imageUrl}
+                      alt="post"
+                      className="w-100"
+                    
+                    />
+                  </Carousel.Item>
+                ))
+              : null}
+            {post?.videos && post?.videos?.length > 0
+              ? post?.videos.map((video, index) => (
+                  <Carousel.Item  key={index} className="p-0">
+                    <video controls key={index} className="w-100">
+                      <source
+                      style={{height:"257px"}}
+                        src={"http://localhost:39524/" + video.videoUrl}
+                        type="video/mp4"
+                        alt="video"
+                      />
+                    </video>
+                  </Carousel.Item>
+                ))
+              : null}
+           
+          </Carousel>
+          {post?.text !== null ? (
+              <p className="ps-3 pe-3 text-start">{post?.text}</p>
+            ) : null}
 
           <div className="post-body-bottom p-3">
             <div className="d-flex justify-content-between mb-3">
@@ -199,85 +221,83 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                 </a>
 
                 {showComment ? (
-                  <a
-                    href="#"
-                    className="d-flex align-items-center text-decoration-none"
-                  >
+                  <>
                     <div
                       className="post-interaction"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                     >
-                      <div>
+                      <div onClick={handleShow}>
                         <FaRegComment />
                       </div>
                     </div>
-                    <div
-                      className="modal fade"
-                      id="exampleModal"
-                      tabIndex="-1"
-                      aria-labelledby="exampleModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div className="modal-dialog">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">
-                              Modal title
-                            </h5>
-                            <button
-                              type="button"
-                              className="btn-close"
-                              data-bs-dismiss="modal"
-                              aria-label="Close"
-                            ></button>
-                          </div>
-                          <div className="modal-body">...</div>
-                          <div className="modal-footer">
-                            <button
-                              type="button"
-                              className="btn btn-secondary"
-                              data-bs-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                            <button type="button" className="btn btn-primary">
-                              Save changes
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Comments</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        {post.comments && post.comments.length > 0 ? (
+                          post.comments.map((comment, index) => (
+                            <div key={index} className="d-flex align-items-center modal-comment">
+                              <div  className="modal-comment-img">
+                                {comment?.user?.imageUrl === null ? (
+                                  <img
+                                    src={require("../../helpers/images/avatar.jpg")}
+                                    alt="commenter-img"
+                                    className="w-100"
+                                  />
+                                ) : (
+                                  <img
+                                    src={
+                                      "http://localhost:39524/" +
+                                      comment?.user?.imageUrl
+                                    }
+                                    alt="commenter-img"
+                                    className="w-100"
+                                  />
+                                )}
+                              </div>
+                              <div className="modal-comment-text">
+                                {comment?.text}
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div>There is no comment of this post.</div>
+                        )}
+                      </Modal.Body>
+                    </Modal>
+                  </>
                 ) : null}
               </div>
-              <a
-                href="#"
-                className="d-flex align-items-center text-decoration-none"
-              >
-                <div className="post-interaction">
-                  <div>
-                    <BsShare />
-                  </div>
+              <div className="post-interaction">
+                <div>
+                  <BsShare />
                 </div>
-     
-              </a>
+              </div>
             </div>
 
-            {console.log("post.likes: ", post?.likes)}
 
             {post.likes?.length > 0 ? (
               <div className="d-flex align-items-center like-content">
                 <div className="avatar-group d-flex ps-2">
                   <div className="avatar-item">
-                    <img
-                      src={
-                        "http://localhost:39524/" +
-                        post.likes[post.likes?.length - 1]?.user?.imageUrl
-                      }
-                      alt={post.id}
-                      className="w-100"
-                    />
+                    {post.likes?.user?.imageUrl === null ? (
+                      <img
+                        src={require("../../helpers/images/avatar.jpg")}
+                        alt="liker-img"
+                        className="w-100"
+                      />
+                    ) : (
+                      <img
+                        src={
+                          "http://localhost:39524/" +
+                          post.likes[0]?.user?.imageUrl
+                        }
+                        alt={post.id}
+                        className="w-100"
+                      />
+                    )}
                   </div>
                   {
                     <div className="ms-2">
@@ -294,7 +314,6 @@ const Post = ({ post, likeTest, setLikeTest }) => {
               </div>
             ) : null}
           </div>
-         {/* </Carousel> */}
         </div>
 
         <div className="post-bottom p-3">
@@ -307,13 +326,21 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                   <div className="d-flex mb-3">
                     <Link to={`/user/${comment?.user?.id}`}>
                       <div>
-                        <img
-                          src={
-                            "http://localhost:39524/" + comment.user?.imageUrl
-                          }
-                          alt="profile-photo"
-                          className="post-profile"
-                        />
+                        {comment?.user?.imageUrl === null ? (
+                          <img
+                            src={require("../../helpers/images/avatar.jpg")}
+                            alt="commenter-img"
+                            className="post-profile"
+                          />
+                        ) : (
+                          <img
+                            src={
+                              "http://localhost:39524/" + comment.user?.imageUrl
+                            }
+                            alt="commenter-img"
+                            className="post-profile"
+                          />
+                        )}
                       </div>
                     </Link>
                     <div className="comment-content ms-3">

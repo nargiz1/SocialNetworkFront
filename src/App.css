@@ -47,7 +47,7 @@
     position: absolute;
     bottom: 25px;
     right: 25px;
-    background-color: #3D63EB;
+    background-color: #6C63FF;
     color: white;
     position: fixed;
 }
@@ -92,4 +92,28 @@
   color: #119c70;
   font-size: 20px;
 }
+@media only screen and (max-width: 1024px) {
+  .sidebar-transform.offcanvas.offcanvas-start.show{
+    width: 310px!important;
+  }
+  .sidebar-transform .offcanvas-body{
+    width: 41%!important;
+  }
+  .sidebar .border-end{
+    border: none!important;
+  }
+
+}
+@media only screen and (max-width: 540px) {
+  .sidebar-desktop,.icon-desktop{
+    display: none;
+  }
+  .sidebar-transform.offcanvas.offcanvas-start.show{
+    width: 200px!important;
+  }
+  .sidebar-transform .offcanvas-body{
+    width: 53%!important;
+  }
+}
+
 

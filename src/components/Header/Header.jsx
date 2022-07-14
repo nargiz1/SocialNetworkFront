@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link} from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { BsSearch } from "react-icons/bs";
 import { MdShoppingCart } from "react-icons/md";
@@ -7,13 +8,20 @@ import { RiNotification2Fill } from "react-icons/ri";
 import { BiMessageDetail } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import  { setSearchingUserId } from '../../redux/Auth/AuthSlice';
-
+import { setCurrentUser} from "../../redux/User/UserSlice";
 import Logo from "../../helpers/images/logo.png";
 import "../Header/Header.css";
 import * as userServices from "../../services/UserService";
 
-function Header({ isOpen, setIsOpen, showIcon = true }) {
+function Header({ isOpen, setIsOpen, showIcon = true, handleShow }) {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   (async function () {
+  //     const user= await userServices.getUserService();
+  //     dispatch(setCurrentUser(user))
+  //   })();
+  // }, [ dispatch]);
+
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const [searchUser, setSearchUser] = useState("");
@@ -36,14 +44,22 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
   return (
     <>
       <nav className="header navbar navbar-expand-lg bg-white">
-        <div className="container-fluid">
+        <div className="container-fluid align-items-center">
           <a className="navbar-brand">
-            <div className="header-left">
+
+            <div className="header-left d-sm-none d-md-none d-lg-block icon-desktop">
               {showIcon && (
                 <i className="header-bar">
                   <HiOutlineMenuAlt1 onClick={handleOpenSidebar} />
                 </i>
               )}
+              <img src={Logo} alt="Logo" />
+            </div>
+
+            <div className="header-left d-sm-block d-md-block d-lg-none" onClick={handleShow}>
+                <i className="header-bar">
+                  <HiOutlineMenuAlt1 />
+                </i>
               <img src={Logo} alt="Logo" />
             </div>
           </a>
@@ -107,7 +123,7 @@ function Header({ isOpen, setIsOpen, showIcon = true }) {
                 <div className="circle">5</div>
                 <BiMessageDetail />
               </a>
-              <Link to={"/user"}>
+              <Link to={`/user/${currentUser.id}`}>
               <div>
                 <img
                  src={"http://localhost:39524/"+currentUser?.imageUrl}

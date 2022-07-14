@@ -41,7 +41,7 @@ const Index = () => {
 
     if (resetData.newPassword !== "" && resetData.passwordConfirm !== "") {
       try {
-        const resp = await authServices.ForgotPasswordService(resetData);
+        const resp = await authServices.ResetPasswordService(resetData);
         if (resp) {
           toast.success("You changed you password successfully!");
           navigate("/");

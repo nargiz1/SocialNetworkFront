@@ -4,7 +4,7 @@
   overflow: hidden;
   box-shadow: 0px 5px 8px -9px rgb(0 0 0 / 75%);
 }
-.post .post-top .post-events{
+.post .post-top .post-events {
   padding: 10px;
 }
 .post .post-top .post-events li:hover {
@@ -50,6 +50,7 @@
   text-align: center;
   border-radius: 100%;
   background-color: #f3f4f6;
+  cursor: pointer;
 }
 
 .comment p {
@@ -87,12 +88,29 @@
   overflow: hidden;
   margin-left: -8px;
 }
-.like-content{
+.like-content {
   font-size: 14px;
 }
-.comment-delete{
+.comment-delete {
   display: none;
 }
-.comment-area:hover .comment-delete{
+.comment-area:hover .comment-delete {
   display: block;
 }
+.modal-comment{
+  border-bottom: 1px solid #8080801c;
+  padding: 7px 11px;
+}
+.modal-comment-img {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  border-radius: 100%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.post-body .carousel-indicators{
+  display: none!important;
+}
+
+

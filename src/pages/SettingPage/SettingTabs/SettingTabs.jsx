@@ -85,8 +85,8 @@ const SettingTabs = () => {
             <h5 className="text-center mb-3">Update Profile</h5>
             <form onSubmit={handleUserSubmit}>
               <div className="row justify-content-center align-items-center">
-                <div className="col-6">
-                  <div className="register-sign-in">
+                <div className="col-md-10 col-lg-6">
+                  <div className="register-sign-in setting">
                     <div>
                       <input
                         type="text"
@@ -214,8 +214,8 @@ const SettingTabs = () => {
         <h5 className="text-center mb-3">Change Password</h5>
             <form onSubmit={handlePasswordSubmit}>
               <div className="row justify-content-center align-items-center">
-                <div className="col-6">
-                  <div className="register-sign-in">
+                <div className="col-md-10 col-lg-6">
+                  <div className="register-sign-in setting">
                     <div>
                       <input
                         type="email"

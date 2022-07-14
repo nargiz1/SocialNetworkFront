@@ -51,11 +51,11 @@ const Index = () => {
     <>
       <div className="container">
         <div className="row vh-100 justify-content-center align-items-center">
-          <div className="col-7">
+          <div className="col-md-6 col-lg-7">
           <img src={LoginSVG} alt="Login" className="w-100" />
           </div>
-          <div className="col-5">
-            <div className="register-sign-in pt-5">
+          <div className="col-md-6 col-lg-5">
+            <div className="register-sign-in sign-in pt-5">
               <h3 className="mb-4 text-center">Log In Now!</h3>
               <form>
                 <div className="mb-3">

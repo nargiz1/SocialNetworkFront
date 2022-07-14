@@ -57,7 +57,6 @@ const Index = () => {
                     <div className="message-by ms-3">
                       <div className="message-by-headline position-relative">
                         <h5>Stella Johnson</h5>
-                        <span>4 hours ago</span>
                       </div>
                       <p>laoreet dolore magna aliquam erat...</p>
                     </div>

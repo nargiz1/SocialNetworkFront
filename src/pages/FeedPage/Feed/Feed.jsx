@@ -1,21 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as postServices from "../../../services/PostService";
+import { setPosts } from "../../../redux/Post/PostSlice";
 import CreatePost from "../../../components/CreatePost/CreatePost";
 import Post from "../../../components/Post/Post";
 import "../Feed/Feed.css";
 
-function Feed({ likeTest, setLikeTest }) {
+function Feed() {
+  const dispatch = useDispatch();
+  const [likeTest, setLikeTest] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      const data = await postServices.getAllPostsService();
+      dispatch(setPosts(data));
+    })();
+  }, [likeTest, dispatch]);
 
   const data = useSelector((state) => state.post.posts);
-  const users = useSelector((state) => state.user.users);
-
-  console.log("all posts",data);
 
   return (
     <div className="feed">
       <CreatePost />
-
       {
         data && data.length > 0 ? (
           data.map((item, index) => (

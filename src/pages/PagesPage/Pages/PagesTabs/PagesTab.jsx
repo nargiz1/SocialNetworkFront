@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-
+import { setUsers } from "../../../../redux/User/UserSlice";
 import Carousel from "../../../../components/Carousel/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { setFollowing } from "../../../../redux/Follow/FollowSlice";
@@ -10,7 +10,7 @@ import * as followServices from "../../../../services/FollowService";
 import * as userServices from "../../../../services/UserService";
 
 export default function PagesTabs() {
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const following = useSelector((state) => state.follow.following);
@@ -20,17 +20,25 @@ export default function PagesTabs() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    (async function () {
+      const usersData = await userServices.getUsersService();
+      dispatch(setUsers(usersData));
+    })();
+  }, [dispatch]);
+
   const handleSubmit = async (id) => {
     const data = await followServices.followService(id);
-    const user=await userServices.getUserService();
+    const user = await userServices.getUserService();
     const following = await followServices.getSubscribesService(user);
     dispatch(setFollowing(following));
   };
   const handleUnfollow = async (id) => {
     const data = await followServices.unFollowService(id);
-    const user=await userServices.getUserService();
+    const user = await userServices.getUserService();
     const following = await followServices.getSubscribesService(user);
-    dispatch(setFollowing(following));    
+    dispatch(setFollowing(following));
   };
 
   return (
@@ -62,7 +70,7 @@ export default function PagesTabs() {
                   <div className="pages-card-body">
                     <h5 className="pages-card-title">{user.fullName}</h5>
                     <Link
-                      to={`user/${user.id}`}
+                      to={`/user/${user.id}`}
                       key={index}
                       className="text-decoration-none"
                     >
@@ -76,7 +84,7 @@ export default function PagesTabs() {
                           className="following-button"
                           onClick={(e) => {
                             handleUnfollow(user.id);
-                            e.stopPropagation();
+                            // e.stopPropagation();
                           }}
                         >
                           Following

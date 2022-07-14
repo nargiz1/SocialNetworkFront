@@ -1,30 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import { Link, useParams } from "react-router-dom";
-import { AiFillHeart, AiOutlineLike, AiOutlineHeart } from "react-icons/ai";
-import { TbWorld } from "react-icons/tb";
-import { MdOutlineWork } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { FaBirthdayCake, FaUniversity } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserPosts } from "../../../redux/Post/PostSlice";
+import { setFollowers,setFollowing } from "../../../redux/Follow/FollowSlice";
+import {  setUserById } from "../../../redux/User/UserSlice";
 import * as followServices from "../../../services/FollowService";
-
+import * as postServices from "../../../services/PostService";
+import * as userServices from "../../../services/UserService";
 import Tabs from "../../../components/Tabs/Tabs";
 import TabPanel from "../../../components/Tabs/TabPanel";
 import CreatePost from "../../../components/CreatePost/CreatePost";
 import Post from "../../../components/Post/Post";
+import { AiFillHeart} from "react-icons/ai";
+import { TbWorld } from "react-icons/tb";
+import { MdOutlineWork } from "react-icons/md";
+import { FaBirthdayCake, FaUniversity } from "react-icons/fa";
 
 import "../../UserPage/index.css";
 
-const Index = () => {
+const Index = ({user}) => {
   const [value, setValue] = React.useState(0);
-  let userId = useParams();
+  const dispatch = useDispatch();
+  const {userId}=useParams();
+  const [likeTest, setLikeTest] = useState(false);
+  
+
+  useEffect(() => {
+    (async function () {
+      const user=await userServices.getUserByIdService(userId);
+      const userPosts = await postServices.getUserPostsService(user); 
+      const following =await followServices.getSubscribesService(user);
+      const followers =await followServices.getFollowersService(user);
+      dispatch(setUserById(user));
+      dispatch(setUserPosts(userPosts));
+      dispatch(setFollowers(followers));
+      dispatch(setFollowing(following));
+    })();
+  }, [userId, dispatch]);
+
+  useEffect(() => {
+    (async function () {
+      const user=await userServices.getUserByIdService(userId);
+      const userPosts = await postServices.getUserPostsService(user); 
+    })();
+  }, [likeTest, dispatch]);
+  
+  const userById = useSelector((state) => state.user.userById);
+  const userPostsData = useSelector((state) => state.post.userPosts);
+  const followersData = useSelector((state) => state.follow.followers);
+  const followingData = useSelector((state) => state.follow.following);
+  
+
+  
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  useEffect(() => {
-    console.log("Params", userId);
-  }, [userId]);
+
 
   const deleteFollower = async (e, id) => {
     e.preventDefault();
@@ -35,12 +69,8 @@ const Index = () => {
     await followServices.unFollowService(id);
   };
 
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const userPostsData = useSelector((state) => state.post.userPosts);
-  const followersData = useSelector((state) => state.follow.followers);
-  const followingData = useSelector((state) => state.follow.following);
-  console.log("followersData",followersData);
-  console.log("followingData",followingData);
+
+
   return (
     <>
       <div className="tabs-holder">
@@ -53,15 +83,15 @@ const Index = () => {
       <div className="container">
         <TabPanel value={value} index={0}>
           <div className="row d-flex justify-content-center">
-            <div className="col-md-6">
+            <div className="col-lg-6 col-md-8">
               <CreatePost />
               {userPostsData && userPostsData.length > 0
                 ? userPostsData.map((item, index) => (
-                    <Post post={item} key={index} />
+                    <Post post={item} key={index} likeTest={likeTest} setLikeTest={setLikeTest}/>
                   ))
                 : "Userin hec bir postu yoxdu"}
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-lg-4">
               <div className="about-list">
                 <h3>About</h3>
                 <ul className="about text-capitalize">
@@ -70,7 +100,7 @@ const Index = () => {
                       <TbWorld style={{ color: "#3B82F6" }} />
                     </i>
                     Country |
-                    <span className="about-data">{currentUser.country}</span>
+                    <span className="about-data">{userById.country}</span>
                   </li>
                   <li>
                     <i>
@@ -79,7 +109,7 @@ const Index = () => {
                     birth date |
                     <span className="about-data">
                       <Moment format="DD/MM/YYYY">
-                        {currentUser.birthDate}
+                        {userById.birthDate}
                       </Moment>
                     </span>
                   </li>
@@ -88,14 +118,14 @@ const Index = () => {
                       <FaUniversity style={{ color: "#10B981" }} />
                     </i>
                     education |
-                    <span className="about-data">{currentUser.education}</span>
+                    <span className="about-data">{userById.education}</span>
                   </li>
                   <li>
                     <i>
                       <MdOutlineWork style={{ color: "#F59E0B" }} />
                     </i>
                     occupation |
-                    <span className="about-data">{currentUser.occupation}</span>
+                    <span className="about-data">{userById.occupation}</span>
                   </li>
                   <li>
                     <i>
@@ -103,7 +133,7 @@ const Index = () => {
                     </i>
                     Relationship Status |
                     <span className="about-data">
-                      {currentUser.relationshipStatus}
+                      {userById.relationshipStatus}
                     </span>
                   </li>
                 </ul>
@@ -240,7 +270,7 @@ const Index = () => {
                                       src={
                                         "http://localhost:39524/" + img?.imageUrl
                                       }
-                                      className="w-100"
+                                      className="w-100 photos"
                                     />
                                   </div>
                                 </div>

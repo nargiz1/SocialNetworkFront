@@ -97,3 +97,22 @@ export async function coverPicService(payload) {
     console.log("err: ", error);
   }
 }
+export async function getUserByIdService(userId) {
+  try {
+    return await (
+      await Axios.get(`/api/User/userById`,{
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        params:{
+          "userId":`${userId}`,
+        }
+      })
+      ).data;
+  } catch (error) {
+    console.log("err: ", error);
+  }
+};
+

@@ -1,21 +1,15 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import Pages from "./Pages/Pages";
-import TopPages from "./TopPages/TopPages";
-
-import { useSelector } from "react-redux";
 
 const Index = () => {
   return (
     <Layout>
     <div className="container pt-4">
       <div className="row justify-content-center align-items-center">
-        <div className="col-md-8">
+        <div className="col-mg-12 col-lg-8">
           <Pages />
         </div>
-        {/* <div className="col-md-4">
-          <TopPages />
-        </div> */}
       </div>
     </div>
     </Layout>

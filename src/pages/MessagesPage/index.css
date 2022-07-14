@@ -30,13 +30,7 @@
   font-weight: 600;
   line-height: 23px;
 }
-.message-content span {
-  font-size: 13px;
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  color: #666;
-}
+
 .message-content p {
   font-size: 14px;
   color: #888888;

@@ -79,7 +79,7 @@ ul.about li {
   text-align: left;
   padding-left: 0px;
   margin: 7px;
-  font-size: 16px;
+  font-size: 15px;
 }
 ul.about li i {
   font-size: 18px;
@@ -100,6 +100,12 @@ ul.about li i {
 .user-friends .friend-card .friend-card-img {
   border-radius: 8px;
   overflow: hidden;
+}
+.user-friends .friend-card .friend-card-img img.photos {
+  height: 160px;
+}
+.user-friends .friend-card .friend-card-img video {
+  height: 90px;
 }
 .user-friends .friend-card .friend-card-info {
   padding: 11px 0px;
@@ -134,7 +140,14 @@ ul.about li i {
 .cover-upload{
   top: 10px;
   right: 20px;
+  display: none;
+}
+.profile-banner:hover .cover-upload{
   display: block;
 }
-/* .profile-banner:hover .cover-upload{
-} */
+@media only screen and (max-width: 1024px) {
+  .user-friends .friend-card .friend-card-img img.photos {
+  height: 115px;
+  }
+ }
+ 

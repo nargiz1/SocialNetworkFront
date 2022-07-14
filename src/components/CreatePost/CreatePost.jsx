@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import * as postServices from "../../services/PostService";
+import { useDispatch } from "react-redux";
 import { FaUserAlt } from "react-icons/fa";
 import { HiOutlinePhotograph, HiOutlineLocationMarker } from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
 import "./CreatePost.css";
-
+import { setPosts } from "../../redux/Post/PostSlice";
 // Additional Libraries
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
-  const [collapseModal,setCollapseModal]=useState(false);
   const [createPost, setCreatePost] = useState({
     Text: "",
     IsPrivate: false,
@@ -25,7 +26,6 @@ const CreatePost = () => {
     setCreatePost({ ...createPost, [name]: value });
   };
   const handleSubmit = async (e) => {
-    setCollapseModal(true);
     e.preventDefault();
     const formData = new FormData();
     const date = new Date();
@@ -33,44 +33,42 @@ const CreatePost = () => {
     formData.append("Text", createPost.Text);
     formData.append("IsPrivate", createPost.IsPrivate);
     formData.append("Location", createPost.Location);
-    Array.from(createPost.ImageFiles).forEach((ImageFile)=>
-      formData.append("ImageFiles",ImageFile)
+    Array.from(createPost.ImageFiles).forEach((ImageFile) =>
+      formData.append("ImageFiles", ImageFile)
     );
-    Array.from(createPost.VideoFiles).forEach((VideoFile)=>
-      formData.append("VideoFiles",VideoFile)
-    );
+    Array.from(createPost.VideoFiles).forEach((VideoFile) =>
+      formData.append("VideoFiles", VideoFile)
+      );
+    console.log("videof",createPost.ImageFiles);
     formData.append("PublicationTime", createPost.PublicationTime);
-
-    console.log(formData);
-
-       await postServices.createPostService(formData);
+   
+     await postServices.createPostService(formData);
+    const data = await postServices.getAllPostsService();
+    dispatch(setPosts(data));
   };
 
   return (
     <>
       <div className="createPost p-3">
         <div className="createPost-top">
-        
           <Link to={"/user"}>
-              <div>
-                <img
-                 src={"http://localhost:39524/"+currentUser?.imageUrl}
-                  alt="profile-photo"
-                  className="post-profile"
-
-                />
+            <div>
+              <img
+                src={"http://localhost:39524/" + currentUser?.imageUrl}
+                alt="profile-photo"
+                className="post-profile"
+              />
             </div>
-              </Link>
-          
+          </Link>
+
           <input
             className="createPost-input w-100"
             placeholder="Crate your post..."
             data-bs-toggle="modal"
             data-bs-target="#exampleModal1"
           />
-{
-  collapseModal?(null):(
-<form>
+
+          <form>
             <div
               className="modal fade create"
               id="exampleModal1"
@@ -81,7 +79,6 @@ const CreatePost = () => {
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">
-                
                     <button
                       type="button"
                       className="btn-close"
@@ -113,8 +110,8 @@ const CreatePost = () => {
                       <div className="text-center mb-3">Add to your post</div>
                       <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex">
-                           <div className="me-2">
-                           <label htmlFor="photo">
+                          <div className="me-2">
+                            <label htmlFor="photo">
                               <div className="photo-icon">
                                 <HiOutlinePhotograph />
                               </div>
@@ -140,7 +137,6 @@ const CreatePost = () => {
                             <input
                               type="file"
                               id="video"
-                             
                               className="custom-file-upload d-none"
                               name="VideoFiles"
                               multiple
@@ -178,8 +174,6 @@ const CreatePost = () => {
                             }
                           />
                         </div>
-
-                        
                       </div>
 
                       <div>
@@ -216,7 +210,6 @@ const CreatePost = () => {
                             }
                           />
                         </div> */}
-                      
                       </div>
                     </div>
                   </div>
@@ -233,9 +226,6 @@ const CreatePost = () => {
               </div>
             </div>
           </form>
-  )
-}
-          
         </div>
 
         {/* <div className="createPost-bottom mt-3 d-flex">

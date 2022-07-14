@@ -36,15 +36,17 @@ function App() {
   
   useEffect(() => {
     (async function() {
-      const user=await userServices.getUserService();
-      const users = await userServices.getUsersService();
-      const followers = await followServices.getFollowersService(user);
-      const following = await followServices.getSubscribesService(user);
-
-      dispatch(setFollowers(followers));
-      dispatch(setFollowing(following));
-      dispatch(setUsers(users));
-      dispatch(setCurrentUser(user));
+      if (token) {
+        const user=await userServices.getUserService();
+        const users = await userServices.getUsersService();
+        const followers = await followServices.getFollowersService(user);
+        const following = await followServices.getSubscribesService(user);
+        dispatch(setFollowers(followers));
+        dispatch(setFollowing(following));
+        dispatch(setUsers(users));
+        dispatch(setCurrentUser(user));
+      }
+      
     })();
   }, [dispatch])
   return (
@@ -63,7 +65,7 @@ function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/videos" element={<VideosPage />} />
           <Route path="/setting" element={<SettingPage />} />
-          <Route path="/user" element={<UserPage />} />
+          <Route path="/user/:userId" element={<UserPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
@@ -73,10 +75,6 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget" element={<ForgetPasswordPage />} />
-
-
-        
-
           <Route path="*" element={<Navigate to="/login" replace />} />
         </>
       )}
