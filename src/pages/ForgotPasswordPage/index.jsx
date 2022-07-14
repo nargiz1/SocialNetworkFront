@@ -26,7 +26,6 @@ const Index = () => {
     if (forgotData !== "") {
       try {
         const resp = await authServices.ForgotPasswordService(forgotData);
-        console.log('FP resp',resp);
         if (resp) {
           sessionStorage.setItem("resetToken", resp);
           sessionStorage.setItem("currentMail", forgotData);
@@ -36,13 +35,14 @@ const Index = () => {
       } catch (error) {
         console.log("error: ", error);
       }
+      navigate("/")
     }
   };
   return (
     <div className="container">
       <div className="row vh-100 justify-content-center align-items-center">
-        <div className="col-6">
-          <div className="register-sign-in pt-5">
+        <div className="col-lg-6 col-md-6 col-sm-12">
+          <div className="register-sign-in sign-in pt-5">
             <div className="mb-4 text-center">
             <h3>Find Your Account</h3>
             <p>Please enter your email to search for your account.</p>

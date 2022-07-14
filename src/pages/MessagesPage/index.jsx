@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FiEdit, FiSend } from "react-icons/fi";
 import { RiDeleteBinLine } from "react-icons/ri";
-
+import Button from "react-bootstrap/Button";
+import ModalBootstrapt from "react-bootstrap/Modal";
 import Layout from "../../components/Layout";
 import "./index.css";
 import * as userServices from "../../services/UserService";
-import { AiTwotoneEdit } from "react-icons/ai";
+import { AiOutlinePlus, AiTwotoneEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { MdOutlineIosShare } from "react-icons/md";
+import { Modal } from "@mui/material";
+import { HiOutlinePhotograph } from "react-icons/hi";
 
 const Index = () => {
   const data = useSelector((state) => state.user.currentUser);
@@ -16,6 +19,10 @@ const Index = () => {
   const [userData, setUserData] = useState([]);
   const [showData, setShowData] = useState(false);
   const [checked, setChecked] = React.useState(true);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,9 +40,61 @@ const Index = () => {
             <div className="message-inbox border-end">
               <div className="chat d-flex justify-content-between border-bottom">
                 <h3>Chats</h3>
-                <a href="#">
-                  <FiEdit />
-                </a>
+                <>
+                  <div onClick={handleShow}>
+                    <FiEdit />
+                  </div>
+                  <ModalBootstrapt show={show} onHide={handleClose}>
+                    <ModalBootstrapt.Header closeButton>
+                      <ModalBootstrapt.Title>
+                        Create Group
+                      </ModalBootstrapt.Title>
+                    </ModalBootstrapt.Header>
+                    <ModalBootstrapt.Body>
+                      <form>
+                        <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <input
+                            required
+                            className="form-control w-100 shadow-none border-0"
+                            type="text"
+                            name="email"
+                            placeholder="Group name..."
+                            // onChange={(e) =>
+                            //   handleChange(e.target.name, e.target.value)
+                            // }
+                          />
+                        </div>
+                        <div className="profile-upload me-3">
+                          <label htmlFor="photo">
+                            <div className="user-profile-upload">
+                              <HiOutlinePhotograph className="text-danger" />
+                            </div>
+                          </label>
+                          <input
+                            type="file"
+                            accept="images/*"
+                            id="photo"
+                            className="custom-file-upload d-none"
+                            name="ImageFile"
+                            // onChange={(e) =>{
+                            //   e.stopPropagation();
+                            //   handleProfileChange("ImageFile", e.target.files)
+                            // }}
+                          />
+                        </div>
+
+                        </div>
+                   
+                      </form>
+                    </ModalBootstrapt.Body>
+                    <ModalBootstrapt.Footer>
+                      <Button variant="primary" onClick={handleClose}>
+                        Create
+                      </Button>
+                    </ModalBootstrapt.Footer>
+                  </ModalBootstrapt>
+                </>
               </div>
               <div className="chat-wrapper">
                 <div className="message-content">
@@ -149,35 +208,44 @@ const Index = () => {
                                       //   <div className="add-member-btn member-btn">+</div>
                                       // </div>
                                       <div className="member-wrapper">
-                                      <div key={index} className="d-flex align-items-center justify-content-between">
-                                          <Link to={`/user/${user.id}`} className="text-decoration-none text-black">
-                                          <div className="d-flex align-items-center">
-                                            <div>
-                                              <a
-                                                href="#"
-                                                className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                                              >
-                                                <div>
-                                               <img
-                                                    className="profile-photo"
-                                                    src={require("../../helpers/images/avatar2.jpg")}
-                                                    alt="profile-photo"
-                                                  /> 
-                                                     {/* <img
+                                        <div
+                                          key={index}
+                                          className="d-flex align-items-center justify-content-between"
+                                        >
+                                          <Link
+                                            to={`/user/${user.id}`}
+                                            className="text-decoration-none text-black"
+                                          >
+                                            <div className="d-flex align-items-center">
+                                              <div>
+                                                <a
+                                                  href="#"
+                                                  className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                                >
+                                                  <div>
+                                                    <img
+                                                      className="profile-photo"
+                                                      src={require("../../helpers/images/avatar2.jpg")}
+                                                      alt="profile-photo"
+                                                    />
+                                                    {/* <img
                                                     className="profile-photo"
                                                     src={"http://localhost:39524/" + user?.imageUrl}
                                                     alt="profile-photo"
                                                   /> */}
-                                                </div>
-                                              </a>
+                                                  </div>
+                                                </a>
+                                              </div>
+                                              <div className="ms-2">
+                                                {user.fullName}
+                                              </div>
                                             </div>
-                                            <div className="ms-2">{user.fullName}</div>
-                                          </div>
                                           </Link>
-                                       
-                                          <div className="add-member-btn member-btn">+</div>
+
+                                          <div className="add-member-btn member-btn">
+                                            +
+                                          </div>
                                         </div>
-                                    
                                       </div>
                                     ))
                                   ) : (
@@ -191,51 +259,61 @@ const Index = () => {
                             <label htmlFor="tab2-2">Search</label>
                             <input id="tab2-2" name="tabs-two" type="radio" />
                             <div className="member-wrapper">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <Link to={"/user"} className="text-decoration-none text-black">
-                                <div className="d-flex align-items-center">
-                                  <div>
-                                    <a
-                                      href="#"
-                                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                                    >
-                                      <div>
-                                        <img
-                                          className="profile-photo"
-                                          src={require("../../helpers/images/avatar2.jpg")}
-                                          alt="profile-photo"
-                                        />
-                                      </div>
-                                    </a>
+                              <div className="d-flex align-items-center justify-content-between">
+                                <Link
+                                  to={"/user"}
+                                  className="text-decoration-none text-black"
+                                >
+                                  <div className="d-flex align-items-center">
+                                    <div>
+                                      <a
+                                        href="#"
+                                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                      >
+                                        <div>
+                                          <img
+                                            className="profile-photo"
+                                            src={require("../../helpers/images/avatar2.jpg")}
+                                            alt="profile-photo"
+                                          />
+                                        </div>
+                                      </a>
+                                    </div>
+                                    <div className="ms-2">Bashir Azizov</div>
                                   </div>
-                                  <div className="ms-2">Bashir Azizov</div>
-                                </div>
                                 </Link>
-                             
-                                <div className="remove-member-btn member-btn">-</div>
+
+                                <div className="remove-member-btn member-btn">
+                                  -
+                                </div>
                               </div>
                               <div className="d-flex align-items-center justify-content-between">
-                                <Link to={"/user"} className="text-decoration-none text-black">
-                                <div className="d-flex align-items-center">
-                                  <div>
-                                    <a
-                                      href="#"
-                                      className="d-flex align-items-center mb-3 text-dark text-decoration-none"
-                                    >
-                                      <div>
-                                        <img
-                                          className="profile-photo"
-                                          src={require("../../helpers/images/avatar2.jpg")}
-                                          alt="profile-photo"
-                                        />
-                                      </div>
-                                    </a>
+                                <Link
+                                  to={"/user"}
+                                  className="text-decoration-none text-black"
+                                >
+                                  <div className="d-flex align-items-center">
+                                    <div>
+                                      <a
+                                        href="#"
+                                        className="d-flex align-items-center mb-3 text-dark text-decoration-none"
+                                      >
+                                        <div>
+                                          <img
+                                            className="profile-photo"
+                                            src={require("../../helpers/images/avatar2.jpg")}
+                                            alt="profile-photo"
+                                          />
+                                        </div>
+                                      </a>
+                                    </div>
+                                    <div className="ms-2">Bashir Azizov</div>
                                   </div>
-                                  <div className="ms-2">Bashir Azizov</div>
-                                </div>
                                 </Link>
-                             
-                                <div className="remove-member-btn member-btn">-</div>
+
+                                <div className="remove-member-btn member-btn">
+                                  -
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -295,7 +373,7 @@ const Index = () => {
               </div>
               <div className="send-area border-top">
                 <div className="row d-flex justify-content-between align-items-center">
-                <div className="col-md-1">
+                  <div className="col-md-1">
                     <button className="share-button">
                       <MdOutlineIosShare />
                     </button>

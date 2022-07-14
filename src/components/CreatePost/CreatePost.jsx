@@ -51,7 +51,7 @@ const CreatePost = () => {
     <>
       <div className="createPost p-3">
         <div className="createPost-top">
-          <Link to={"/user"}>
+          <Link to={`/user/${currentUser.id}`}>
             <div>
               <img
                 src={"http://localhost:39524/" + currentUser?.imageUrl}

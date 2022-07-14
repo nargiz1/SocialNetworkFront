@@ -28,7 +28,7 @@ export default function PagesTabs() {
     })();
   }, [dispatch]);
 
-  const handleSubmit = async (id) => {
+  const handleFollow = async (id) => {
     const data = await followServices.followService(id);
     const user = await userServices.getUserService();
     const following = await followServices.getSubscribesService(user);
@@ -93,7 +93,7 @@ export default function PagesTabs() {
                         <button
                           className="follow-button"
                           onClick={(e) => {
-                            handleSubmit(user.id);
+                            handleFollow(user.id);
                             e.stopPropagation();
                           }}
                         >

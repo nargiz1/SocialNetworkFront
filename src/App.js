@@ -64,9 +64,8 @@ function App() {
           <Route path="/photos" element={<PhotosPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/videos" element={<VideosPage />} />
-          <Route path="/setting" element={<SettingPage />} />
+          <Route path="/setting/:userId" element={<SettingPage />} />
           <Route path="/user/:userId" element={<UserPage />} />
-
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       )}

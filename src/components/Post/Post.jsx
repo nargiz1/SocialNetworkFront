@@ -194,7 +194,7 @@ const Post = ({ post, likeTest, setLikeTest }) => {
            
           </Carousel>
           {post?.text !== null ? (
-              <p className="ps-3 pe-3 text-start">{post?.text}</p>
+              <p className="ps-3 pe-3 text-start mt-3">{post?.text}</p>
             ) : null}
 
           <div className="post-body-bottom p-3">

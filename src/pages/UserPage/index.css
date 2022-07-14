@@ -145,9 +145,25 @@ ul.about li i {
 .profile-banner:hover .cover-upload{
   display: block;
 }
+.MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller #simple-tab-5{
+  display: none;
+}
+
 @media only screen and (max-width: 1024px) {
   .user-friends .friend-card .friend-card-img img.photos {
   height: 115px;
+  }
+ }
+ @media only screen and (max-width: 540px) {
+  .css-19kzrtu{
+  padding: 0px!important;
+  margin-top: 24px!important;
+  }
+  .MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller{
+    overflow: auto!important;
+  }
+  .MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller #simple-tab-5{
+    display: block;
   }
  }
  

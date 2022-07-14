@@ -3,8 +3,8 @@ import Moment from "react-moment";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserPosts } from "../../../redux/Post/PostSlice";
-import { setFollowers,setFollowing } from "../../../redux/Follow/FollowSlice";
-import {  setUserById } from "../../../redux/User/UserSlice";
+import { setFollowers, setFollowing } from "../../../redux/Follow/FollowSlice";
+import { setUserById } from "../../../redux/User/UserSlice";
 import * as followServices from "../../../services/FollowService";
 import * as postServices from "../../../services/PostService";
 import * as userServices from "../../../services/UserService";
@@ -12,26 +12,26 @@ import Tabs from "../../../components/Tabs/Tabs";
 import TabPanel from "../../../components/Tabs/TabPanel";
 import CreatePost from "../../../components/CreatePost/CreatePost";
 import Post from "../../../components/Post/Post";
-import { AiFillHeart} from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
 import { MdOutlineWork } from "react-icons/md";
 import { FaBirthdayCake, FaUniversity } from "react-icons/fa";
 
 import "../../UserPage/index.css";
 
-const Index = ({user}) => {
+const Index = ({ user }) => {
   const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
-  const {userId}=useParams();
+  const { userId } = useParams();
   const [likeTest, setLikeTest] = useState(false);
-  
 
   useEffect(() => {
     (async function () {
-      const user=await userServices.getUserByIdService(userId);
-      const userPosts = await postServices.getUserPostsService(user); 
-      const following =await followServices.getSubscribesService(user);
-      const followers =await followServices.getFollowersService(user);
+      const user = await userServices.getUserByIdService(userId);
+      const currentUser= await userServices.getUserService();
+      const userPosts = await postServices.getUserPostsService(user);
+      const following = await followServices.getSubscribesService(user);
+      const followers = await followServices.getFollowersService(user);
       dispatch(setUserById(user));
       dispatch(setUserPosts(userPosts));
       dispatch(setFollowers(followers));
@@ -41,24 +41,21 @@ const Index = ({user}) => {
 
   useEffect(() => {
     (async function () {
-      const user=await userServices.getUserByIdService(userId);
-      const userPosts = await postServices.getUserPostsService(user); 
+      const user = await userServices.getUserByIdService(userId);
+      const userPosts = await postServices.getUserPostsService(user);
+      dispatch(setUserPosts(userPosts));
     })();
   }, [likeTest, dispatch]);
-  
+
   const userById = useSelector((state) => state.user.userById);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const userPostsData = useSelector((state) => state.post.userPosts);
   const followersData = useSelector((state) => state.follow.followers);
   const followingData = useSelector((state) => state.follow.following);
-  
-
-  
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
 
   const deleteFollower = async (e, id) => {
     e.preventDefault();
@@ -69,15 +66,20 @@ const Index = ({user}) => {
     await followServices.unFollowService(id);
   };
 
-
-
   return (
     <>
       <div className="tabs-holder">
         <Tabs
           activeTab={value}
           handleTabChange={handleChange}
-          tabs={["Timeline", "Followers", "Following", "Photos", "Videos"]}
+          tabs={[
+            "Timeline",
+            "Followers",
+            "Following",
+            "Photos",
+            "Videos",
+            "About",
+          ]}
         ></Tabs>
       </div>
       <div className="container">
@@ -85,61 +87,87 @@ const Index = ({user}) => {
           <div className="row d-flex justify-content-center">
             <div className="col-lg-6 col-md-8">
               <CreatePost />
-              {userPostsData && userPostsData.length > 0
-                ? userPostsData.map((item, index) => (
-                    <Post post={item} key={index} likeTest={likeTest} setLikeTest={setLikeTest}/>
-                  ))
-                : "Userin hec bir postu yoxdu"}
+              {userPostsData && userPostsData.length > 0 ? (
+                userPostsData.map((item, index) => (
+                  <Post
+                    post={item}
+                    key={index}
+                    likeTest={likeTest}
+                    setLikeTest={setLikeTest}
+                  />
+                ))
+              ) : (
+                <div className="mt-3">User doesn't have any photo</div>
+              )}
             </div>
             <div className="col-md-4 col-lg-4">
               <div className="about-list">
                 <h3>About</h3>
                 <ul className="about text-capitalize">
-                  <li>
-                    <i>
-                      <TbWorld style={{ color: "#3B82F6" }} />
-                    </i>
-                    Country |
-                    <span className="about-data">{userById.country}</span>
-                  </li>
-                  <li>
-                    <i>
-                      <FaBirthdayCake style={{ color: "#EC4899" }} />
-                    </i>
-                    birth date |
-                    <span className="about-data">
-                      <Moment format="DD/MM/YYYY">
-                        {userById.birthDate}
-                      </Moment>
-                    </span>
-                  </li>
-                  <li>
-                    <i>
-                      <FaUniversity style={{ color: "#10B981" }} />
-                    </i>
-                    education |
-                    <span className="about-data">{userById.education}</span>
-                  </li>
-                  <li>
-                    <i>
-                      <MdOutlineWork style={{ color: "#F59E0B" }} />
-                    </i>
-                    occupation |
-                    <span className="about-data">{userById.occupation}</span>
-                  </li>
-                  <li>
-                    <i>
-                      <AiFillHeart style={{ color: "#EF4444" }} />
-                    </i>
-                    Relationship Status |
-                    <span className="about-data">
-                      {userById.relationshipStatus}
-                    </span>
-                  </li>
+                  {userById?.country !== null ? (
+                    <li>
+                      <i>
+                        <TbWorld style={{ color: "#3B82F6" }} />
+                      </i>
+                      Country |
+                      <span className="about-data">{userById.country}</span>
+                    </li>
+                  ) : null}
+                  {userById?.birthDate !== null ? (
+                    <li>
+                      <i>
+                        <FaBirthdayCake style={{ color: "#EC4899" }} />
+                      </i>
+                      birth date |
+                      <span className="about-data">
+                        <Moment format="DD/MM/YYYY">
+                          {userById.birthDate}
+                        </Moment>
+                      </span>
+                    </li>
+                  ) : null}
+                  {userById?.education !== null ? (
+                    <li>
+                      <i>
+                        <FaUniversity style={{ color: "#10B981" }} />
+                      </i>
+                      education |
+                      <span className="about-data">{userById.education}</span>
+                    </li>
+                  ) : null}
+                  {
+                    userById?.occupation !== null?(
+                      <li>
+                      <i>
+                        <MdOutlineWork style={{ color: "#F59E0B" }} />
+                      </i>
+                      occupation |
+                      <span className="about-data">{userById.occupation}</span>
+                    </li>
+
+                    ):null
+                  }
+                  {
+                    userById?.relationshipStatus !== null?(
+                      <li>
+                      <i>
+                        <AiFillHeart style={{ color: "#EF4444" }} />
+                      </i>
+                      Relationship Status |
+                      <span className="about-data">
+                        {userById.relationshipStatus}
+                      </span>
+                    </li>
+                    ):null
+                  }
                 </ul>
-                <Link to={"/setting"}>
-                  <button className="btn btn-primary w-100 mt-3">Edit</button>
-                </Link>
+                {
+                  userById.id==currentUser.id?(
+                    <Link to={`/setting/${userById}`}>
+                    <button className="btn btn-primary w-100 mt-3">Edit</button>
+                  </Link>
+                  ):null
+                }
               </div>
             </div>
           </div>
@@ -259,26 +287,25 @@ const Index = ({user}) => {
               <div className="user-friends">
                 <div className="row">
                   {userPostsData && userPostsData.length > 0
-                    ? (
-                      userPostsData.map((post) =>
+                    ? userPostsData.map((post) =>
                         post.images || post.images.length > 0
-                          ?( post.images.map((img,index) => (
+                          ? post.images.map((img, index) => (
                               <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">
                                   <div className="friend-card-img">
                                     <img
                                       src={
-                                        "http://localhost:39524/" + img?.imageUrl
+                                        "http://localhost:39524/" +
+                                        img?.imageUrl
                                       }
                                       className="w-100 photos"
                                     />
                                   </div>
                                 </div>
                               </div>
-                            )))
+                            ))
                           : "You don't have any photo"
                       )
-                    )
                     : null}
                 </div>
               </div>
@@ -297,10 +324,7 @@ const Index = ({user}) => {
                               <div className="col-md-4" key={index}>
                                 <div className="friend-card mb-3">
                                   <div className="friend-card-img">
-                                    <video
-                                      controls
-                                      className="w-100"
-                                    >
+                                    <video controls className="w-100">
                                       <source
                                         src={
                                           "http://localhost:39524/" +
@@ -318,6 +342,57 @@ const Index = ({user}) => {
                     : null}
                 </div>
               </div>
+            </div>
+          </div>
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <div className="col-md-4 col-lg-4">
+            <div className="about-list">
+              <h3>About</h3>
+              <ul className="about text-capitalize">
+                <li>
+                  <i>
+                    <TbWorld style={{ color: "#3B82F6" }} />
+                  </i>
+                  Country |
+                  <span className="about-data">{userById.country}</span>
+                </li>
+                <li>
+                  <i>
+                    <FaBirthdayCake style={{ color: "#EC4899" }} />
+                  </i>
+                  birth date |
+                  <span className="about-data">
+                    <Moment format="DD/MM/YYYY">{userById.birthDate}</Moment>
+                  </span>
+                </li>
+                <li>
+                  <i>
+                    <FaUniversity style={{ color: "#10B981" }} />
+                  </i>
+                  education |
+                  <span className="about-data">{userById.education}</span>
+                </li>
+                <li>
+                  <i>
+                    <MdOutlineWork style={{ color: "#F59E0B" }} />
+                  </i>
+                  occupation |
+                  <span className="about-data">{userById.occupation}</span>
+                </li>
+                <li>
+                  <i>
+                    <AiFillHeart style={{ color: "#EF4444" }} />
+                  </i>
+                  Relationship Status |
+                  <span className="about-data">
+                    {userById.relationshipStatus}
+                  </span>
+                </li>
+              </ul>
+              <Link to={"/setting"}>
+                <button className="btn btn-primary w-100 mt-3">Edit</button>
+              </Link>
             </div>
           </div>
         </TabPanel>

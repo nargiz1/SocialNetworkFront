@@ -18,6 +18,6 @@ export const followSlice = createSlice({
   }
 });
 
-export const { setFollowers,setFollowing } = followSlice.actions;
+export const { setFollowers, setFollowing } = followSlice.actions;
 
 export default followSlice.reducer;

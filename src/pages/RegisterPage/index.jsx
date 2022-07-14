@@ -6,21 +6,19 @@ import * as authServices from "../../services/AuthService";
 import RegisterSVG from "../../helpers/images/register.svg";
 
 const Index = () => {
-
   const [registerData, setRegisterData] = useState({
     fullName: "",
     userName: "",
     email: "",
     password: "",
-    passwordConfirm: ""
-  });  
+    passwordConfirm: "",
+  });
   const navigate = useNavigate();
   const backToLogin = {
     textDecoration: "none",
     color: "#393939",
-    fontStyle:"italic"
+    fontStyle: "italic",
   };
-
 
   const handleChange = (name, value) => {
     setRegisterData({ ...registerData, [name]: value });
@@ -28,31 +26,41 @@ const Index = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (registerData.fullName !== "" && registerData.userName !== "" && registerData.email !== "" && registerData.password !== "" && registerData.passwordConfirm !== "") {
+    if (
+      registerData.fullName !== "" &&
+      registerData.userName !== "" &&
+      registerData.email !== "" &&
+      registerData.password !== "" &&
+      registerData.passwordConfirm !== ""
+    ) {
       try {
         const resp = await authServices.RegisterService(registerData);
         if (resp) {
-            toast.success("User was registered successfully,check your email address!");
-            navigate("/login");
+          toast.success(
+            "User was registered successfully,check your email address!"
+          );
+          navigate("/login");
         } else {
-            toast.error("It occurs any error, please, try again!");
+          toast.error("It occurs any error, please, try again!");
         }
       } catch (error) {
-        console.log('error: ', error);
+        console.log("error: ", error);
       }
     }
-  }
+  };
 
   return (
     <div className="container">
-      <div className="row justify-content-center align-items-center p-5">
-      <div className="col-7">
-          <img src={RegisterSVG} alt="Register" className="w-100" />
+      <div className="row justify-content-center align-items-center mt-3">
+        <div className="col-lg-7">
+          <div className="register-img">
+            <img src={RegisterSVG} alt="Register" className="w-100" />
           </div>
-          <div className="col-5">
-            <div className="register-sign-in pt-5">
-              <h3 className="mb-4 text-center">Welcome!</h3>
-              <form>
+        </div>
+        <div className="col-sm-12 col-lg-5 register-form">
+          <div className="register-sign-in register pt-lg-5">
+            <h3 className="mb-4 text-center">Welcome!</h3>
+            <form>
               <div className="mb-4">
                 <input
                   id="fullName"
@@ -61,7 +69,7 @@ const Index = () => {
                   type="text"
                   name="fullName"
                   placeholder="Full name"
-                  onChange={(e)=> handleChange(e.target.name,e.target.value)}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>
 
@@ -73,7 +81,7 @@ const Index = () => {
                   type="text"
                   name="userName"
                   placeholder="Username"
-                  onChange={(e)=> handleChange(e.target.name,e.target.value)}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>
 
@@ -85,7 +93,7 @@ const Index = () => {
                   type="email"
                   name="email"
                   placeholder="Email address"
-                  onChange={(e)=> handleChange(e.target.name,e.target.value)}
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>
 
@@ -97,9 +105,7 @@ const Index = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  onChange={(e) =>
-                    handleChange(e.target.name, e.target.value)
-                  }
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>
 
@@ -111,9 +117,7 @@ const Index = () => {
                   type="password"
                   name="passwordConfirm"
                   placeholder="Confirm password"
-                  onChange={(e) =>
-                    handleChange(e.target.name, e.target.value)
-                  }
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>
 
@@ -132,8 +136,8 @@ const Index = () => {
                 </Link>
               </div>
             </form>
-            </div>
           </div>
+        </div>
       </div>
     </div>
   );
