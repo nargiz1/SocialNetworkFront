@@ -40,7 +40,7 @@ function Sidebar({ isOpen }) {
       className={`border-end ps-2 pe-2`}
       
       >
-      <div className="sidebar-top border-bottom pt-3">
+      <div className="sidebar-top border-bottom pt-lg-3 pt-sm-0">
         <SidebarRow
           Icon={AiFillHome}
           title="Feed"
