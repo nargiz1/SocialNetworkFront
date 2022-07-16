@@ -7,9 +7,9 @@ const Index = () => {
     <Layout>
     <div className="container pt-4">
       <div className="row justify-content-center align-items-center">
-        <div className="col-mg-12 col-lg-8">
+      
           <Pages />
-        </div>
+      
       </div>
     </div>
     </Layout>

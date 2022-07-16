@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import "./WedgetTabs.css";
 import Tabs from "../../../../components/Tabs/Tabs";
 import TabPanel from "../../../../components/Tabs/TabPanel";
@@ -16,7 +15,7 @@ export default function WedgetTabs() {
       <Tabs
         activeTab={value}
         handleTabChange={handleChange}
-        tabs={["Friends", "Groups"]}
+        tabs={["Following", "Followers"]}
       >
         <TabPanel value={value} index={0}>
           <div>

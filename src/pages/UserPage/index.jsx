@@ -13,6 +13,10 @@ import { AiOutlinePlus } from "react-icons/ai";
 import * as followServices from "../../services/FollowService";
 
 const Index = () => {
+  const user = useSelector((state) => state.user.userById);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const following = useSelector((state) => state.follow.following);
+  const followers = useSelector((state) => state.follow.followers);
   const dispatch = useDispatch();
   const { userId } = useParams();
 
@@ -29,10 +33,6 @@ const Index = () => {
     })();
   }, [userId, dispatch]);
 
-  const user = useSelector((state) => state.user.userById);
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const following = useSelector((state) => state.follow.following);
-  const followers = useSelector((state) => state.follow.followers);
 
   console.log('following: ', following);
 
@@ -92,24 +92,30 @@ const Index = () => {
                       className="w-100 h-100"
                     />
                   )}
+                  {
+                    user.id===currentUser.id &&(
+                      <div className="cover-upload">
+                      <label htmlFor="cover-photo">
+                        <div className="user-profile-upload">
+                          <AiOutlinePlus />
+                        </div>
+                      </label>
+                      <input
+                        type="file"
+                        accept="images/*"
+                        id="cover-photo"
+                        className="custom-file-upload d-none"
+                        name="CoverPicFile"
+                        onChange={(e) =>
+                          handleCoverChange("CoverPicFile", e.target.files)
+                        }
+                      />
+                    </div>
 
-                  <div className="cover-upload">
-                    <label htmlFor="cover-photo">
-                      <div className="user-profile-upload">
-                        <AiOutlinePlus />
-                      </div>
-                    </label>
-                    <input
-                      type="file"
-                      accept="images/*"
-                      id="cover-photo"
-                      className="custom-file-upload d-none"
-                      name="CoverPicFile"
-                      onChange={(e) =>
-                        handleCoverChange("CoverPicFile", e.target.files)
-                      }
-                    />
-                  </div>
+                    )
+                  }
+
+                 
                 </div>
                 <div className="profile-content align-items-center justify-content-center">
                   <div className="avatar-parent">
@@ -126,24 +132,30 @@ const Index = () => {
                         />
                       )}
                     </div>
-                    <div className="profile-upload">
-                      <label htmlFor="photo">
-                        <div className="user-profile-upload">
-                          <AiOutlinePlus />
-                        </div>
-                      </label>
-                      <input
-                        type="file"
-                        accept="images/*"
-                        id="photo"
-                        className="custom-file-upload d-none"
-                        name="ImageFile"
-                        onChange={(e) => {
-                          e.stopPropagation();
-                          handleProfileChange("ImageFile", e.target.files);
-                        }}
-                      />
-                    </div>
+                    {
+                      user.id===currentUser.id &&(
+                        <div className="profile-upload">
+                        <label htmlFor="photo">
+                          <div className="user-profile-upload">
+                            <AiOutlinePlus />
+                          </div>
+                        </label>
+                        <input
+                          type="file"
+                          accept="images/*"
+                          id="photo"
+                          className="custom-file-upload d-none"
+                          name="ImageFile"
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleProfileChange("ImageFile", e.target.files);
+                          }}
+                        />
+                      </div>
+                        
+                      )
+                    }
+                   
                   </div>
                   <div className="profile-info align-items-center justify-content-center">
                     {user?.fullName ? (
@@ -157,21 +169,14 @@ const Index = () => {
                       </span>
                     ) : null}
                   </div>
+             
                   {user?.id !== currentUser?.id ? (
                     <div className="d-flex w-100 justify-content-center align-items-center mt-3">
                       <button className="btn btn-primary">Message</button>
-                      {/* <button className="btn btn-primary ms-2 ps-3 pe-3" onClick={(e) => {
-                            handleSubmit(user.id);
-                            e.stopPropagation();
-                          }}>Follow</button> */}
-
-                          {
-                            console.log('test: ', followers)
-                          }
-                      {Boolean(following.find((f) => f.id === user.id)) ?
+                      {/* {Boolean(following.find((f) => f.id === user.id)) ?
                        (
                         <button
-                          className="following-button"
+                          className="following-button btn btn-secondary"
                           onClick={(e) => {
                             handleUnfollow(user.id);
                             e.stopPropagation();
@@ -189,7 +194,7 @@ const Index = () => {
                         >
                           Follow
                         </button>
-                      )}
+                      )} */}
                     </div>
                   ) : null}
                 </div>

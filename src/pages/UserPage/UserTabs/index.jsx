@@ -97,11 +97,11 @@ const Index = ({ user }) => {
                   />
                 ))
               ) : (
-                <div className="mt-3">User doesn't have any photo</div>
+                <div className="mt-3">User doesn't have any post</div>
               )}
             </div>
-            <div className="col-md-4 col-lg-4">
-              <div className="about-list">
+            <div className="col-lg-4 about-list">
+          
                 <h3>About</h3>
                 <ul className="about text-capitalize">
                   {userById?.country !== null ? (
@@ -163,12 +163,12 @@ const Index = ({ user }) => {
                 </ul>
                 {
                   userById.id==currentUser.id?(
-                    <Link to={`/setting/${userById}`}>
-                    <button className="btn btn-primary w-100 mt-3">Edit</button>
+                    <Link to={`/setting`}>
+                    <button className="edit-button w-100 mt-3">Edit</button>
                   </Link>
                   ):null
                 }
-              </div>
+        
             </div>
           </div>
         </TabPanel>
@@ -346,8 +346,7 @@ const Index = ({ user }) => {
           </div>
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <div className="col-md-4 col-lg-4">
-            <div className="about-list">
+            <div className="about-list mobile">
               <h3>About</h3>
               <ul className="about text-capitalize">
                 <li>
@@ -394,7 +393,7 @@ const Index = ({ user }) => {
                 <button className="btn btn-primary w-100 mt-3">Edit</button>
               </Link>
             </div>
-          </div>
+     
         </TabPanel>
       </div>
     </>

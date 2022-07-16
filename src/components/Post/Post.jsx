@@ -18,6 +18,7 @@ import Carousel from "react-bootstrap/Carousel";
 import { setIsClickedLike, setPosts } from "../../redux/Post/PostSlice";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Post = ({ post, likeTest, setLikeTest }) => {
   const dispatch = useDispatch();
@@ -108,9 +109,8 @@ const Post = ({ post, likeTest, setLikeTest }) => {
             <div className="ms-3 text-start">
               <div className="username text-lowercase">
                 <Link to={`/user/${post?.user?.id}`} className="username">
-                @{post?.user?.userName || "user"}
+                  @{post?.user?.userName || "user"}
                 </Link>
-               
               </div>
               <div className="d-flex align-items-center">
                 <span className="post-date text-capitalize">
@@ -119,70 +119,64 @@ const Post = ({ post, likeTest, setLikeTest }) => {
               </div>
             </div>
           </div>
+          {
+            post.user.id==currentUser.id?(
+              <div className="dropdown">
+              <GoKebabHorizontal
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              />
+              <ul className="dropdown-menu post-events">
+                <li>Edit post</li>
+                {showComment ? (
+                  <li onClick={(e) => setShowComment(!showComment)}>
+                    Disable comments
+                  </li>
+                ) : (
+                  <li onClick={(e) => setShowComment(!showComment)}>
+                    Unable comments
+                  </li>
+                )}
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li
+                  onClick={() => {
+                    deletePost(post.id);
+                  }}
+                >
+                  Delete
+                </li>
+              </ul>
+            </div>
 
-          {/* <a
-           href="#"
-            className="text-decoration-none fs-4 text-secondary"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <GoKebabHorizontal />
-          </a>
-
-          <ul className="dropdown-menu post-events">
-            <li>Edit post</li>
-
-            {showComment ? (
-              <li onClick={(e) => setShowComment(!showComment)}>
-                Disable comments
-              </li>
-            ) : (
-              <li onClick={(e) => setShowComment(!showComment)}>
-                Unable comments
-              </li>
-            )}
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-            <li
-              onClick={() => {
-                deletePost(post.id);
-              }}
-            >
-              Delete
-            </li>
-          </ul> */}
-          {post.userId == currentUser?.id ? (
-            <button
-              onClick={() => {
-                deletePost(post.id);
-              }}
-            >
-              delete
-            </button>
-          ) : null}
+            ):null
+          }
+        
         </div>
-
         <div className="post-body">
           <Carousel interval={null}>
             {post?.images && post.images?.length > 0
               ? post?.images.map((img, index) => (
-                  <Carousel.Item  key={index} className="p-0">
-                    <img style={{height:"257px"}}
+                  <Carousel.Item key={index} className="p-0">
+                    <img
+                      style={{ height: "257px" }}
                       src={"http://localhost:39524/" + img?.imageUrl}
                       alt="post"
                       className="w-100"
-                    
                     />
                   </Carousel.Item>
                 ))
               : null}
             {post?.videos && post?.videos?.length > 0
               ? post?.videos.map((video, index) => (
-                  <Carousel.Item  key={index} className="p-0">
+                  <Carousel.Item key={index} className="p-0">
                     <video controls key={index} className="w-100">
                       <source
-                      style={{height:"257px"}}
+                        style={{ height: "257px" }}
                         src={"http://localhost:39524/" + video.videoUrl}
                         type="video/mp4"
                         alt="video"
@@ -191,11 +185,10 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                   </Carousel.Item>
                 ))
               : null}
-           
           </Carousel>
           {post?.text !== null ? (
-              <p className="ps-3 pe-3 text-start mt-3">{post?.text}</p>
-            ) : null}
+            <p className="ps-3 pe-3 text-start mt-3">{post?.text}</p>
+          ) : null}
 
           <div className="post-body-bottom p-3">
             <div className="d-flex justify-content-between mb-3">
@@ -238,8 +231,11 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                       <Modal.Body>
                         {post.comments && post.comments.length > 0 ? (
                           post.comments.map((comment, index) => (
-                            <div key={index} className="d-flex align-items-center modal-comment">
-                              <div  className="modal-comment-img">
+                            <div
+                              key={index}
+                              className="d-flex align-items-center modal-comment"
+                            >
+                              <div className="modal-comment-img">
                                 {comment?.user?.imageUrl === null ? (
                                   <img
                                     src={require("../../helpers/images/avatar.jpg")}
@@ -276,7 +272,6 @@ const Post = ({ post, likeTest, setLikeTest }) => {
                 </div>
               </div>
             </div>
-
 
             {post.likes?.length > 0 ? (
               <div className="d-flex align-items-center like-content">
@@ -315,112 +310,105 @@ const Post = ({ post, likeTest, setLikeTest }) => {
             ) : null}
           </div>
         </div>
-
-        <div className="post-bottom p-3">
-          {post.comments?.length > 0
-            ? post.comments.map((comment, index) => (
-                <div
-                  key={index}
-                  className="comment-area d-flex justify-content-between"
-                >
-                  <div className="d-flex mb-3">
-                    <Link to={`/user/${comment?.user?.id}`}>
-                      <div>
-                        {comment?.user?.imageUrl === null ? (
-                          <img
-                            src={require("../../helpers/images/avatar.jpg")}
-                            alt="commenter-img"
-                            className="post-profile"
-                          />
-                        ) : (
-                          <img
-                            src={
-                              "http://localhost:39524/" + comment.user?.imageUrl
-                            }
-                            alt="commenter-img"
-                            className="post-profile"
-                          />
-                        )}
-                      </div>
-                    </Link>
-                    <div className="comment-content ms-3">
-                      <div className="comment align-items-center">
-                        <p>{comment.text}</p>
-                      </div>
-                      <div className="d-flex comment-options align-items-center">
-                        <div className="d-flex me-2">
-                          <a
-                            href="#"
-                            className="text-decoration-none text-danger"
-                          >
-                            <AiOutlineHeart />
-                          </a>
+        {showComment ? (
+          <div className="post-bottom p-3">
+            {post.comments?.length > 0
+              ? post.comments.map((comment, index) => (
+                  <div
+                    key={index}
+                    className="comment-area d-flex justify-content-between"
+                  >
+                    <div className="d-flex mb-3">
+                      <Link to={`/user/${comment?.user?.id}`}>
+                        <div>
+                          {comment?.user?.imageUrl === null ? (
+                            <img
+                              src={require("../../helpers/images/avatar.jpg")}
+                              alt="commenter-img"
+                              className="post-profile"
+                            />
+                          ) : (
+                            <img
+                              src={
+                                "http://localhost:39524/" +
+                                comment.user?.imageUrl
+                              }
+                              alt="commenter-img"
+                              className="post-profile"
+                            />
+                          )}
                         </div>
-                        <div className="d-flex me-2"></div>
-                        <span className="comment-date text-secondary comment-date">
-                          3d
-                        </span>
+                      </Link>
+                      <div className="comment-content ms-3">
+                        <div className="comment align-items-center">
+                          <p>{comment.text}</p>
+                        </div>
+                        <div className="d-flex comment-options align-items-center">
+                          <div className="d-flex me-2">
+                            <a
+                              href="#"
+                              className="text-decoration-none text-danger"
+                            >
+                              <AiOutlineHeart />
+                            </a>
+                          </div>
+                          <div className="d-flex me-2"></div>
+                          <span className="comment-date text-secondary comment-date">
+                            3d
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    {post.userId == currentUser?.id ||
+                    comment.userId == currentUser?.id ? (
+                      <div
+                        className="comment-delete"
+                        onClick={() => {
+                          deleteComment(comment.id);
+                        }}
+                      >
+                        <AiOutlineDelete />
+                      </div>
+                    ) : null}
                   </div>
-                  {post.userId == currentUser?.id ||
-                  comment.userId == currentUser?.id ? (
-                    <div
-                      className="comment-delete"
-                      onClick={() => {
-                        deleteComment(comment.id);
-                      }}
-                    >
-                      <AiOutlineDelete />
-                    </div>
-                  ) : null}
-                </div>
-              ))
-            : null}
+                ))
+              : null}
 
-          {
-            <div className="mb-3">
-              {post.comments?.length - 1 > 0 ? (
-                <a href="#" className="more-comment">
-                  View {post.comments?.length - 1} more comments
-                </a>
-              ) : null}
-            </div>
-          }
+            {
+              <div className="mb-3" onClick={handleShow}>
+                {post.comments?.length > 3 ? (
+                  <a href="#" className="more-comment">
+                    {/* View {post.comments?.length - 1} more comments */}
+                    View more comments
+                  </a>
+                ) : null}
+              </div>
+            }
 
-          {showComment ? (
-            <div className="post-input position-relative">
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  className="w-100"
-                  name="text"
-                  placeholder="Add a comment..."
-                  onChange={(e) => handleChange(e.target.name, e.target.value)}
-                />
-              </form>
-              {/* <div className="position-absolute post-input-icons">
-              <i className="me-2 text-secondary">
-                <BsEmojiLaughing />
-              </i>
-              <i className="me-2 text-secondary">
-                <MdOutlinePhotoSizeSelectActual />
-              </i>
-              <i className="text-secondary">
-                <IoMdLink />
-              </i>
-            </div> */}
-            </div>
-          ) : (
-            <p className="m-0 text-start">Comments are off.</p>
-          )}
+       
+              <div className="post-input position-relative">
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    className="w-100"
+                    name="text"
+                    placeholder="Add a comment..."
+                    onChange={(e) =>
+                      handleChange(e.target.name, e.target.value)
+                    }
+                  />
+                </form>
+              </div>
+          
+            
 
-          <div className="d-flex align-items-center mt-2">
-            <span className="post-date">
-              <Moment format="DD/MM/YYYY">{post.created}</Moment>
-            </span>
           </div>
-        </div>
+        ) :   (<p className="m-0 p-2 text-start">Comments are off.</p>)}
+            <div className="p-2 d-flex align-items-center">
+              <span className="post-date">
+                <Moment format="DD/MM/YYYY">{post.created}</Moment>
+              </span>
+            </div>
       </div>
     </>
   );

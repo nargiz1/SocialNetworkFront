@@ -28,6 +28,12 @@
   overflow: hidden;
   box-shadow: 0px 5px 8px -9px rgb(0 0 0 / 75%);
 }
+.pages{
+  padding: 35px 135px
+}
+.pages-card-top img{
+  height: 220px;
+}
 .pages-card-title {
   color: #595959;
   font-size: 16px;
@@ -58,14 +64,11 @@
 .following-button i {
   font-size: 17px;
 }
-@media only screen and (max-width: 1024px) {
- .pages{
-  margin-top: 170px;
- }
-}
+
 @media only screen and (max-width: 540px) {
   .pages{
-   margin-top: 80px;
+    padding: 19px 49px;
+
   }
  }
 

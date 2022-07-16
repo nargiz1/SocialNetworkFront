@@ -9,6 +9,7 @@ const Index = () => {
   const [registerData, setRegisterData] = useState({
     fullName: "",
     userName: "",
+    birthDate:"",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -29,6 +30,7 @@ const Index = () => {
     if (
       registerData.fullName !== "" &&
       registerData.userName !== "" &&
+      registerData.birthDate !== "" &&
       registerData.email !== "" &&
       registerData.password !== "" &&
       registerData.passwordConfirm !== ""
@@ -81,6 +83,17 @@ const Index = () => {
                   type="text"
                   name="userName"
                   placeholder="Username"
+                  onChange={(e) => handleChange(e.target.name, e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  id="birthDate"
+                  required
+                  className="form-control w-100 shadow-none"
+                  type="date"
+                  name="birthDate"
+                  placeholder="Birth date"
                   onChange={(e) => handleChange(e.target.name, e.target.value)}
                 />
               </div>

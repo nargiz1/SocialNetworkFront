@@ -50,6 +50,26 @@
   background-color: white;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
+.MuiTabs-scroller button.MuiButtonBase-root {
+  font-weight: bold;
+}
+.MuiTabs-scroller button.Mui-selected {
+  color: #5850EC;
+}
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #5850EC !important;
+}
+.add-button {
+  font-size: 30px;
+  color: #5850EC;
+}
+.edit-button{
+  color: white;
+  background-color: #5850EC;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 0px;
+}
 .about-list {
   padding: 20px 13px 20px 13px;
   background-color: white;
@@ -153,6 +173,25 @@ ul.about li i {
   .user-friends .friend-card .friend-card-img img.photos {
   height: 115px;
   }
+  .css-19kzrtu{
+    padding: 0px!important;
+    margin-top: 24px!important;
+    }
+    .MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller{
+      overflow: auto!important;
+    }
+    .MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller #simple-tab-5{
+      display: block;
+    }
+  .about-list{
+    display: none;
+  }
+  .about-list.mobile{
+    display: block;
+  }
+ 
+ 
+
  }
  @media only screen and (max-width: 540px) {
   .css-19kzrtu{
@@ -165,5 +204,12 @@ ul.about li i {
   .MuiTabs-scroller.MuiTabs-fixed.css-jpln7h-MuiTabs-scroller #simple-tab-5{
     display: block;
   }
+  .about-list{
+    display: none;
+  }
+  .about-list.mobile{
+    display: block;
+  }
+  
  }
  

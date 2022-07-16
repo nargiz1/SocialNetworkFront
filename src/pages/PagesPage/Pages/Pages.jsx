@@ -1,5 +1,5 @@
 import React from "react";
-import "../Pages/Pages.css";
+import "./PagesTabs/index.css";
 import PagesTab from '../Pages/PagesTabs/PagesTab';
 
 

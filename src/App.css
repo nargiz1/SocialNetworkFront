@@ -47,7 +47,7 @@
     position: absolute;
     bottom: 25px;
     right: 25px;
-    background-color: #6C63FF;
+    background-color: #5850EC;
     color: white;
     position: fixed;
 }
@@ -124,20 +124,22 @@
   }
 }
 @media only screen and (max-width: 540px) {
-  .login-img,.register-img{
+  .login-img,.register-img,.reset-img{
     display: none;
   }
-  .register-sign-in.sign-in{
+  .register-sign-in.sign-in,.register-sign-in.register,.register-sign-in.reset{
     padding: 37px 20px 30px 20px;
 
   }
-  .register-sign-in.register{
-    padding: 37px 20px 30px 20px;
-
-  }
-  .register-form{
+ 
+  .register-form,.resert-form{
     padding-top: 40px;
   }
+ 
+}
+.show-more{
+  font-size: 23px;
+  color: #5850EC;
 }
 
 

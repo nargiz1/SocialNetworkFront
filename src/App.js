@@ -1,8 +1,8 @@
 import React,{useEffect} from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { Routes, Route, Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import * as userServices from "../src/services/UserService";
 import * as followServices from "../src/services/FollowService";
@@ -38,12 +38,6 @@ function App() {
     (async function() {
       if (token) {
         const user=await userServices.getUserService();
-        const users = await userServices.getUsersService();
-        const followers = await followServices.getFollowersService(user);
-        const following = await followServices.getSubscribesService(user);
-        dispatch(setFollowers(followers));
-        dispatch(setFollowing(following));
-        dispatch(setUsers(users));
         dispatch(setCurrentUser(user));
       }
       
@@ -64,7 +58,7 @@ function App() {
           <Route path="/photos" element={<PhotosPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/videos" element={<VideosPage />} />
-          <Route path="/setting/:userId" element={<SettingPage />} />
+          <Route path="/setting" element={<SettingPage />} />
           <Route path="/user/:userId" element={<UserPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </>

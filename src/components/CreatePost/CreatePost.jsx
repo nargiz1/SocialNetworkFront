@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as postServices from "../../services/PostService";
 import { useDispatch } from "react-redux";
 import { FaUserAlt } from "react-icons/fa";
-import { HiOutlinePhotograph, HiOutlineLocationMarker } from "react-icons/hi";
+import { HiOutlinePhotograph} from "react-icons/hi";
 import { MdVideoCall } from "react-icons/md";
 import "./CreatePost.css";
 import { setPosts } from "../../redux/Post/PostSlice";
-// Additional Libraries
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as userServices from "../../services/UserService";
+import Button from "react-bootstrap/Button";
+import ModalBootstrapt from "react-bootstrap/Modal";
+import { setCurrentUser } from "../../redux/User/UserSlice";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
+  useEffect(() => {
+    (async function () {
+      const user = await userServices.getUserService();
+      dispatch(setCurrentUser(user));
+ 
+    })();
+  }, [dispatch]);
+
   const [createPost, setCreatePost] = useState({
     Text: "",
     IsPrivate: false,
@@ -24,12 +35,18 @@ const CreatePost = () => {
   });
   const handleChange = (name, value) => {
     setCreatePost({ ...createPost, [name]: value });
+    console.log(createPost);
+   
   };
-  const handleSubmit = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     const date = new Date();
-    createPost.PublicationTime = moment(date).format();
+    if (createPost.PublicationTime=="") {
+      createPost.PublicationTime = moment(date).format();
+      
+    }
+    formData.append("PublicationTime", createPost.PublicationTime);
     formData.append("Text", createPost.Text);
     formData.append("IsPrivate", createPost.IsPrivate);
     formData.append("Location", createPost.Location);
@@ -38,13 +55,17 @@ const CreatePost = () => {
     );
     Array.from(createPost.VideoFiles).forEach((VideoFile) =>
       formData.append("VideoFiles", VideoFile)
-      );
-    console.log("videof",createPost.ImageFiles);
+    );
+    console.log("videof", createPost.ImageFiles);
     formData.append("PublicationTime", createPost.PublicationTime);
+
+    await postServices.createPostService(formData);
    
-     await postServices.createPostService(formData);
-    const data = await postServices.getAllPostsService();
-    dispatch(setPosts(data));
+    const timer=setTimeout(async ()=>{
+      const data = await postServices.getAllPostsService();
+      dispatch(setPosts(data));
+
+    },2000);
   };
 
   return (
@@ -66,11 +87,112 @@ const CreatePost = () => {
             placeholder="Crate your post..."
             data-bs-toggle="modal"
             data-bs-target="#exampleModal1"
+            disabled
           />
 
           <form>
+            {/* <ModalBootstrapt show={show} onHide={handleClose}>
+              <ModalBootstrapt.Header closeButton>
+                <ModalBootstrapt.Title>Create Post</ModalBootstrapt.Title>
+              </ModalBootstrapt.Header>
+              <ModalBootstrapt.Body>
+                <div className="d-flex align-items-center">
+                  <a href="#">
+                    <div className="user-info">
+                      <FaUserAlt />
+                    </div>
+                  </a>
+
+                  <input
+                    type="text"
+                    placeholder="What's Your Mind?"
+                    className="w-100 bg-white"
+                    name="Text"
+                    onChange={(e) =>
+                      handleChange(e.target.name, e.target.value)
+                    }
+                  />
+                </div>
+
+                <div className="add-post">
+                  <div className="text-center mb-3">Add to your post</div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex">
+                      <div className="me-2">
+                        <label htmlFor="photo">
+                          <div className="photo-icon">
+                            <HiOutlinePhotograph />
+                          </div>
+                        </label>
+                        <input
+                          type="file"
+                          accept="images/*"
+                          id="photo"
+                          className="custom-file-upload d-none"
+                          name="ImageFiles"
+                          multiple
+                          onChange={(e) =>
+                            handleChange(e.target.name, e.target.files)
+                          }
+                        />
+                      </div>
+                      <div className="me-2">
+                        <label htmlFor="video">
+                          <div className="video-icon">
+                            <MdVideoCall />
+                          </div>
+                        </label>
+                        <input
+                          type="file"
+                          id="video"
+                          className="custom-file-upload d-none"
+                          name="VideoFiles"
+                          multiple
+                          onChange={(e) =>
+                            handleChange(e.target.name, e.target.files)
+                          }
+                        />
+                      </div>
+                      <div className="d-flex">
+                   
+                        <input
+                          type="text"
+                          id="location"
+                          className="custom-file-upload"
+                          placeholder="Location..."
+                          name="Location"
+                          onChange={(e) =>
+                            handleChange(e.target.name, e.target.value)
+                          }
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="IsPrivate"> Private Post</label>
+                      <input
+                        type="checkbox"
+                        id="IsPrivate"
+                        name="IsPrivate"
+                        onChange={(e) =>
+                          handleChange(e.target.name, e.target.checked)
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                
+                  </div>
+                </div>
+              </ModalBootstrapt.Body>
+              <ModalBootstrapt.Footer>
+                <Button className="btn btn-primary" onClick={handleClose}>
+                  Create
+                </Button>
+              </ModalBootstrapt.Footer>
+            </ModalBootstrapt> */}
             <div
-              className="modal fade create"
+              className={`modal fade create `}
               id="exampleModal1"
               tabIndex="-1"
               aria-labelledby="exampleModalLabel"
@@ -146,11 +268,6 @@ const CreatePost = () => {
                             />
                           </div>
                           <div className="d-flex">
-                            {/* <label htmlFor="location">
-                              <div className="location-icon">
-                                <HiOutlineLocationMarker />
-                              </div>
-                            </label> */}
                             <input
                               type="text"
                               id="location"
@@ -175,49 +292,26 @@ const CreatePost = () => {
                           />
                         </div>
                       </div>
-
-                      <div>
-                        {/* <div className="mb-3">
+                        <div className="mt-3">
+                          <label htmlFor="schedule">Schedule post*</label>
                           <input
-                            type="file"
-                            name="ImageFiles"
-                            style={{ width: "90%" }}
-                            multiple
-                            onChange={(e) =>
-                              handleChange(e.target.name, e.target.files)
-                            }
-                          />
-                        </div> */}
-                        {/* <div className="mb-3">
-                          <input
-                            type="file"
-                            name="VideoFiles"
-                            style={{ width: "90%" }}
-                            multiple
-                            onChange={(e) =>
-                              handleChange(e.target.name, e.target.files)
-                            }
-                          />
-                        </div> */}
-                        {/* <div className="mb-3">
-                          <input
-                            type="text"
-                            name="Location"
-                            style={{ width: "90%" }}
-                            placeholder=" Enter Location"
+                            type="datetime-local"
+                            id="schedule"
+                            name="PublicationTime"
                             onChange={(e) =>
                               handleChange(e.target.name, e.target.value)
                             }
                           />
-                        </div> */}
-                      </div>
+                        </div>
+
+                 
                     </div>
                   </div>
                   <div className="modal-footer">
                     <button
                       type="submit"
-                      className="btn btn-primary"
-                      onClick={handleSubmit}
+                      className="btn btn-primary "
+                      onClick={handleClick}
                     >
                       Share
                     </button>
@@ -227,33 +321,6 @@ const CreatePost = () => {
             </div>
           </form>
         </div>
-
-        {/* <div className="createPost-bottom mt-3 d-flex">
-          <div className="createPost-option">
-            <a href="#">
-              <div className="photo-icon">
-                <HiOutlinePhotograph />
-              </div>
-            </a>
-            <h3>Photo/Video</h3>
-          </div>
-          <div className="createPost-option">
-            <a href="#">
-              <div className="add-friend">
-                <AiOutlineUserAdd />
-              </div>
-            </a>
-            <h3>Tag Friend</h3>
-          </div>
-          <div className="createPost-option">
-            <a href="#">
-              <div className="smile-icon">
-                <FaRegSmile />
-              </div>
-            </a>
-            <h3>Fealing/Activity</h3>
-          </div>
-        </div> */}
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,Link, useParams, useLocation } from "react-router-dom";
+import { useNavigate, Link, useParams, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import { toast } from "react-toastify";
 
@@ -9,17 +9,17 @@ import ResetSVG from "../../helpers/images/reset.svg";
 const Index = () => {
   const navigate = useNavigate();
   const search = useLocation().search;
-   const token = (new URLSearchParams(search).get('token')).replace(/ /g, '+');
+  const token = new URLSearchParams(search).get("token").replace(/ /g, "+");
   // const token=new URLSearchParams(search).get('token');
 
-  const email=new URLSearchParams(search).get('email');
+  const email = new URLSearchParams(search).get("email");
 
   useEffect(() => {
     console.log("token", token);
     console.log("email", email);
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("email", email);
-  }, [token,email]);
+  }, [token, email]);
 
   const [resetData, setResetData] = useState({
     email: "",
@@ -63,13 +63,13 @@ const Index = () => {
   return (
     <>
       <div className="container">
-        <div className="row vh-100 justify-content-center align-items-center">
-          <div className="col-7">
-            <img src={ResetSVG} alt="Login" className="w-100" />
+      <div className="row vh-100 justify-content-center align-items-center">
+          <div className="col-md-6 col-lg-7 reset-img">
+          <img src={ResetSVG} alt="reset" className="w-100" />
           </div>
-          <div className="col-5">
-            <div className="register-sign-in pt-5">
-              <h3 className="mb-4 text-center">Reset Now!</h3>
+          <div className="col-md-6 col-lg-5 login-form">
+            <div className="register-sign-in sign-in pt-5">
+            <h3 className="mb-4 text-center">Reset Now!</h3>
               <form>
                 <div className="mb-3">
                   <input
@@ -92,16 +92,18 @@ const Index = () => {
                   />
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
+                  <div>
                   <button onClick={backToForgot} className="fw-bold">
                     Go back
                   </button>
-                  <button
+                  </div>
+                 <div> <button
                     type="submit"
                     onClick={handleSubmit}
                     className="fw-bold"
                   >
                     Confirm
-                  </button>
+                  </button></div>
                 </div>
               </form>
             </div>
