@@ -1,3 +1,14 @@
+.profile-upload{
+  position: absolute;
+  font-size: 22px;
+  bottom: 0px;
+}
+.img{
+  bottom: -50px;
+}
+.file-upload{
+  right: 8%;
+}
 .profile-photo {
   width: 40px;
   height: 40px;
@@ -20,6 +31,7 @@
 } */
 .message-content {
   padding: 10px;
+  cursor: pointer;
 }
 .message-content:hover {
   background-color: #fafafa;
@@ -326,4 +338,3 @@ select:focus {
   background-color: #888888;
   font-size: 19px;
 }
-
