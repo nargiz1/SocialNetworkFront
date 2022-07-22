@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -10,6 +10,8 @@ import  { setCurrentUser,setUsers } from '../src/redux/User/UserSlice';
 import  { setFollowers,setFollowing } from '../src/redux/Follow/FollowSlice';
 import FeedPage from "./pages/FeedPage/index";
 import "./App.css";
+import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
+
 
 const GroupsPage = React.lazy(() => import("./pages/GroupsPage/index"));
 const PagesPage = React.lazy(() => import("./pages/PagesPage/index"));
@@ -33,6 +35,7 @@ function App() {
   useSelector((state) => state.auth.resetToken);
   const token = sessionStorage.getItem("token");
   const resetToken = sessionStorage.getItem("resetToken");
+  const user = useSelector((state) => state.user.currentUser);
   
   useEffect(() => {
     (async function() {
@@ -40,9 +43,66 @@ function App() {
         const user=await userServices.getUserService();
         dispatch(setCurrentUser(user));
       }
-      
     })();
   }, [dispatch])
+
+  
+
+
+
+  const [connection, setConnection] = useState();
+  const [messages1, setMessages1] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const joinRoom = async (user, room) => {
+    try {
+      const connection = new HubConnectionBuilder()
+        .withUrl("http://localhost:39524/chat")
+        .configureLogging(LogLevel.Information)
+        .build();
+
+      connection.on("UsersInRoom", (users) => {
+        setUsers(users);
+      })
+
+      connection.on("ReceiveMessage", (message) => {
+        var messageObject = JSON.parse(message);
+        setMessages1(messages1 => [...messages1, messageObject]);
+      });
+
+      connection.onclose(e => {
+        setConnection();
+        setMessages1([]);
+      })
+
+      await connection.start();
+      await connection.invoke("JoinRoom", { user, room });
+      setConnection(connection);
+      
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  console.log(users)
+
+  const closeConnection = async () => {
+    try {
+      await connection.stop()
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const sendMessage = async (message) => {
+    try {
+      var messageString = JSON.stringify(message)
+      await connection.invoke("SendMessage", messageString);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
+
   return (
     <>
         <ToastContainer autoClose={2000} position="bottom-right" />
@@ -53,13 +113,19 @@ function App() {
         <>
           <Route path="/" element={<FeedPage />} />
           <Route path="/groups" element={<GroupsPage />} />
-          <Route path="/messages" element={<MessagesPage />} />
+          <Route path="/messages" element={<MessagesPage users={users} 
+          joinRoom={joinRoom} 
+          sendMessage={sendMessage} 
+          messages1={messages1} 
+          closeConnection={closeConnection}/>} />
           <Route path="/pages" element={<PagesPage />} />
           <Route path="/photos" element={<PhotosPage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/videos" element={<VideosPage />} />
           <Route path="/setting" element={<SettingPage />} />
-          <Route path="/user/:userId" element={<UserPage />} />
+          <Route path="/user/:userId" element={<UserPage 
+           joinRoom={joinRoom}
+          />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </>
       )}

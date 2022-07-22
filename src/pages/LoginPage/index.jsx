@@ -7,6 +7,7 @@ import * as authServices from "../../services/AuthService";
 import { setLogin } from "../../redux/Auth/AuthSlice";
 import LoginSVG from "../../helpers/images/login.svg";
 
+
 const Index = () => {
   const dispatch = useDispatch();
 
