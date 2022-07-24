@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     groupChats: [],
     group: {},
-    groupMembers: []
+    groupMembers: [],
 }
 
 export const groupChatSlice = createSlice({

@@ -157,7 +157,7 @@ const Index = ({joinRoom}) => {
                     {
                       user.id===currentUser.id &&(
                         <div className="profile-upload">
-                        <label htmlFor="photo">
+                        <label htmlFor="profile-photo">
                           <div className="user-profile-upload">
                             <AiOutlinePlus />
                           </div>
@@ -165,7 +165,7 @@ const Index = ({joinRoom}) => {
                         <input
                           type="file"
                           accept="images/*"
-                          id="photo"
+                          id="profile-photo"
                           className="custom-file-upload d-none"
                           name="ImageFile"
                           onChange={(e) => {

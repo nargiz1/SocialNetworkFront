@@ -7,6 +7,7 @@ import messageReducer from './Message/MessageSlice';
 import privateChatReducer from './Chat/PrivateChatSlice';
 import groupChatReducer from './Chat/GroupChatSlice';
 import advReducer from './Adv/AdvSlice';
+import chatReducer from './Chat/Chat/ChatSlice';
 
 const store = configureStore({
   reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
     message: messageReducer,
     privateChat: privateChatReducer,
     groupChat: groupChatReducer,
-    adv: advReducer
+    adv: advReducer,
+    chat: chatReducer
   },
 });
 

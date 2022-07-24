@@ -10,6 +10,7 @@ import  { setCurrentUser,setUsers } from '../src/redux/User/UserSlice';
 import  { setFollowers,setFollowing } from '../src/redux/Follow/FollowSlice';
 import FeedPage from "./pages/FeedPage/index";
 import "./App.css";
+import { fetchJoinRoom } from "./redux/Chat/Chat/ChatAction";
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
 
 
@@ -36,6 +37,9 @@ function App() {
   const token = sessionStorage.getItem("token");
   const resetToken = sessionStorage.getItem("resetToken");
   const user = useSelector((state) => state.user.currentUser);
+
+  const room = useSelector((state) => state.chat.users);
+  console.log(room)
   
   useEffect(() => {
     (async function() {
@@ -46,43 +50,40 @@ function App() {
     })();
   }, [dispatch])
 
-  
-
-
-
   const [connection, setConnection] = useState();
   const [messages1, setMessages1] = useState([]);
   const [users, setUsers] = useState([]);
 
   const joinRoom = async (user, room) => {
-    try {
-      const connection = new HubConnectionBuilder()
-        .withUrl("http://localhost:39524/chat")
-        .configureLogging(LogLevel.Information)
-        .build();
+    try{
+    const connection = new HubConnectionBuilder()
+    .withUrl("http://localhost:39524/chat")
+    .configureLogging(LogLevel.Information)
+    .build();
 
-      connection.on("UsersInRoom", (users) => {
-        setUsers(users);
-      })
+  connection.on("UsersInRoom", (users) => {
+    setUsers(users);
+  })
 
-      connection.on("ReceiveMessage", (message) => {
-        var messageObject = JSON.parse(message);
-        setMessages1(messages1 => [...messages1, messageObject]);
-      });
+  connection.on("ReceiveMessage", (message) => {
+    const messageObject = JSON.parse(message);
+    setMessages1(messages1 => [...messages1, messageObject]);
+  });
 
-      connection.onclose(e => {
-        setConnection();
-        setMessages1([]);
-      })
+  connection.onclose(e => {
+    setConnection();
+    setMessages1([]);
+  })
 
-      await connection.start();
-      await connection.invoke("JoinRoom", { user, room });
-      setConnection(connection);
-      
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  await connection.start();
+  await connection.invoke("JoinRoom", { user, room });
+  setConnection(connection);
+  
+} catch (e) {
+  console.log(e);
+}
+  };
+  
   console.log(users)
 
   const closeConnection = async () => {

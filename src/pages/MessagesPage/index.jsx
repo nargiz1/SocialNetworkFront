@@ -33,6 +33,7 @@ const Index = ({joinRoom, users, sendMessage, messages1, closeConnection}) => {
   const privateChat = useSelector((state) => state.privateChat.Chat);
   const groupChat = useSelector((state) => state.groupChat.group);
   
+  console.log(user)
   const search = useLocation().search;
   const chatId = new URLSearchParams(search).get("chat")
   const groupId =new URLSearchParams(search).get("group")
@@ -59,7 +60,7 @@ const Index = ({joinRoom, users, sendMessage, messages1, closeConnection}) => {
         userId: user.id,
         privateChatId: chat,
       }
-      const resp = await messageService.MessagesAreRead(msg);
+      // const resp = await messageService.MessagesAreRead(msg);
       const messages = await messageService.getChatMessages(privateChat.id);
       dispatch(setPrivateChat(privateChat));
       dispatch(setMessage(messages));
@@ -75,7 +76,7 @@ const Index = ({joinRoom, users, sendMessage, messages1, closeConnection}) => {
         userId: user.id,
         groupChatId: group.id,
       }
-      const resp = await messageService.MessagesAreRead(msg);
+      // const resp = await messageService.MessagesAreRead(msg);
       const messages = await messageService.getGroupMessages(groupChat);
       dispatch(setGroupChat(groupChat));
       dispatch(setGroupChatMembers(groupChatMembers));
@@ -108,7 +109,7 @@ const Index = ({joinRoom, users, sendMessage, messages1, closeConnection}) => {
               {(chat || group) && (
                 <>
                   <ChatNav deleteChat={deleteChat} deleteGroup={deleteGroup} group={group}/>
-                  <Chat messages={messages1} usersInRoom={users}/>
+                  <Chat messages={messages1} usersInRoom={users} />
                   <MessageForm sendMessage={sendMessage} usersInRoom={users}/>
                 </>
               )}
